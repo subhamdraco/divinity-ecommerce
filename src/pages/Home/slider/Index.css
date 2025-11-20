@@ -1,0 +1,163 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css');
+
+/* .slick-slider {
+  overflow: hidden;
+} */
+
+.homeslider {
+    padding: 20px 0px;
+}
+
+.homeslider-main{
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+}
+
+.homeslider-main .item{
+    position: relative;
+    height: 28rem !important;
+}
+
+.homeslider-main .item img{
+    height: 28rem !important;
+}
+
+.homeslider-main .item .info{
+    position: absolute;
+    top: 54%;
+    left: 7%;
+    z-index: 90;
+   
+}
+
+.homeslider-main .item .info.slider-2-info{
+    top: 30% !important;
+}
+
+.homeslider-main .item .info.slider-2-info h1, .homeslider-main .item .info.slider-2-info p {
+    color: #fff !important;
+}
+
+.homeslider-main .item .info h1{
+    font-weight: bolder !important;
+    text-transform: capitalize;
+    color: var(--primary-text-color);        
+}
+
+.homeslider-main .item .info p{
+    font-size: 1.3rem;
+    font-weight: 500;
+}
+
+.homeslider-main .slick-dots{
+    position: absolute;
+    bottom: 2% !important;
+}
+
+.homeslider-main .slick-dots button::before{
+    font-size: 16px !important;
+}
+
+.slick-active button::before{
+    color: var(--primary-text-color) !important;
+}
+
+.slick-arrow{
+    position: absolute;
+    top: 47%;
+    width:45px !important;
+    height:45px !important;
+    border-radius: 50% !important;
+    background: #f2f3f4 !important;
+    z-index: 100 !important;
+    transition: all 0.2s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.slick-arrow.slick-next {
+    right: 2% !important;
+}
+
+.slick-arrow.slick-prev {
+    left: 2% !important;
+}
+
+.slick-prev::before{
+    content: "\f104";
+    font-family: FontAwesome !important;
+    font-size: 25px;
+    color: #000;
+}
+
+.slick-next::before{
+    content: "\f105";
+    font-family: FontAwesome !important;
+    font-size: 25px;
+    color: #000;
+}
+
+.slick-arrow:hover{
+    background-color: var(--hover-color) !important;
+}
+
+.slick-prev:hover::before{
+    color: #f2f3f4;
+}
+
+.slick-next:hover::before{
+    color: #f2f3f4;
+}
+
+.slick-active button::before{
+    color: var(--hover-color) !important;
+}
+
+.shopnowbuttons{
+    position: absolute;
+    top: 86%;
+    left: 7%;
+    z-index: 1045;
+}
+
+.shopnowbuttons ul li button{
+    border-radius: 50px;
+    height: 2.8rem;
+    background: var(--primary-icon-color);
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.shopnowbuttons ul li button:hover{
+    color: var(--primary-text-color);
+}
+
+.shopnowbuttons ul li button a{
+    text-decoration: none;
+    color: inherit;
+    font-size: large;
+    text-transform: capitalize;
+}
+
+.shopnowbuttons ul li.titan button{
+    background: none;
+    border: 3px solid var(--primary-icon-color);
+    color: var(--primary-icon-color);
+}
+
+.shopnowbuttons ul li.titan button:hover{
+    color: var(--primary-text-color);
+}
+
+.catslidersection .slick-arrow{
+    width:30px !important;
+    height:30px !important;
+}
+
+.catslidersection .slick-arrow.slick-prev::before{
+    font-size: 16px;
+}
+
+.catslidersection .slick-arrow.slick-next::before{
+    font-size: 16px;
+}

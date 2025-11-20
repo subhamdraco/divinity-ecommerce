@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap');
+
+:root {
+  --primary-icon-color : #d4af37;
+  --primary-text-color: #052a4a;
+  --hover-color: 	  #E2CA78;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+::placeholder{
+
+  font-size: 0.8rem;
+}
+
+h1, h2, h3, h4, p{
+  font-family: "Playfair Display", serif !important;
+}
+
+body {
+  color: var(--primary-text-color);
+  font-family: "Inter", sans-serif;
+}
+
+.container-fluid {
+  padding: 0px 45px;
+}
+
+.cursor{
+   cursor: pointer;
+}
+
+.bg-g {
+  background-color: var(--primary-icon-color) !important;
+}
+
+.text-g{
+  color: var(--primary-icon-color);
+}
+
+.hd{
+  font-size: 2rem !important;
+  font-weight: 600 !important;
+  padding-left: 1rem;
+}
+
+.monserrat{
+  font-family: "Montserrat", serif !important;
+}
+
+.playfair{
+  font-family: "Playfair Display", serif !important;
+}
+.quicksand{
+  font-family: "Quicksand", serif !important;
+}
+
+.transition{
+  transition: all 0.3s ease-in-out;
+}

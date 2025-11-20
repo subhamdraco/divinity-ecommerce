@@ -1,0 +1,48 @@
+.bannerSection{
+    padding: 2.5rem 0px;
+    margin-bottom: 1rem;
+}
+
+.bannerSection .box{
+    overflow: hidden;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+
+.bannerSection .box:hover img{
+    position: relative;
+    transform: scale(1.1);
+}
+
+.bannerSection .box{
+    position: relative;
+}
+
+.bannerSection .box h5{
+    position: absolute;
+    top: 10%;
+    padding: 2rem;
+    z-index: 100;
+}
+
+.bannerSection .box .shopnowbutton{
+    position: absolute;
+    z-index: 102;
+    top: 50%;
+    left: 20%;
+}
+
+.bannerSection .box .shopnowbutton button{
+    background-color: var(--primary-icon-color) !important;
+    text-transform: capitalize;
+}
+
+.bannerSection .box:hover .shopnowbutton button{
+    transform: scale(1.1);
+    color: var(--primary-text-color);
+}
+
+.bannerSection .box:hover h5{
+    transform: scale(1.1);
+}

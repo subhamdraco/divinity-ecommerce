@@ -1,0 +1,33 @@
+.homeproducts{
+    padding: 1rem 0px;
+}
+
+.filtertab li {
+    margin-left: 1rem;
+}
+
+.filtertab li a{
+    color: var(--primary-text-color);
+    text-decoration: none;
+    font-size: 1rem !important;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    font-weight: 600;
+}
+
+.filtertab li a:hover{
+    color: var(--primary-icon-color);
+    transform: translateY(-10px) !important;
+}
+
+.homeproducts .productrow{
+    display: flex;
+    padding: 0.3rem !important;
+    flex-wrap: wrap;
+}
+
+.homeproducts .productrow .item{
+    width: 20%;
+    padding: 1rem 1rem !important;
+}
+
