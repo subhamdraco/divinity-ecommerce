@@ -1,0 +1,58 @@
+.signup-btn {
+  position: relative;
+  padding: 10px 34px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-light-g), var(--primary-icon-color));
+  color: #ffff;
+  overflow: hidden; 
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+}
+
+/* Hover lift */
+.signup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.35);
+}
+
+/* Click feedback */
+.signup-btn:active {
+  transform: translateY(0);
+}
+
+/* Text stays above effects */
+.signup-btn .btn-text {
+  position: relative;
+  z-index: 2;
+  text-transform: capitalize !important;
+}
+
+/* Subtle glow sweep */
+.signup-btn .btn-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,0.35),
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform 0.6s ease;
+}
+
+.signup-btn:hover .btn-glow {
+  transform: translateX(120%);
+}
+
+/* Focus accessibility */
+.signup-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.35);
+}

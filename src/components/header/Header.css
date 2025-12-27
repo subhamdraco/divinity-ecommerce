@@ -4,9 +4,34 @@ header {
     margin: auto;
     padding: 5px 0px;
 }
+/* .headerwrapper{
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    background: #fff;
+    z-index: 10000;
+} */
+ .headerwrapper {
+    transition: all 0.3s ease-in-out;
+    background: #fff;
+ }
+
+ .headerwrapper.fixed{
+    position: fixed;
+    top: -90px;
+    left: 0px;
+    width: 100%;
+    z-index: 10000;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+ }
+
+  .headerwrapper.fixed .container-fluid{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 
 header .countrywrapper .selectdrop{
-    width: 180px;
+    width: 130px;
     height: 35px;
     padding-left: 10px;
     border: 1px solid #ececec;
@@ -46,12 +71,15 @@ header .headersearch {
 }
 
 header .headersearch .selectdrop{
-    width: 25%;
+    width: 25% !important;
     font-size: 16px;
     font-weight: 500;
     position: relative;
-
 }
+header .headersearch .selectDrop{
+    width: 160px;
+}
+
 header .headersearch .selectdrop::after{
     content: '';
     width: 1px;
@@ -80,7 +108,7 @@ header .headersearch .search input{
 header .headersearch .search .searchIcon{
     position: absolute;
     top: 10px;
-    right: 2px;
+    right: -6rem;
     opacity: 0.5;
     font-size: 25px !important;
 }
@@ -90,6 +118,11 @@ header .headertabs{
 }
 header .headertabs li{
     position: relative;
+}
+
+header .headertabs li a{
+    text-decoration: none;
+    color: inherit;
 }
 
 header .headertabs li span.badge{
@@ -169,3 +202,193 @@ header .headertabs li .accountdropdownmenu li button:hover{
 header .headertabs li .accountdropdownmenu li button:hover svg{
     fill: #ffff !important;
 }
+
+.headersmall{
+    display: none;
+}
+
+.search {
+  position: relative;
+  width: 100%;
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.15);
+  z-index: 999;
+  max-height: 360px;
+  overflow-y: auto;
+}
+
+
+.search-dropdown li {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  list-style: none;
+}
+
+.search-dropdown li a {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-decoration: none;
+  color: #000;
+}
+
+.search-dropdown img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.search-dropdown p {
+  font-weight: 600;
+  margin: 0;
+}
+
+.search-dropdown span {
+  color: #b88e2f;
+  font-weight: 500;
+}
+
+
+/* .headersmall {
+    display: none;
+}
+
+
+
+.logowrapper{
+    display: flex;
+    align-items: center;
+} */
+
+/* .headersmallwrapper{
+    display: none !important;
+}
+
+.headerlastcol{
+    display: flex;
+    align-items: center;
+} */
+
+@media(max-width: 1228px) {
+    .headersmall{
+        display: block;
+    }
+
+    .headerwrapper{
+        display: none;
+    }
+}
+/* 
+    .headerlastcol{
+        display: none !important;
+    }
+
+   .headersmallwrapper{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between;
+    margin-left: 24rem;
+}
+
+.headersmallwrapper ul li span{
+    cursor: pointer;
+}
+
+.accountdropdownmenu2{
+    position: absolute;
+    z-index: 1000;
+    left:-160px;
+    width: 200px;
+    background: #fff;
+    -webkit-box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 3px 6px rgb(0 0 0 / 20%);
+    padding-left: 2%;
+    z-index: 100;
+}
+
+.accountdropdownmenu2 li button{
+     width: 100%;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    color: var(--primary-text-color) !important;
+    text-transform: capitalize !important;
+    font-size: 13px !important;
+    font-weight: 350;
+}
+
+.accountdropdownmenu2 li button svg {
+    opacity: 0.5 !important;
+    margin-right: 8px !important;
+    color: var(--primary-icon-color);
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.accountdropdownmenu2  li button:hover{
+    background-color: var(--primary-icon-color) !important;
+    color: #fff !important;
+}
+
+.accountdropdownmenu2  li button:hover svg{
+    fill: #ffff !important;
+}
+
+.openselect {
+    font-size: 0.8rem !important;
+}
+
+.headersearch .itemicon{
+    display: none !important;
+}
+
+.headersearch .arrow{
+    font-size: 0.8rem !important;
+    margin-top: 5px;
+}
+
+
+header .headersearch {
+    width: 100%;
+    height: 45px;
+    border: 1px solid var(--primary-text-color);
+    padding: 10px 10px;
+    border-radius: 0.2rem;
+    
+}
+
+.selectDrop{
+    left: -10px !important;
+    right: 30px !important;
+}
+
+}
+
+@media(max-width: 684px){
+    .headersmallwrapper{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between;
+    margin-left: 18rem;
+}
+}
+
+@media(max-width: 588px){
+    .headersmallwrapper{
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between;
+    margin-left: 12rem;
+}
+} */
+
+
+

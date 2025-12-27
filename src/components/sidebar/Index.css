@@ -1,0 +1,239 @@
+/* =========================
+   GLOBAL SAFETY FIXES
+========================= */
+
+.sidebarwrapper,
+.rightcontent,
+.productlist,
+.listingdata {
+    overflow: visible !important;
+}
+
+.topstrip {
+    position: relative;
+    z-index: 1000;
+}
+
+/* =========================
+   SIDEBAR LAYOUT
+========================= */
+
+.sidebarwrapper {
+    max-width: 20% !important;
+    flex: 0 0 20% !important;
+    position: relative;
+}
+
+.rightcontent {
+    max-width: 80% !important;
+    flex: 0 0 80% !important;
+}
+
+/* Sticky sidebar */
+.sidebarwrapper .sidebar {
+    position: sticky;
+    top: 100px;
+    z-index: 5;
+}
+
+/* =========================
+   SIDEBAR CARD
+========================= */
+
+.sidebar .card {
+    padding: 1.45rem !important;
+    border-radius: 8px !important;
+    background: #fff;
+}
+
+/* Headings */
+.sidebarwrapper h3 {
+    font-size: 1.5rem !important;
+    font-weight: 600;
+    position: relative;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.sidebarwrapper h3::after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: #f0f0f0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.sidebarwrapper h3::before {
+    content: '';
+    width: 25%;
+    height: 3px;
+    background: var(--color-light-g);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+}
+
+/* =========================
+   CATEGORY LIST
+========================= */
+
+.catlist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.catitem {
+    padding: 8px 10px;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.catitem:hover {
+    background: rgba(226,202,120,0.08);
+    border-color: rgba(0,0,0,0.2);
+}
+
+.catitem h4 {
+    font-size: 0.95rem !important;
+    text-transform: capitalize;
+    color: var(--primary-text-color);
+}
+
+.catitem .img {
+    color: var(--color-light-g);
+}
+
+/* Count bubble */
+.itemcount {
+    font-size: 0.75rem !important;
+    color: #fff !important;
+    background: var(--primary-icon-color);
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+/* =========================
+   PRICE FILTER
+========================= */
+
+.MuiSlider-root {
+    color: #E2CA78 !important;
+}
+
+.pricerange {
+    display: flex;
+    margin-top: 10px;
+}
+
+.pricerange span {
+    font-size: 0.8rem !important;
+}
+
+.pricerange span strong {
+    font-size: 0.75rem !important;
+}
+
+.priceright {
+    margin-left: auto;
+}
+
+/* =========================
+   FILTER CHECKBOX LIST
+========================= */
+
+.filters {
+    margin-top: 1rem;
+}
+
+.filters h5 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.filters ul {
+    list-style: none;
+    padding: 0;
+    margin-left: -10px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.filters ul li {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+/* Scrollbar */
+.filters ul::-webkit-scrollbar {
+    width: 6px;
+}
+
+.filters ul::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+/* =========================
+   BUTTON
+========================= */
+
+.sidebar button {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* =========================
+   DROPDOWN FIX (CRITICAL)
+========================= */
+
+.showdropdownmenu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    min-width: 180px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    z-index: 9999;
+    padding: 0.5rem 0;
+}
+
+/* =========================
+   BANNER
+========================= */
+
+.listing-banner {
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+    .sidebarwrapper {
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+        margin-bottom: 2rem;
+    }
+
+    .rightcontent {
+        max-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+
+    .sidebarwrapper .sidebar {
+        position: relative;
+        top: 0;
+    }
+}

@@ -6,69 +6,73 @@
 } */
 
 .homeslider {
-    padding: 20px 0px;
+    padding: 0px 0px;
+    margin: 0px;
+
 }
 
-.homeslider-main{
-    border-radius: 25px;
-    overflow: hidden;
+.homeslider-main {
+    border-bottom-left-radius: 4%;
+    border-bottom-right-radius: 4%;
+    /* overflow: hidden; */
     position: relative;
 }
 
-.homeslider-main .item{
+.homeslider-main .item {
     position: relative;
     height: 28rem !important;
 }
 
-.homeslider-main .item img{
+.homeslider-main .item img {
     height: 28rem !important;
 }
 
-.homeslider-main .item .info{
+.homeslider-main .item .info {
     position: absolute;
     top: 54%;
     left: 7%;
     z-index: 90;
-   
+
 }
 
-.homeslider-main .item .info.slider-2-info{
+.homeslider-main .item .info.slider-2-info {
     top: 30% !important;
 }
 
-.homeslider-main .item .info.slider-2-info h1, .homeslider-main .item .info.slider-2-info p {
+.homeslider-main .item .info.slider-2-info h1,
+.homeslider-main .item .info.slider-2-info p {
     color: #fff !important;
 }
 
-.homeslider-main .item .info h1{
+.homeslider-main .item .info h1 {
     font-weight: bolder !important;
     text-transform: capitalize;
-    color: var(--primary-text-color);        
+    color: var(--primary-text-color);
 }
 
-.homeslider-main .item .info p{
+.homeslider-main .item .info p {
     font-size: 1.3rem;
     font-weight: 500;
 }
 
-.homeslider-main .slick-dots{
+.homeslider-main .slick-dots {
     position: absolute;
     bottom: 2% !important;
 }
 
-.homeslider-main .slick-dots button::before{
+.homeslider-main .slick-dots button::before {
     font-size: 16px !important;
 }
 
-.slick-active button::before{
+.slick-active button::before {
     color: var(--primary-text-color) !important;
 }
 
-.slick-arrow{
+.slick-arrow {
     position: absolute;
     top: 47%;
-    width:45px !important;
-    height:45px !important;
+    width: 45px !important;
+    height: 45px !important;
     border-radius: 50% !important;
     background: #f2f3f4 !important;
     z-index: 100 !important;
@@ -84,80 +88,101 @@
     left: 2% !important;
 }
 
-.slick-prev::before{
+.slick-prev::before {
     content: "\f104";
     font-family: FontAwesome !important;
     font-size: 25px;
-    color: #000;
+    color: #000 !important;
 }
 
-.slick-next::before{
+.slick-next::before {
     content: "\f105";
     font-family: FontAwesome !important;
     font-size: 25px;
-    color: #000;
+    color: #000 !important;
 }
 
-.slick-arrow:hover{
+.slick-arrow:hover {
     background-color: var(--hover-color) !important;
 }
 
-.slick-prev:hover::before{
-    color: #f2f3f4;
+.slick-prev:hover::before {
+    color: #f2f3f4 !important;
 }
 
-.slick-next:hover::before{
-    color: #f2f3f4;
+.slick-next:hover::before {
+    color: #f2f3f4 !important;
 }
 
-.slick-active button::before{
+.slick-active button::before {
     color: var(--hover-color) !important;
 }
 
-.shopnowbuttons{
+.shopnowbuttons {
     position: absolute;
     top: 86%;
-    left: 7%;
+    left: 45%;
     z-index: 1045;
 }
 
-.shopnowbuttons ul li button{
+.shopnowbuttons ul li button {
     border-radius: 50px;
     height: 2.8rem;
     background: var(--primary-icon-color);
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
-.shopnowbuttons ul li button:hover{
+.shopnowbuttons ul li button:hover {
     color: var(--primary-text-color);
 }
 
-.shopnowbuttons ul li button a{
+.shopnowbuttons ul li button a {
     text-decoration: none;
     color: inherit;
     font-size: large;
     text-transform: capitalize;
 }
 
-.shopnowbuttons ul li.titan button{
+.shopnowbuttons ul li.titan button {
     background: none;
     border: 3px solid var(--primary-icon-color);
     color: var(--primary-icon-color);
 }
 
-.shopnowbuttons ul li.titan button:hover{
+.shopnowbuttons ul li.titan button:hover {
     color: var(--primary-text-color);
 }
 
-.catslidersection .slick-arrow{
-    width:30px !important;
-    height:30px !important;
+.catslidersection .slick-arrow {
+    width: 30px !important;
+    height: 30px !important;
 }
 
-.catslidersection .slick-arrow.slick-prev::before{
+.catslidersection .slick-arrow.slick-prev::before {
     font-size: 16px;
 }
 
-.catslidersection .slick-arrow.slick-next::before{
+.catslidersection .slick-arrow.slick-next::before {
     font-size: 16px;
+}
+
+@media(max-width: 550px) {
+    .shopnowbuttons ul li button {
+        height: 3rem;
+        width: 8rem;
+    }
+
+    .shopnowbuttons ul li button a {
+        text-decoration: none;
+        color: inherit;
+        font-size: 0.9rem;
+        text-transform: capitalize;
+    }
+
+}
+
+@media(max-width: 400px) {
+    .shopnowbuttons{
+        display: none;
+    }
 }

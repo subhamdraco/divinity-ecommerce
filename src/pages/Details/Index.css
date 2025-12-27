@@ -1,0 +1,215 @@
+.breadcrumbwrapper2{
+    width: 100%;
+    height: auto;
+    margin-top: 5px;
+    padding: 1.1rem 0px !important;
+    /* border-top: 1px solid rgb(0,0,0,0.1) !important; */
+    border-bottom: 1px solid rgb(0,0,0,0.1) !important;
+}
+
+.breadcrumb2 {
+    background: none !important;
+    padding: 0px !important;
+}
+
+.breadcrumb2 li {
+    margin-right: 0.5rem !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    color: var(--primary-icon-color)
+}
+
+.breadcrumb2 li a{
+    color: var(--primary-text-color) !important;
+    text-decoration: none;
+    
+     
+}
+
+.detailspage .productinfo h1{
+    font-weight: bold;
+    opacity: 0.8;
+}
+
+.detailspage .productinfo .pricesection .pricelarge {
+    font-size: 2.813rem;
+    font-weight: bold;
+}
+
+
+.detailspage .productinfo .pricesection .text-orange {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.detailspage .productinfo .pricesection .oldprice {
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-decoration: line-through;
+    color: #c0c0c0
+}
+
+.fjjMVj {
+    background-color: transparent !important;
+}
+
+.part1 .col-md-5 .productzoom{
+     padding: 0% 5% !important;
+}
+
+.productzoom {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid rgb(0,0,0,0.1);
+    border-radius: 5px;
+
+}
+
+.productzoom:hover{
+   display: flex !important;
+    align-items: center !important;
+    justify-content: center !important; 
+}
+
+.productzoom .img-product{
+    mix-blend-mode: multiply;
+    padding: 1rem 1rem;
+    height: 70% !important;
+    width: 70% !important;
+    /* height: fit-content !important;
+    width: fit-content !important; */
+}
+.productzoom .img-product:hover{
+    height: 100% !important;
+    width:  100% !important;
+}
+
+.zoomslider .slider-item {
+  margin-top: 3%;
+  height: 10rem;
+  padding: 0.5rem;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid rgb(0,0,0,0.1);
+  border-radius: 5% !important;
+}
+
+.zoomslider .slider-item:hover{
+    border: 1px solid rgb(0,0,0,0.4);
+}
+
+.zoomslider .slider-item img {
+  height: 100%;      
+  width: auto;       
+  object-fit: contain;
+  mix-blend-mode: multiply; 
+}
+
+.zoomslider .slick-arrow{
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.thumbactive{
+    border: 1px solid var(--primary-icon-color) !important;
+}
+
+.addcartsection {
+    width: 100%;
+    height: auto;
+}
+
+.addcartsection .countsection{
+    width: 8%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid var(--primary-icon-color);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addcartsection .countsection input{
+    width: 80%;
+    height: 100% !important;
+    padding: 5px 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 0px;
+    outline: none !important;
+}
+
+.decrement , .increment {
+    padding: 0% 0%;
+    border-radius: 100%;
+    border: 1px solid var(--primary-icon-color);
+    margin: 0px 1%;
+    font-size: 1rem;
+    font-weight: bold;
+    width: 1.6rem;
+    height: 1.6rem; 
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+
+}
+
+.decrement:hover , .increment:hover {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.addcartsection button{
+    font-size: 0.8rem;
+    color: #ffff !important;
+    padding: 0.8rem 0.8rem !important;
+    text-transform: capitalize;
+    background: var(--hover-color) !important;
+}
+.addcartsection button svg{
+    font-size: 1.1rem;
+    /* margin-bottom: 4px !important; */
+    margin-bottom: 0.1rem !important;
+    margin-right: 0.2rem;
+}
+
+.addcartsection button:hover{
+    background: var(--primary-icon-color) !important;
+}
+
+.wishlisttab {
+    /* background: var(--primary-text-color); */
+    width: 50px;
+    height: 33px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    border: 1px solid var(--primary-text-color);
+}
+
+/* .wishlisttab:hover{
+    background: var(--primary-icon-color);
+    
+} */
+
+/* .wishlisttab:hover svg{
+    color: inherit !important;
+} */
+
+.wishlisttab svg {
+    padding: 5px;
+    font-size: 2rem !important;
+    color: #949090;    
+}

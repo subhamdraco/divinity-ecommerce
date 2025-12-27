@@ -1,0 +1,133 @@
+.headersmall {
+    width: 100%;
+    height: auto;
+}
+
+.headersmall .row .col-sm-4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+.menuitems{
+    position: absolute;
+    height: 100vh;
+    width: 50vh;
+    background: #fff;
+    top: 5%;
+    left: 0%;
+    z-index: 100000;
+    transition: all 0.4s ease-in-out;
+    overflow: scroll;
+
+}
+.menuitems .row {
+    width: 100%;
+    height: auto;
+}
+
+.menuitems .row .logo{
+    height: 100% !important;
+    width: 100% !important;
+    padding-bottom: 2px !important;
+}
+
+.cross {
+
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    justify-content: end;
+}
+
+.cross:hover svg{
+    font-size: 2rem;
+}
+
+.headersmall .row>[class*="col-"]:last-child ul {
+    margin-left: 80% !important;
+}
+
+.headersmall .row>[class*="col-"]:first-child {
+    justify-content: start !important;
+}
+
+.hamburgermenu {
+    cursor: pointer;
+}
+
+.dash{
+    border: 1px solid #706d6d;
+    opacity: 0.1;
+}
+
+.headersmall .menuitems .search {
+    width: 75%;
+    padding-left: 20px;
+    position: relative;
+    padding-bottom: 3px;
+}
+
+.headersmall .menuitems .search input{
+    width: 100%;
+    height: 200% !important;
+    border: 10px;
+    outline: none !important;
+    font-size: 18px;
+    /* background-color: var(--hover-color); */
+}
+
+.headersmall .menuitems .search .searchIcon{
+    position: absolute;
+    top: 10%;
+    right: 2px;
+    opacity: 0.5;
+    font-size: 1.5rem !important;
+}
+
+.hammenuitems{
+    display: flex;
+    justify-content: left;
+}
+
+.list-group-item{
+    border: none !important;
+}
+
+.hammenuitems ul li button a{
+    text-decoration: none !important;
+    text-transform: capitalize;
+    color: var(--primary-text-color);
+    padding: 0.4rem 1rem;
+}
+
+.hammenuitems ul li button a:hover{
+   background: var(--hover-color);
+   color: #fff;
+}
+
+.left-logo {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: start !important;
+}
+
+
+@media (max-width: 930px) {
+.headersmall .row>[class*="col-"]:last-child ul {
+    margin-left: 0% !important;
+    }
+}
+
+@media (max-width: 644px) {
+    .headersmall .row>[class*="col-"]:first-child {
+        justify-content: center !important;
+    }
+
+    .headersmall .row>[class*="col-"]:last-child ul {
+        margin-left: 0% !important;
+    }
+}
+

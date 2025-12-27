@@ -22,38 +22,58 @@
 
 .nav nav ul li button {
     text-transform: capitalize !important;
-    padding: 0.1rem 0.01rem;
+    padding: 0.2rem 1.5rem;
 }
-.nav nav ul li button:hover{
+/* .nav nav ul li button:hover{
     background-color: var(--hover-color);
+    text-decoration: underline ;
+    text-decoration-color: var(--hover-color);
+    text-decoration-style: solid
+} */
+
+.nav nav ul li {
+    position: relative;
+    display: inline-block;
 }
 
-.nav nav ul li button a {
+.nav nav ul li::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 4px;
+    background: currentColor;
+    opacity: 0;
+    transform: translateY(5px);
+    transition: 
+        width 0.3s ease,
+        height 0.3s ease,
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+
+.nav nav ul li:hover::after {
+    width: 100%;
+    height: 2px;
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+
+.nav nav ul li a button {
     text-decoration: none !important;
-    color: var(--primary-text-color) !important;
-    font-size: 0.8rem;
+    /* color: #fff !important; */
+    font-size: 1.2rem;
+    color: #fff !important;
 }
 
-.nav .phno svg{
-    font-size: 30px !important;
-    color: var(--primary-icon-color);
-    opacity: 0.7;
-}
-
-.nav .phno .info p{
-    font-size: 12px !important;
-    color: var(--primary-text-color);
-}
-
-.nav .phno .info h5{
-    color: var(--primary-text-color);
-}
 
 .nav nav .dropdownmenu{
     position: absolute;
     top: 150%;
     left: 0px;
-    width: 120px;
+    width: 100%;
     height: auto;
     background: #fff;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16) , 0 3px 6px rgba(0,0,0,0.23);
@@ -93,8 +113,8 @@ nav .nav li:hover .dropdownmenu{
 
 }
 
-.megamenu{
- height: auto !important;
+/* ra */
+ /* height: auto !important;
  width: 98% !important;
  padding: 30px 30px !important;
  margin-left: 14px;
@@ -113,4 +133,24 @@ nav .nav li:hover .dropdownmenu{
 
 .megamenu .col ul li a:hover{
     color: var(--primary-icon-color) !important;
+} */
+
+.brands .dropdownmenu ul li {
+    padding: 10% !important;
+}
+
+.brands .dropdownmenu ul li:hover{
+    /* background-color: var(--hover-color); */
+}
+
+.brands .dropdownmenu ul li:hover a{
+    color: var(--primary-icon-color) !important;
+    font-size: large;
+}
+
+.brands .dropdownmenu ul li a{
+    text-decoration: none;
+    color: var(--primary-text-color);
+    font-size: medium;
+    font-weight: 600;
 }

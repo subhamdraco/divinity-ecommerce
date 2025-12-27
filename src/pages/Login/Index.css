@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --gold: #d4af37;
+  --navy: #052a4a;
+  --navy-dark: #031c30;
+  --gold-soft: #E2CA78;
+  --bg-light: #f8f9fb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-light);
+  color: var(--navy);
+}
+
+/* ---------- WRAPPER ---------- */
+
+.auth-wrap {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+}
+
+@media (max-width: 900px) {
+  .auth-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- BRAND SIDE ---------- */
+
+.auth-brand {
+  padding: 6rem;
+  background: linear-gradient(
+    180deg,
+    var(--navy),
+    var(--navy-dark)
+  );
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-brand h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.auth-brand span {
+  color: var(--gold);
+}
+
+.auth-brand p {
+  margin-top: 1.6rem;
+  font-size: 1.05rem;
+  color: #d6dbe0;
+  max-width: 420px;
+}
+
+@media (max-width: 900px) {
+  .auth-brand {
+    display: none;
+  }
+}
+
+/* ---------- FORM PANEL ---------- */
+
+.auth-panel {
+  display: grid;
+  place-items: center;
+  padding: 3rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: #fff;
+  padding: 3.5rem;
+  border-radius: 20px;
+  box-shadow: 0 40px 120px rgba(5,42,74,.15);
+}
+
+/* ---------- HEAD ---------- */
+
+.auth-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  margin: 0;
+}
+
+.auth-card p {
+  margin: .6rem 0 2.6rem;
+  color: #6b7a88;
+}
+
+/* ---------- INPUT ---------- */
+
+.field {
+  position: relative;
+  margin-bottom: 1.8rem;
+}
+
+.field input {
+  width: 100%;
+  padding: 16px 14px;
+  border-radius: 12px;
+  border: 1px solid #dfe5ea;
+  font-size: 1rem;
+  color: var(--navy);
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.field label {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  padding: 0 6px;
+  color: #7b8a99;
+  pointer-events: none;
+  transition: .3s;
+}
+
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label {
+  top: -8px;
+  font-size: .75rem;
+  color: var(--gold);
+}
+
+/* ---------- BUTTON ---------- */
+
+.auth-btn {
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  border: none;
+  background: var(--navy);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .3s, transform .2s;
+}
+
+.auth-btn:hover {
+  background: var(--gold);
+  color: var(--navy-dark);
+  transform: translateY(-1px);
+}
+
+/* ---------- FOOTER ---------- */
+
+.auth-footer {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: .95rem;
+}
+
+.auth-footer a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+}

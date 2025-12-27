@@ -4,13 +4,26 @@
 :root {
   --primary-icon-color : #d4af37;
   --primary-text-color: #052a4a;
-  --hover-color: 	  #E2CA78;
+  --hover-color: 	  #052a4a;
+  --color-light-g: #E2CA78;
 }
 
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+}
+
+.btn-g{
+  background: var(--hover-color) !important;
+  color: white !important;
+  padding: 7px 15px !important;
+  border-radius: 5px !important;
+  text-transform: capitalize !important;
+  transition: all 0.3s ease-in-out;
+}
+.btn-g:hover{
+  background: var(--primary-icon-color) !important;
 }
 
 ::placeholder{
@@ -25,6 +38,7 @@ h1, h2, h3, h4, p{
 body {
   color: var(--primary-text-color);
   font-family: "Inter", sans-serif;
+  overflow-x: hidden;
 }
 
 .container-fluid {
@@ -36,11 +50,19 @@ body {
 }
 
 .bg-g {
-  background-color: var(--primary-icon-color) !important;
+background: linear-gradient(135deg, #052a4a, #0a4d7c, #d4af37) !important;
 }
 
 .text-g{
   color: var(--primary-icon-color);
+}
+
+.bg-navy{
+  background-color: var(--primary-text-color) !important;
+}
+
+.text-orange{
+  color: #FDC040 !important;
 }
 
 .hd{
@@ -62,4 +84,16 @@ body {
 
 .transition{
   transition: all 0.3s ease-in-out;
+}
+
+.h-330px{
+  height: 300px !important;
+}
+
+.bg-red{
+  color: red !important;
+}
+
+a {
+  text-decoration: none !important;
 }

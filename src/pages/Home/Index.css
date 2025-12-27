@@ -2,8 +2,32 @@
     padding: 1rem 0px;
 }
 
+.homeproductsrow2 .prodslider .item{
+    padding-right: 0.8rem !important;
+    padding-bottom: 1rem !important;
+    height: 40px !important;
+}
+
+.homeproductsrow2 .daily-banner{
+    height: 30rem !important;
+    width: 18rem !important;
+    border-radius: 1rem;
+}
+
+.homeproductsrow2 .daily-best-info{
+    position: absolute;
+    color: white;
+    top: 13%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-transform: capitalize;
+    text-align: center;
+}
+
+
 .filtertab li {
     margin-left: 1rem;
+    transition: all 0.3s ease-in-out;
 }
 
 .filtertab li a{
@@ -15,19 +39,74 @@
     font-weight: 600;
 }
 
-.filtertab li a:hover{
+.filtertab li:hover a{
     color: var(--primary-icon-color);
-    transform: translateY(-10px) !important;
+    bottom:3px;
 }
 
 .homeproducts .productrow{
-    display: flex;
+    display: flex !important;
     padding: 0.3rem !important;
-    flex-wrap: wrap;
+    flex-wrap: wrap !important;
+    height: 100% !important;
 }
 
 .homeproducts .productrow .item{
-    width: 20%;
-    padding: 1rem 1rem !important;
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0.5rem 1rem !important;
 }
 
+.daily-nav {
+    display: flex;
+    gap: 1%;
+    left: 92%;
+    position: absolute;
+    top: 4%;
+}
+
+.cat-prev,
+.cat-next {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 1% 8%;
+    color: var(--primary-text-color);
+    transition: 0.2s;
+    user-select: none;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+}
+
+.cat-prev svg{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 50%;
+    font-size: 30px;
+}
+.cat-next svg{
+     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+     border-radius: 50%;
+     font-size: 30px;
+}   
+
+.cat-prev:hover,
+.cat-next:hover {
+    color: var(--primary-icon-color);
+}
+
+.homeproductsrow2 .swiper-slide {
+    display: flex;
+    height: auto !important;
+}
+
+
+@media(max-width: 800px){
+.homeproductsrow2 .daily-banner{
+    display: none;
+}
+
+.daily-nav{
+    display: none;
+}
+}

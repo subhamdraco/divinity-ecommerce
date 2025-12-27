@@ -1,0 +1,211 @@
+/* ===============================
+   GLOBAL
+================================ */
+.listingpage {
+  width: 100%;
+  padding: 1.2rem 0;
+  background: #fafafa;
+}
+
+.quicksand {
+  font-family: "Quicksand", sans-serif;
+}
+
+/* ===============================
+   BREADCRUMB
+================================ */
+.breadcrumb {
+  background: #f4f6f8;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb h1 {
+  font-weight: 700;
+  font-size: 1.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.breadcrumb ul {
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb ul li a {
+  text-decoration: none;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.breadcrumb ul li a:hover {
+  color: var(--primary-icon-color);
+}
+
+/* ===============================
+   LAYOUT FIX (IMPORTANT)
+================================ */
+.listingdata,
+.rightcontent,
+.topstrip,
+.row {
+  overflow: visible !important;
+}
+
+/* ===============================
+   SIDEBAR
+================================ */
+.sidebarwrapper {
+  max-width: 280px;
+}
+
+/* ===============================
+   TOP STRIP
+================================ */
+.rightcontent .topstrip {
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.75rem 1.25rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.2rem;
+}
+
+.topstrip p {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* ===============================
+   DROPDOWN TABS
+================================ */
+.tab_ {
+  position: relative;
+  margin-left: 0.75rem;
+  z-index: 100;
+}
+
+.tab_ .btn {
+  text-transform: capitalize !important;
+  font-size: 0.9rem;
+  background: #f9f9f9 !important;
+  border-radius: 12px !important;
+  padding: 0.45rem 0.9rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  color: #333 !important;
+}
+
+.tab_ .btn svg {
+  font-size: 1.2rem;
+  margin-right: 0.3rem;
+}
+
+/* ===============================
+   DROPDOWN MENU
+================================ */
+.showdropdownmenu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 7rem;
+  background: #fff;
+  border-radius: 12px;
+  padding: 0.3rem 0;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  z-index: 99999;
+}
+
+.showdropdownmenu.sort {
+  width: 11rem;
+}
+
+.showdropdownmenu li {
+  list-style: none;
+  padding: 0.55rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #333;
+}
+
+.showdropdownmenu li:hover,
+.showdropdownmenu li.active {
+  background: var(--primary-icon-color);
+  color: #fff;
+}
+
+/* ===============================
+   PRODUCT GRID
+================================ */
+.productlist {
+  margin-top: 0.5rem;
+}
+
+.productsearch {
+  margin-bottom: 1.5rem;
+}
+
+.productsearch .item {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===============================
+   PAGINATION
+================================ */
+.paginationsection {
+  margin-top: 2rem;
+}
+
+.css-1l5xwdx-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+  background: var(--primary-icon-color) !important;
+  color: #fff !important;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 1200px) {
+  .sidebarwrapper {
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 992px) {
+  .sidebarwrapper {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .rightcontent {
+    max-width: 100%;
+  }
+
+  .topstrip {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .tab_ {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .breadcrumb {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .breadcrumb h1 {
+    font-size: 1.5rem;
+  }
+
+  .topstrip p {
+    font-size: 0.85rem;
+  }
+
+  .showdropdownmenu {
+    right: auto;
+    left: 0;
+  }
+}

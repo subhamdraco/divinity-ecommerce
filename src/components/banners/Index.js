@@ -15,7 +15,7 @@ const Banners = () =>{
                         <div className='box'>
                             <h5>Premium quality, globally<br/> certified ingredients</h5>
                             <img src={Banner1} alt='banner1' className='w-100 transition'/>
-                            <div className='shopnowbutton'><Button variant='contained'><Link to="/shop-now"></Link>Shop Now</Button></div>
+                            <div className='shopnowbutton'><Link to="/listing"><Button variant='contained'>Shop Now</Button></Link></div>
                         </div>          
                     </div>
 
@@ -23,7 +23,7 @@ const Banners = () =>{
                         <div className='box'>
                             <h5>Products crafted with care<br/> and tested for safety</h5>
                             <img src={Banner2} alt='banner1' className='w-100 transition'/>
-                            <div className='shopnowbutton'><Button variant='contained'><Link to="/shop-now"></Link>Shop Now</Button></div>
+                            <div className='shopnowbutton'><Link to="/listing"><Button variant='contained'>Shop Now</Button></Link></div>
                         </div>          
                     </div>
 
@@ -31,7 +31,7 @@ const Banners = () =>{
                         <div className='box'>
                             <h5>Competitive pricing and<br/>reliable global logistics</h5>
                             <img src={Banner3} alt='banner1' className='w-100 transition'/>
-                            <div className='shopnowbutton'><Button variant='contained'><Link to="/shop-now"></Link>Shop Now</Button></div>
+                            <div className='shopnowbutton'><Link to="/listing"><Button variant='contained'>Shop Now</Button></Link></div>
                         </div>          
                     </div>
                 </div>
@@ -40,4 +40,4 @@ const Banners = () =>{
 
     )
 }
-export default Banners
+export default Banners;

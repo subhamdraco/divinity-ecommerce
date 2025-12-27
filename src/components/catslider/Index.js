@@ -1,81 +1,90 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Slider from "react-slick";
 import './Index.css';
 import { Link } from 'react-router-dom';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
+import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 
-const CatSlider = () => {
-    const [itembg, setitembg] = useState([
-        '#f2fce4',
-        '#fffceb',
-        '#ecffec',
-        '#feefea',
-        '#fff3eb',
-        '#fff3ff',
-        '#f2fce4',
-        '#feefea'
-    ]);
+const CatSlider = (props) => {
 
-    const slider = useRef();
-    var settings = {
-        dots: false,
-        infinite: true,
-        slidesToShow: 7,
-        slidesToScroll: 1,
-        arrows: true,
-        speed: 500,
-        autoplay: true,
-        autoplaySpeed: 2000,
-    };
     function importAll(r) {
         return r.keys().map((key) => ({
             src: r(key),
             name: key.replace('./', '').replace('.png', '')
         }));
     }
-    const images = importAll(require.context('../../assets/images/cat', false, /\.(png|jpe?g|svg)$/));
 
     return (
         <>
-            <div className="catslidersection">
+            <div className="catslidersection mt-4">
                 <div className="container-fluid">
 
                     <div className="featuretitle d-flex align-items-center">
                         <h2 className="hd quicksand">Featured Categories</h2>
                         <ul className="ps-5 pt-2 mt-2 list-inline cat_list_items">
                             <li className="ps-2 list-inline-item quicksand">
-                                <Link to="/shop-now">ToothPaste</Link>
+                                <Link to="/listing">ToothPaste</Link>
                             </li>
                             <li className="ps-2 list-inline-item quicksand">
-                                <Link to="/shop-now">Whey Protein</Link>
+                                <Link to="/listing">Whey Protein</Link>
                             </li>
                             <li className="ps-2 list-inline-item quicksand">
-                                <Link to="/shop-now">Fish Oil</Link>
+                                <Link to="/listing">Fish Oil</Link>
                             </li>
                             <li className="ps-2 list-inline-item quicksand">
-                                <Link to="/shop-now">Baby Wipes</Link>
+                                <Link to="/listing">Baby Wipes</Link>
                             </li>
                         </ul>
+                        <div className="catslider-nav ms-auto">
+                            <div className="cat-prev"><KeyboardArrowLeftOutlinedIcon /></div>
+                            <div className="cat-next"><KeyboardArrowRightOutlinedIcon /></div>
+                        </div>
                     </div>
-                    
-                    
-                    <Slider {...settings} className="catslider-main">
-                        {images.map((img, i) => {
+                    <Swiper
+                        modules={[Navigation, Autoplay]}
+                        slidesPerView={5}
+                        navigation={{
+                            nextEl: ".cat-next",
+                            prevEl: ".cat-prev",
+                        }}
+                        spaceBetween={20}
+                        autoplay={{
+                            delay: 2500,
+                            disableOnInteraction: false,
+                        }}
+                        speed={600}
+                        loop={true}
+                        breakpoints={{
+                            1200: { slidesPerView: 4 },
+                            1024: { slidesPerView: 3 },
+                            768: { slidesPerView: 3 },
+                            600: { slidesPerView: 1 },
+                            320: { slidesPerView: 1 },
+                        }}
+                        className="catslider-main">{props.data.map((product, i) => {
                             return (
-                                <div className="item">
-                                    <Link className="quicksand">
-                                        <div className="info" style={{ backgroundColor: itembg[i % itembg.length] }}>
-                                            <img key={i} src={img.src} alt="" />
-                                            <span className="catname">{img.name}</span>
-                                        </div>
-                                    </Link>
-                                </div>
+                                <SwiperSlide key={i}>
+                                    <div className="item">
+                                        <Link className="quicksand">
+                                            <div className="info d-flex mb-2 position-relative">
+                                                <Link to={"/listing"}><img key={i} src={product.image} alt="" /></Link>
+                                                {/* <div className="d-flex flex-column align-items-center m-0 catname position-absolute">
+                                                    <span className="catname1">{product.category}</span>
+                                                    <span className="catname2">{product.name}</span>
+                                                </div> */}
+                                                
+                                            </div>
+                                        </Link>
+                                    </div>
+                                </SwiperSlide>
                             )
-                        })}
-                    </Slider>
+                        })}</Swiper>
                 </div>
             </div>
         </>
     )
 }
-
 export default CatSlider;
