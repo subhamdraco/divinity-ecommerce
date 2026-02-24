@@ -6,14 +6,14 @@ import HeaderSmall from "../headersmall/index";
 import Footer from "../footer/Footer";
 
 const ProtectedRoute = () => {
-    const { user, loading, logout } = useAuth();
+    const {user, loading, logout } = useAuth();
     const location = useLocation();
 
     if (loading) return null; // or loader
 
-    if (!user) {
-        return <Navigate to="/login" replace state={{ from: location }} />;
-    }
+    // if (!user) {
+    //     return <Navigate to="/login" replace state={{ from: location }} />;
+    // }
 
     // return user ? <Outlet /> : <Navigate to="/login" replace />;
     return (

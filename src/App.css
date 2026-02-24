@@ -94,6 +94,6 @@ background: linear-gradient(135deg, #052a4a, #0a4d7c, #d4af37) !important;
   color: red !important;
 }
 
-a {
+a , a svg{
   text-decoration: none !important;
 }

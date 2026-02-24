@@ -4,15 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Index.css";
 
 const MyOrders = () => {
-  const { user } = useAuth();
+  const user = localStorage.getItem("user");
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    if (!user?.id) {
-      navigate("/login");
-      return;
-    }
+    // if (!user?.id) {
+    //   navigate("/login");
+    //   return;
+    // }
 
     fetch(`https://divinityimpex.com/api/get-orders?user_id=${user.id}`)
       .then(res => res.json())

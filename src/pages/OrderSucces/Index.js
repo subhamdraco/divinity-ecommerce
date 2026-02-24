@@ -10,17 +10,74 @@ const OrderSuccess = () => {
     const { order_number } = useParams();
     const [status, setStatus] = useState(null);
     const [order, setOrder] = useState(null);
-    const { cart, clearCart } = useCart();
-    const { user } = useAuth();
+    const { clearCart, fetchCart } = useCart();
+    const user = JSON.parse(localStorage.getItem("user"));
     const [loading, setLoading] = useState(true);
     const hasProcessed = useRef(false);
 
+    const updateStock = async (orderData) => {
+        const payload = {
+            order_id : orderData.id
+        }
+
+        const res = await fetch(
+            "https://divinityimpex.com/api/update-stock.php",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }
+        );
+
+        const data = await res.json();
+        return data
+    }
+
+    const sendEmail = async (Order, orderData) => {
+
+        const Message = `
+            <p>
+            Quiqup Order Id <strong>${Order.order.id}</strong>.
+            </p>
+            <p>
+            Internal Order ID - <strong>${orderData.order_number}</strong>
+            </p>
+
+            <p>
+            Go to this link for order label download –
+            <br>
+            <a href="https://business-ae.quiqup.com/order/${Order.order.id}" target="_blank">
+                https://business-ae.quiqup.com/order/${Order.order.id}
+            </a>
+            </p>
+            `;
+
+        const payload = {
+            to: "exports@divinityimpex.com",
+            to2: "accounts@divinityimpex.com",
+            subject: " Divinity Impex New Order Received",
+            message: Message
+        }
+
+        const res = await fetch(
+            "https://divinityimpex.com/api/send-email.php",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }
+        );
+
+        const data = await res.json();
+
+        return data
+    }
 
     const createQuiqupOrder = async (order, cart) => {
 
         const payload = {
             order_id: order.order_number,
-
+            kind: order.delivery,
             pickup: {
                 name: "Navire logistics services LLC warehouse",
                 phone: "+971525914261",
@@ -63,115 +120,18 @@ const OrderSuccess = () => {
     };
 
     useEffect(() => {
+
         if (!order_number) return;
 
         if (hasProcessed.current) return;
         hasProcessed.current = true;
 
-        // const processOrder = async () => {
-        //     try {
-        //         /* =========================
-        //            1. UPDATE PAYMENT STATUS
-        //         ========================= */
-        //         const updateRes = await fetch(`${API}/update-payment-status.php`, {
-        //             method: "POST",
-        //             headers: { "Content-Type": "application/json" },
-        //             body: JSON.stringify({
-        //                 order_id: order_number,
-        //                 payment_status: "paid"
-        //             })
-        //         });
-
-        //         const updateData = await updateRes.json();
-        //         if (!updateData.success) {
-        //             setStatus("failed");
-        //             return;
-        //         }
-
-        //         /* =========================
-        //            2. FETCH ORDER STATUS
-        //         ========================= */
-        //         const orderRes = await fetch(
-        //             `${API}/get-order-status.php?order_id=${order_number}`
-        //         );
-        //         const orderData = await orderRes.json();
-
-        //         if (!orderData.success) {
-        //             setStatus("failed");
-        //             return;
-        //         }
-
-        //         setOrder(orderData.data);
-
-        //         /* =========================
-        //            3. CREATE QUIQUP ORDER
-        //         ========================= */
-        //         if (orderData.data.payment_status === "paid") {
-        //             const orderAddress = await fetch(`${API}/get-order-address.php?order_id=${orderData.data.id}`);
-
-        //             const orderAddressData = await orderAddress.json();
-
-        //             const orderitem = {
-        //                 "order_number": order_number,
-        //                 "shipping_name": orderAddressData.data[0].full_name,
-        //                 "shipping_phone": orderAddressData.data[0].phone,
-        //                 "shipping_address1": orderAddressData.data[0].address_line1,
-        //                 "shipping_address2": orderAddressData.data[0].address_line1,
-        //                 "shipping_city": orderAddressData.data[0].city
-        //             }
-
-        //             const quiqupData = await createQuiqupOrder(orderitem, cart);
-
-        //             if (quiqupData.error) {
-        //                 setStatus("failed")
-        //                 return;
-        //             }
-
-        //             if (quiqupData.order) {
-
-        //                 const success = "success"
-        //                 setStatus(success)
-
-        //                 const quiqupPayload = {
-        //                     tracking_url : quiqupData.order.tracking_url,
-        //                     user_id: user.id,
-        //                     order_id: order_number,
-        //                     quiqup_order_id: quiqupData.order.id,
-        //                     status: status,
-        //                     response: quiqupData.order
-        //                 }
-
-
-        //                 const quiqupOrderRes = await fetch(
-        //                     "https://divinityimpex.com/api/store-quiqup-order.php",
-        //                     {
-        //                         method: "POST",
-        //                         headers: { "Content-Type": "application/json" },
-        //                         body: JSON.stringify(quiqupPayload)
-        //                     }
-        //                 );
-
-
-        //                 const quiqupDatares = await quiqupOrderRes.json();
-
-        //                 clearCart();
-
-        //                 setStatus("success");
-        //             }
-
-        //         };
-
-
-
-        //     } catch (err) {
-        //         console.error(err);
-        //         setStatus("failed");
-        //     }
-        // };
-
         const processOrder = async () => {
             try {
                 setLoading(true);
+
+                const cartData = await fetchCart();
+                console.log(cartData);
 
                 /* 1️⃣ UPDATE PAYMENT */
                 const updateRes = await fetch(`${API}/update-payment-status.php`, {
@@ -204,6 +164,7 @@ const OrderSuccess = () => {
                 /* 4️⃣ QUIQUP */
                 const orderitem = {
                     order_number,
+                    delivery: orderData.data.delivery_type,
                     shipping_name: addressData.data[0].full_name,
                     shipping_phone: addressData.data[0].phone,
                     shipping_address1: addressData.data[0].address_line1,
@@ -211,8 +172,9 @@ const OrderSuccess = () => {
                     shipping_city: addressData.data[0].city
                 };
 
-                const quiqupData = await createQuiqupOrder(orderitem, cart);
+                const quiqupData = await createQuiqupOrder(orderitem, cartData);
                 if (!quiqupData?.order) throw new Error("Quiqup failed");
+
 
                 /* 5️⃣ STORE QUIQUP */
                 await fetch(`${API}/store-quiqup-order.php`, {
@@ -228,6 +190,10 @@ const OrderSuccess = () => {
                     })
                 });
 
+                await sendEmail(quiqupData, orderData.data);
+
+                await updateStock(orderData.data);
+                
                 clearCart();
                 setStatus("success");
             } catch (err) {
@@ -249,7 +215,7 @@ const OrderSuccess = () => {
     if (loading) {
         return (
             <div className="container text-center py-5">
-                <FadeLoader/>
+                <FadeLoader />
                 <p className="mt-3">Processing your payment...</p>
             </div>
         );

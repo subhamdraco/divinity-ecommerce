@@ -32,12 +32,12 @@ const AddToCartBtn = ({ product , qty}) => {
     const [added, setAdded] = useState(false);
 
     const handleAddToCart = () => {
-        if (!user) {
-            navigate("/login", {
-                state: { from: window.location.pathname }
-            });
-            return;
-        }
+        // if (!user) {
+        //     navigate("/login", {
+        //         state: { from: window.location.pathname }
+        //     });
+        //     return;
+        // }
 
         addToCart(product, qty || 1);
         setAdded(true);

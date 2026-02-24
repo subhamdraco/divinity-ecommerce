@@ -2,10 +2,14 @@
     color: black !important;
 }
 
+.aboutcontent .row .col-sm-12{
+  height: 700px !important;
+}
+
 .aboutimage {
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  height: 100%;
+  object-fit: fill;
   border-radius: 15px;
 }
 
@@ -306,11 +310,16 @@
 
 /* Card */
 .team-card {
-  background: #fafafa;
+  background: #353333;
   border-radius: 22px;
   overflow: hidden;
   box-shadow: 0 30px 60px rgba(0,0,0,0.06);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  color: #f1f1f1 !important;
+}
+
+.team-card p{
+  color: #f1f1f1 !important;
 }
 
 .team-card:hover {
@@ -329,13 +338,17 @@
   width: 100%;
   height: 360px;
   overflow: hidden;
+  background-color:#efeffb;
+}
+.team-image.lead{
+  background-color: #067994 !important;
 }
 
 .team-image img {
   width: 100%;
   height: 100%;
-  /* object-fit: contain; */
-  object-fit: fill;
+  object-fit: cover;
+  /* object-fit: fill; */
 }
 
 /* Content */

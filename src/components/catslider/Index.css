@@ -1,143 +1,142 @@
-.catslidersection{
+/* ==================================
+   CATEGORY SLIDER SECTION
+================================== */
+
+.catslidersection {
     width: 100%;
-    height: auto;
-    padding: 0px 0px;
+    padding: 10px 0;
+}
+
+/* ==================================
+   TITLE
+================================== */
+
+.featuretitle {
     position: relative;
-    /* overflow: hidden; */
 }
 
-.cat_list_items{
-    font-size: 1.1rem;
-}
-
-.catslidersection .item{
-    height: 30% !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding: 10% 0px;
-    transition: all 0.3s ease-in-out;
-}
-
-.catslidersection .item .info{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    /* background: #EEF9CD; */
-    border-radius: 2%;
-    padding-top: 1rem !important;
-    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
-    height: 28rem ;
-    width: 18rem;
-    padding-left: 2%;
-
-}
-
-.catslidersection .item:hover .info img{
-    transform: scale(1.1);
-}
-
-.catslidersection .item .info img{
-    /* mix-blend-mode: multiply; */
-    padding: 1rem 1rem;
-    height: 100% !important;
-    width: 100%;
-}
-
-.catslidersection .item a{
-    font-size: 0.7rem !important;
+.featuretitle h2 {
+    font-size: 1.6rem;
     font-weight: 700;
+}
+
+/* ==================================
+   CARD DESIGN (SMALL & CLEAN)
+================================== */
+
+.catslidersection .item {
+    display: flex;
+    justify-content: center;
+    padding: 0 !important;
+}
+
+.cat-card {
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.catslidersection .info {
+    width: 180px;
+    height: 200px;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;      /* important */
+    padding: 0;            /* remove padding */
+    display: flex;
+}
+
+.catslidersection .info img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     /* fills entire box */
+    display: block;
+    transition: 0.3s ease;
+}
+
+/* Hover Effects */
+
+.catslidersection .item:hover .info {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.catslidersection .item:hover img {
+    transform: scale(1.05);
+}
+
+/* ==================================
+   CATEGORY TITLE
+================================== */
+
+.cat-title {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--primary-text-color);
-    text-transform:uppercase;
+    text-align: center;
+    text-transform: capitalize;
 }
 
-.catslidersection .item:hover .info{
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+/* ==================================
+   SLIDER MAIN
+================================== */
+
+.catslider-main {
+    padding: 5px 0;
 }
 
-.catslider-main{
-    padding: 1rem 0px;
-    position: relative;
-    height: 100% !important;
-}
-
-.catslider-main .item .info:hover{
-    color: var(--hover-color);
-}
+/* ==================================
+   NAVIGATION
+================================== */
 
 .catslider-nav {
     display: flex;
-    gap: 1%;
-    left: 120%;
+    gap: 8px;
     position: absolute;
-    top: -3%;
+    right: 15px;   /* keeps inside container */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
 }
 
-.cat-prev,
-.cat-next {
+
+.cat-prev svg,
+.cat-next svg {
+    font-size: 26px;
+    padding: 6px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     cursor: pointer;
-    font-weight: 600;
-    padding: 1% 8%;
-    color: var(--primary-text-color);
-    transition: 0.2s;
-    user-select: none;
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    transition: 0.2s ease;
 }
 
-.cat-prev svg{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 50%;
-    font-size: 30px;
-}
-.cat-next svg{
-     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-     border-radius: 50%;
-     font-size: 30px;
-}   
-
-.cat-prev:hover,
-.cat-next:hover {
-    color: var(--primary-icon-color);
+.cat-prev svg:hover,
+.cat-next svg:hover {
+    transform: scale(1.1);
 }
 
-/* .catname{
-    top: 2000px !important;
-}   
+/* ==================================
+   RESPONSIVE
+================================== */
 
-.catname1{
-    position: absolute;
-    padding-top: 0rem !important;
-    /* padding-bottom: 1rem !important; */
-    /* font-size: 1rem !important;
-    text-transform: capitalize; */
-/* } */ 
+@media (max-width: 768px) {
 
+    .catslidersection .info {
+        width: 120px;
+        height: 130px;
+        padding: 10px;
+    }
 
-.featuretitle{
-    max-width: 1024px !important;
-    position: relative;
+    .cat-title {
+        font-size: 0.75rem;
+    }
 }
 
-.featuretitle ul li a{
-    text-decoration: none !important;
-    color: var(--primary-text-color);
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-.featuretitle ul li a:hover{
-    color: var(--primary-icon-color);
-    
-}
-
-@media(max-width: 500px){
-    .catslider-nav{
+@media (max-width: 500px) {
+    .catslider-nav {
         display: none;
     }
 }

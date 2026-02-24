@@ -1,12 +1,14 @@
 import React from "react";
 import "./Index.css";
-import Aboutbanner from "../../assets/images/aboutbanner.png";
-import Slider2 from "../../assets/images/about-slider/slider-2.png";
-import Slider3 from "../../assets/images/about-slider/slider-3.png";
-import Slider4 from "../../assets/images/about-slider/slider-4.png";
-import Slider5 from "../../assets/images/about-slider/slider-5.png";
-import Slider6 from "../../assets/images/about-slider/slider-6.png";
+import Aboutbanner from "../../assets/images/aboutbanner.jpg";
+import Slider1 from "../../assets/images/about-slider/slider-1.jpg";
+import Slider2 from "../../assets/images/about-slider/slider-2.jpg";
+import Slider3 from "../../assets/images/about-slider/slider-3.jpg";
+import Slider4 from "../../assets/images/about-slider/slider-4.jpg";
 import Slider from "react-slick";
+import AboutImage from '../../assets/images/about-image.jpg';
+import AboutImage2 from '../../assets/images/about-image3.png';
+import { Link } from "react-router-dom";
 
 const About = () => {
     var settings = {
@@ -24,19 +26,18 @@ const About = () => {
             <div className='breadcrumbwrapper2 mb-2'>
                 <div className='container-fluid' style={{ "--bs-breadcrumb-divider": "'>'" }} aria-label="breadcrumb">
                     <ol className="breadcrumb breadcrumb2">
-                        <li className="breadcrumb-item">Home </li>
-                        <li className="breadcrumb-item">Pages </li>
-                        <li className="breadcrumb-item breadactive" aria-current="page">About</li>
+                        <li className="breadcrumb-item"><Link to={"/"}>Home</Link></li>
+                        <li className="breadcrumb-item breadactive" aria-current="page"><Link to={"/about"}>About</Link></li>
                     </ol>
                 </div>
             </div>
 
             <div className="aboutcontent pt-3 container-fluid">
-                <div className="row h-auto">
-                    <div className="col-md-6 col-lg-6 col-sm-12 d-flex justify-content-center h-auto">
+                <div className="row">
+                    <div className="col-md-6 col-lg-6 col-sm-12 d-flex justify-content-center">
                         <img src={Aboutbanner} className="aboutimage" />
                     </div>
-                    <div className="col-md-6 col-lg-6 col-sm-12 aboutcontent text-center">
+                    <div className="pb-0 col-md-6 col-lg-6 col-sm-12 text-center">
                         <h1 className="d-flex justify-content-center curl-underline">Welcome to Divinity</h1>
                         <h4 className="d-flex justify-content-center curl-underline">Our Journey </h4>
                         <h4 className="d-flex justify-content-center pb-4">Building Everyday Trust Through Quality</h4>
@@ -50,6 +51,9 @@ const About = () => {
 
                         <Slider {...settings} className="aboutslider">
                             <div>
+                                <img src={Slider1} className="aboutsliderimage" />
+                            </div>
+                            <div>
                                 <img src={Slider2} className="aboutsliderimage" />
                             </div>
                             <div>
@@ -57,12 +61,6 @@ const About = () => {
                             </div>
                             <div>
                                 <img src={Slider4} className="aboutsliderimage" />
-                            </div>
-                            <div>
-                                <img src={Slider5} className="aboutsliderimage" />
-                            </div>
-                            <div>
-                                <img src={Slider6} className="aboutsliderimage" />
                             </div>
                         </Slider>
                     </div>
@@ -192,7 +190,7 @@ const About = () => {
 
             <section class="team-section">
                 <div class="container">
-                 <div class="team-header">
+                    <div class="team-header">
                         <span class="team-label">👥 MEET THE TEAM</span>
                         <h1 className="quicksand">The People Behind Divinity Impex</h1>
                         <p>
@@ -205,38 +203,66 @@ const About = () => {
 
                     <div class="team-grid">
 
+                        <div class="team-card dark">
+                            <div class="team-image lead">
+                                <img src={AboutImage} alt="Operations Head - Divinity Impex" />
+                            </div>
+                            <div class="team-content">
+                                <h3 className="text-white">Rizwan Adatia</h3>
+                                <span class="role">Chairman – COGEF Group |
+                                    Chairman – RAF Global | Vision Exports UAE | Motivational Speaker</span>
+                                <p>
+                                    The man behind us, the founder of our company and our Managing Director
+                                    <br/>
+                                    <br/>
+                                    He is a Visionary Entrepreneur, Philanthropist, and Advocate for Positive Change. A motivational speaker and a Business man who shares his own life experience and helps others to grow like him through his positive influence and motivation.
+                                    <br/>
+                                    <br/>
+                                    From humble beginning in Porbandar, Gujarat to a thriving network of businesses across 10+ African countries – a story worth telling. He is also the Director of COGEF Group.
+                                    <br/>
+                                    <Link to={"https://www.cogefgroup.com"}>https://www.cogefgroup.com</Link>
+                                    <br/>
+                                    His vision enabled robust ecosystems irrespective of challenges. His personal philanthropy gave birth to an idea of a dedicated effort in the form of a foundation – RAF Global, an international NGO catering help and support to many people across India and Africa in terms of Food, Health & Education.
+                                    <br/>
+                                    <Link to={"https://rafglobal.org/"}>https://rafglobal.org/</Link>
+                                    <br/>
+                                    He is also the co-owner of Vision Exports & Ayul International in UAE.
+                                    <br/>
+                                    <Link to={"https://www.ayulinternational.com"}>https://www.ayulinternational.com</Link>
+                                    <br/>
+                                    He is also the owner of Divinity Impex in UAE.
+                                    <br/>
+                                    <Link to={"https://www.divinityimpex.com"}>hhttps://www.divinityimpex.com</Link>
+                                    <br/>
+                                    He is leading a team of more than 3000+ professionals under his able guidance.
+                                    <br/>
+                                    <br/>
+                                    To learn more about him please follow his official link
+                                    <br/>  
+                                    <Link to={"https://www.rizwanadatia.com "}>https://www.rizwanadatia.com</Link>
+                                    <br/>
+                                    <Link to={"https://www.facebook.com/iamrizwanadatia"}> View More ..</Link>
+                                </p>
+                            </div>
+                        </div>
+
                         <div class="team-card">
                             <div class="team-image">
-                                <img src="https://nest-frontend-v6.vercel.app/assets/imgs/page/about-6.png" alt="Founder - Divinity Impex"/>
+                                <img src={AboutImage2} alt="Founder - Divinity Impex" />
                             </div>
                             <div class="team-content">
-                                <h3>Krishna Ghosh</h3>
-                                <span class="role">Founder & Managing Director</span>
+                                <h3 className="text-white">Ayanangshu A. Chowdhury</h3>
+                                <span class="role">Strategy Consultant | Divinity Impex LLC</span>
                                 <p>
-                                    With a vision to build brands rooted in trust and performance,
-                                    Krish leads Divinity Impex with a strong focus on quality,
-                                    ethical sourcing, and long-term value creation across
-                                    personal care and nutrition industries.
+                                    The Strategy Consultant at Divinity Impex LLC, <br/>with extensive experience working alongside leading FMCG companies. He brings a strong strategic mindset backed by practical industry exposure, helping brands navigate competitive markets and accelerate sustainable growth.
+                                    With expertise in FMCG brand strategy, market expansion,portfolio planning, and go-to-market execution, plays a critical role in shaping business direction and long-term growth strategies at Divinity Impex. His approach combines market intelligence, consumer insights, and data-driven analysis to build scalable and resilient brands.
+                                    At Divinity Impex LLC, he contributes to strategic planning, brand positioning, pricing strategy, and channel development, ensuring alignment between business objectives and market opportunities. He supports the company’s vision of building trusted, high-performance consumer brands across regional and international markets.
                                 </p>
                             </div>
                         </div>
 
 
-                        <div class="team-card dark">
-                            <div class="team-image">
-                                <img src="https://nest-frontend-v6.vercel.app/assets/imgs/page/about-8.png" alt="Operations Head - Divinity Impex"/>
-                            </div>
-                            <div class="team-content">
-                                <h3 className="text-white">Payel Ghosh</h3>
-                                <span class="role">Operations & Brand Strategy Head</span>
-                                <p>
-                                    Payel ensures seamless operations and brand consistency
-                                    across all product lines. Her expertise bridges creativity
-                                    and execution, ensuring every Divinity Impex brand delivers
-                                    excellence from concept to consumer.
-                                </p>
-                            </div>
-                        </div>
+
 
                     </div>
 

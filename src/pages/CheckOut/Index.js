@@ -3,11 +3,55 @@ import { useLocation } from "react-router-dom";
 import { useCart } from "../../components/context/CartContext";
 import { useAuth } from "../../components/context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import shaker from '../../assets/images/shaker.jpeg';
 
 import "./Index.css";
 
-const Checkout = (props) => {
+const getUAEDate = () =>
+  new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Dubai" }));
 
+const getDeliveryOptions = () => {
+  const now = getUAEDate();
+  const mins = now.getHours() * 60 + now.getMinutes();
+
+  const options = [];
+
+  // Next Day
+  options.push({
+    key: "partner_next_day",
+    label: "Next Day Delivery",
+    desc: "Delivered tomorrow before 23:00",
+    price: 22
+  });
+
+  // 4 Hours: 08:00 – 18:00
+  if (mins >= 480 && mins <= 1080) {
+    options.push({
+      key: "partner_4hr",
+      label: "4 Hours Delivery",
+      desc: "Delivered within 4 hours ( After 6pm will receive a 4hr deliver at 12pm the next day.)",
+      price: 35
+    });
+  }
+
+  // Same Day: before 10:00
+  if (mins <= 600) {
+    options.push({
+      key: "partner_same_day",
+      label: "Same Day Delivery",
+      desc: "Delivered today before 23:00",
+      price: 0
+    });
+  }
+
+  return options;
+};
+
+
+const Checkout = () => {
+
+  const [deliveryMethod, setDeliveryMethod] = useState(null);
+  const deliveryOptions = getDeliveryOptions();
   const { state } = useLocation();
   const hasProductRef = useRef(false);
   const [isFormValid, setIsFormValid] = useState(false);
@@ -121,7 +165,6 @@ const Checkout = (props) => {
     if (!form.name.trim()) err.name = "Name is required";
     if (!form.address.trim()) err.address = "Address is required";
     if (!form.city.trim()) err.city = "City is required";
-    if (!form.pincode.trim()) err.pincode = "Pincode is required";
     if (form.phone.length < 6 || form.phone.length > 15) err.phone = "Enter valid phone number";
     setErrors(err);
     return Object.keys(err).length === 0;
@@ -129,10 +172,14 @@ const Checkout = (props) => {
 
   /* ---------- CHECKOUT ---------- */
   const handleCheckout = async () => {
-    if (!user || !user.id) {
-      navigate("/login");
+    if (!deliveryMethod) {
+      alert("Please select a delivery option");
       return;
     }
+    //   if (!user || !user.id) {
+    //     navigate("/login");
+    //     return;
+    //   }
 
     const valid = validate();
     setIsFormValid(valid);
@@ -144,6 +191,7 @@ const Checkout = (props) => {
         body: JSON.stringify({
           user_id: user.id,
           cart: cart,
+          delivery: deliveryMethod.key,
           address: { ...form, phone: form.countryCode + form.phone }
         })
       });
@@ -151,7 +199,7 @@ const Checkout = (props) => {
       const data = await response.json();
 
       if (data.success && data.order_number) {
-         // clearCart(); // clear frontend cart
+        // clearCart(); // clear frontend cart
         // navigate(`/order-success/${data.order_number}`);
         try {
           const res = await fetch(`${API}/create-payment-intent.php`, {
@@ -160,7 +208,7 @@ const Checkout = (props) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              amount: Math.round(subtotal * 100),
+              amount: Math.round((subtotal + deliveryMethod.price) * 100),
               order_number: data.order_number
             }),
           });
@@ -185,7 +233,7 @@ const Checkout = (props) => {
       console.error(err);
       alert("Something went wrong while creating order");
     }
-  // createQuiqupOrder(orderitem, cart)
+    // createQuiqupOrder(orderitem, cart)
 
   };
 
@@ -195,7 +243,7 @@ const Checkout = (props) => {
       <div className="cart-empty">
         <h2>Your cart is empty</h2>
         <p>Add premium products and experience quality.</p>
-        <Link to="/listing" className="btn-primary-gold">
+        <Link to="/products" className="btn-primary-gold">
           Explore Products
         </Link>
       </div>
@@ -233,6 +281,15 @@ const Checkout = (props) => {
             <button className="remove-btn" onClick={() => removeFromCart(item.product_id)}>✕</button>
           </div>
         ))}
+        <div className="cart-item">
+          <div className="cart-img">
+              <img src={shaker} alt="shaker" />
+            </div>
+            <div className="cart-info">
+              <h4>Shaker</h4>
+              <span className="price">Free</span>
+            </div>
+        </div>
       </div>
 
       {/* RIGHT */}
@@ -270,7 +327,7 @@ const Checkout = (props) => {
 
             <div className="form-group">
               <input
-                placeholder="Pincode"
+                placeholder="Pincode (Optional)"
                 value={form.pincode}
                 onChange={e => setForm({ ...form, pincode: e.target.value })}
               />
@@ -305,6 +362,25 @@ const Checkout = (props) => {
             {errors.phone && <span className="error">{errors.phone}</span>}
           </div>
 
+          <h3 style={{ marginTop: "20px" }}>Delivery Options</h3>
+
+          {deliveryOptions.map(opt => (
+            <label key={opt.key} className="delivery-option">
+              <input
+                type="radio"
+                name="delivery"
+                value={opt.key}
+                onChange={() => setDeliveryMethod(opt)}
+              />
+              <div>
+                <strong>{opt.label}</strong>
+                <p>{opt.desc}</p>
+                <span>+ {opt.price} AED</span>
+              </div>
+            </label>
+          ))}
+
+
           <div className="summary-row">
             <span>Subtotal</span>
             <span>{subtotal.toFixed(2)} AED</span>
@@ -312,7 +388,7 @@ const Checkout = (props) => {
 
           <div className="summary-total">
             <span>Total</span>
-            <span>{subtotal.toFixed(2)} AED</span>
+            <span>{(subtotal + (deliveryMethod?.price || 0)).toFixed(2)} AED</span>
           </div>
 
           {/* FALLBACK */}

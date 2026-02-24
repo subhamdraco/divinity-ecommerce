@@ -5,16 +5,16 @@ import logo from '../../assets/images/logo.svg';
 import SearchIcon from '@mui/icons-material/Search';
 import Select from '../selectDrop/Select';
 import Nav from '../header/nav/Nav';
-import SignUpButton from '../../components/signupbutton/Index';
+// import SignUpButton from '../../components/signupbutton/Index';
 import axios from 'axios';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+// import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
-import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
-import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+// import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+// import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
+// import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
+// import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import { useCart } from "../../components/context/CartContext";
@@ -48,8 +48,6 @@ const Header = (props) => {
     const headerRef = useRef()
 
     const [isOpenDropdown, setisOpenDropdown] = useState(true)
-
-    const [smallisOpenDropdown, smallsetisOpenDropdown] = useState(true)
 
     // const [categories, setcategories] = useState([
     //     "BCAA",
@@ -169,10 +167,10 @@ const Header = (props) => {
                                     <div className="countrywrapper">
                                         <Select data={countryList} placeholder={countryList[0]} icon={<LocationOnOutlinedIcon className="itemicon" style={{ opacity: 0.4 }} />} />
                                     </div>
-                                    {props.user ? (
+                                    {user && (
                                         <ClickAwayListener onClickAway={() => setisOpenDropdown(true)}>
                                             <ul className="list list-inline mb-0 headertabs">
-                                                <li className="list-inline-item p-1" onClick={() => window.location.reload()}>
+                                                {/* <li className="list-inline-item p-1" onClick={() => window.location.reload()}>
                                                     <Link to={"/wishlist"}>
                                                         <span>
                                                             <FavoriteBorderOutlinedIcon className="itemicon" />
@@ -180,7 +178,7 @@ const Header = (props) => {
                                                             Wishlist
                                                         </span>
                                                     </Link>
-                                                </li>
+                                                </li> */}
                                                 <li className="list-inline-item p-1">
                                                     <Link to={"/cart"} >
                                                         <span><ShoppingCartOutlinedIcon className="itemicon" />
@@ -189,22 +187,19 @@ const Header = (props) => {
                                                         </span>
                                                     </Link>
                                                 </li>
-                                                <li className="list-inline-item p-1">
+                                                {/* <li className="list-inline-item p-1">
                                                     <span onClick={() => setisOpenDropdown(!isOpenDropdown)}><PersonOutlineOutlinedIcon className="itemicon" />
                                                         Account
                                                     </span>
                                                     {isOpenDropdown === false &&
                                                         <ul className="accountdropdownmenu">
-                                                            {/* <li><Button><PersonOutlinedIcon />My Account</Button></li> */}
                                                             <li><Link to={"/my-orders"}><Button><LocationOnOutlinedIcon />Order Tracking</Button></Link></li>
-                                                            {/* <li><Button><FavoriteBorderOutlinedIcon />My Wishlist</Button></li> */}
-                                                            {/* <li><Button><TuneOutlinedIcon />Settings</Button></li> */}
                                                             <li><Button onClick={props.logout}><LogoutOutlinedIcon />Sign Out</Button></li>
                                                         </ul>
                                                     }
-                                                </li>
+                                                </li> */}
                                             </ul>
-                                        </ClickAwayListener>) : <div className="ps-5"><SignUpButton /></div>}
+                                        </ClickAwayListener>)}
                                 </div>
                             </div>
                         </div>

@@ -16,39 +16,44 @@ import MyOrders from './pages/UserOrders/Index.js';
 import OrderTracking from './pages/OrderTracking/Index.js';
 import Wishlist from './pages/Wishlist/Index.js';
 import PaymentFailure from './pages/PaymentFailure/Index.js';
+import ContactUs from './pages/Contact/Index.js';
+import Combo from "./pages/Combo/Index.js";
 
 
 function App() {
 
   return (
     <>
-    <Routes>
-      <Route element={<AuthLayout />}>
-        <Route exact={true} path="/register" element={<Register />} />
-        <Route exact={true} path="/login" element={<Login />} />
-      </Route>
+      <Routes>
+        <Route element={<AuthLayout />}>
+          <Route exact={true} path="/register" element={<Register />} />
+          <Route exact={true} path="/login" element={<Login />} />
+        </Route>
 
-      <Route element={<MainLayout />}>
-        <Route exact={true} path="/" element={<Home/>} />
-        <Route exact={true} path="/about" element={<About />} />
-        <Route exact={true} path="/listing" element={<Listing />} />
-       
-        {/* <Route exact={true} path="/cart" element={<Cart />} />
+        <Route element={<MainLayout />}>
+          <Route exact={true} path="/" element={<Home />} />
+          <Route exact={true} path="/about" element={<About />} />
+          <Route exact={true} path="/products" element={<Listing />} />
+          <Route exact={true} path="/contact" element={<ContactUs />} />
+          <Route path="/order-success/:order_number" element={<OrderSuccess />} />
+          <Route path="/product/combo" element={<Combo />} />
+
+          {/* <Route exact={true} path="/cart" element={<Cart />} />
         <Route exact={true} path="/checkout" element={<Checkout />} />
         <Route exact={true} path="/order-success/:order_number" element={<OrderSuccess/>} /> */}
-      </Route>
-      
+        </Route>
+
         <Route element={<ProtectedRoute />}>
           <Route path="/my-orders" element={<MyOrders />} />
           <Route path="/order-tracking/:order_number" element={<OrderTracking />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/order-success/:order_number" element={<OrderSuccess />} />
+
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/payment-failed/:order_number" element={<PaymentFailure />} />
           <Route exact={true} path="/product/details/:id" element={<Details />} />
         </Route>
-    </Routes>
+      </Routes>
     </>
   );
 }

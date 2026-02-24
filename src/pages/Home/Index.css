@@ -1,112 +1,119 @@
-.homeproducts{
-    padding: 1rem 0px;
+/* ================= SECTION STRUCTURE ================= */
+
+.home-section {
+    padding: 60px 0;
 }
 
-.homeproductsrow2 .prodslider .item{
-    padding-right: 0.8rem !important;
-    padding-bottom: 1rem !important;
-    height: 40px !important;
+.light-bg {
+    background: #fafafa;
 }
 
-.homeproductsrow2 .daily-banner{
-    height: 30rem !important;
-    width: 18rem !important;
-    border-radius: 1rem;
+/* Remove container padding */
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
-.homeproductsrow2 .daily-best-info{
-    position: absolute;
-    color: white;
-    top: 13%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-transform: capitalize;
-    text-align: center;
+/* Inner content padding */
+.section-inner {
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
+/* ================= HEADER ================= */
 
-.filtertab li {
-    margin-left: 1rem;
-    transition: all 0.3s ease-in-out;
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    padding-left: 0; /* EXTREME LEFT */
 }
 
-.filtertab li a{
-    color: var(--primary-text-color);
-    text-decoration: none;
-    font-size: 1rem !important;
-    transition: all 0.3s ease-in-out;
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.view-all {
     position: relative;
     font-weight: 600;
+    text-decoration: none;
+    color: var(--primary-text-color);
+    font-size: 15px;
+    transition: 0.3s ease;
 }
 
-.filtertab li:hover a{
-    color: var(--primary-icon-color);
-    bottom:3px;
+.view-all::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: #E2CA78;
+    transition: 0.3s ease;
 }
 
-.homeproducts .productrow{
-    display: flex !important;
-    padding: 0.3rem !important;
-    flex-wrap: wrap !important;
-    height: 100% !important;
+.view-all:hover::after {
+    width: 100%;
 }
 
-.homeproducts .productrow .item{
-    width: 100% !important;
-    height: 100% !important;
-    padding: 0.5rem 1rem !important;
+/* ================= DAILY SECTION ================= */
+
+.daily-banner {
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    max-height: 500px;
 }
+
+.daily-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+/* Navigation Arrows */
 
 .daily-nav {
     display: flex;
-    gap: 1%;
-    left: 92%;
-    position: absolute;
-    top: 4%;
+    gap: 10px;
 }
 
-.cat-prev,
-.cat-next {
+.daily-prev svg,
+.daily-next svg {
+    font-size: 26px;
+    padding: 6px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     cursor: pointer;
-    font-weight: 600;
-    padding: 1% 8%;
-    color: var(--primary-text-color);
-    transition: 0.2s;
-    user-select: none;
-    border-radius: 50%;
-    width: 100%;
-    height: 100%;
-    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+    transition: 0.2s ease;
 }
 
-.cat-prev svg{
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    border-radius: 50%;
-    font-size: 30px;
-}
-.cat-next svg{
-     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-     border-radius: 50%;
-     font-size: 30px;
-}   
-
-.cat-prev:hover,
-.cat-next:hover {
-    color: var(--primary-icon-color);
+.daily-prev svg:hover,
+.daily-next svg:hover {
+    transform: scale(1.1);
 }
 
-.homeproductsrow2 .swiper-slide {
-    display: flex;
-    height: auto !important;
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 992px) {
+    .section-inner {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .daily-nav {
+        display: none;
+    }
 }
 
-
-@media(max-width: 800px){
-.homeproductsrow2 .daily-banner{
-    display: none;
-}
-
-.daily-nav{
-    display: none;
-}
+@media (max-width: 768px) {
+    .home-section {
+        padding: 40px 0;
+    }
 }

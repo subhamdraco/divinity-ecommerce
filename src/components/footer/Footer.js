@@ -7,6 +7,7 @@ import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import { FaFacebookF } from "react-icons/fa6";
 import { CiYoutube } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
+import {Link} from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -62,14 +63,14 @@ const Footer = () => {
                             <div className='col'>
                                 <ul className='footerlist'>
                                     <li className='footerlistheader'><h5>Top Selling Products</h5></li>
-                                    <li>Whey Protein</li>
-                                    <li>Fish Oil</li>
-                                    <li>EAA</li>
-                                    <li>Baby Wipes</li>
+                                    <li><Link to={"/products"}>Whey Protein</Link></li>
+                                    <li><Link to={"/products"}>Fish Oil</Link></li>
+                                    <li><Link to={"/products"}>True Gain</Link></li>
+                                    <li><Link to={"/products"}>Baby Wipes</Link></li>
                                 </ul>
                             </div>
 
-                            <div className='col'>
+                            {/* <div className='col'>
                                 <ul className='footerlist'>
                                     <li className='footerlistheader'><h5>FAQs</h5></li>
                                     <li>Return Policy</li>
@@ -77,26 +78,26 @@ const Footer = () => {
                                     <li>Track Your Order</li>
                                     <li>ABOUT US</li>
                                 </ul>
-                            </div>
+                            </div> */}
 
                             <div className='col'>
                                 <ul className='footerlist'>
                                     <li className='footerlistheader'><h5>Our Quality</h5></li>
-                                    <li>About Us</li>
-                                    <li>Sustainability</li>
+                                    <li><Link to="/about">About Us</Link></li>
+                                    {/* <li>Sustainability</li>
                                     <li>Privacy Policy</li>
-                                    <li>Terms & Conditions</li>
-                                    <li>EXPLORE</li>
+                                    <li>Terms & Conditions</li> */}
+                                    <li><Link to={"/products"}>EXPLORE</Link></li>
                                 </ul>
                             </div>
 
                             <div className='col'>
                                 <ul className='footerlist'>
                                     <li className='footerlistheader'><h5>NEED HELP?</h5></li>
-                                    <li>011 - 49594959</li>
-                                    <li>WhatsApp</li>
-                                    <li>divinity@test.com</li>
-                                    <li>Brand Authorized Offline Stores</li>
+                                    <li>+971525914261</li>
+                                    {/* <li>WhatsApp</li> */}
+                                    <li>exports@divinityimpex.com</li>
+                                    {/* <li>Brand Authorized Offline Stores</li> */}
                                 </ul>
                             </div>
 
@@ -104,9 +105,9 @@ const Footer = () => {
                             <div className='col'>
                                 <h5>Follow Us</h5>
                                 <ul className='footerlist list list-inline d-flex align-items-center ps-2'>
-                                    <li className='list-inline-item'><FaFacebookF /></li>
-                                    <li className='list-inline-item'><CiYoutube /></li>
-                                    <li className='list-inline-item'><FaInstagram /></li>
+                                    <li className='list-inline-item'><Link to={"https://www.facebook.com/share/1DFMXnjMm2/"}><FaFacebookF /></Link></li>
+                                    <li className='list-inline-item'><Link to={"https://youtube.com/@titancoreofficial?si=tfp4_Q5GRkh5nL20"}><CiYoutube /></Link></li>
+                                    <li className='list-inline-item'><Link to={"https://www.instagram.com/titan_core_uae?igsh=MXRqbjQ1OW01MGdyMg=="}><FaInstagram /></Link></li>
                                 </ul>
                             </div>
                         </div>
@@ -117,6 +118,6 @@ const Footer = () => {
             </div>
         </>
     )
-}
+}   
 
 export default Footer;

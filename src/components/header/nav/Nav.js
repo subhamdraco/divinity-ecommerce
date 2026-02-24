@@ -53,10 +53,10 @@ const Nav = () => {
                                             <div className="dropdownmenu">
                                                 <ul>
                                                     <li>
-                                                        <Link to={"/listing"}>Titan Core</Link>
+                                                        <Link to={"/products?brand=TITAN%20CORE"}>Titan Core</Link>
                                                     </li>
                                                     <li>
-                                                        <Link to={"/listing"}>Reshu</Link>
+                                                        <Link to={"/products?brand=RESHU"}>Reshu</Link>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -68,7 +68,7 @@ const Nav = () => {
                                             <Button><Link>Titan Core</Link></Button>
                                         </li> */}
                                         <li className="list-inline-item">
-                                            <Link to="/listing"><Button>Shop</Button></Link>
+                                            <Link to="/products"><Button>Shop</Button></Link>
                                             {/* <KeyboardArrowDownIcon /> */}
                                             {/* <div className="dropdownmenu megamenu">
                                                 <div className="row">
@@ -77,7 +77,7 @@ const Nav = () => {
                                                         <ul className="mb-0 mt-3">
                                                             {reshu.map((item, index) => {
                                                                 return (
-                                                                    <li><Link to="/listing">{item}</Link></li>
+                                                                    <li><Link to="/products">{item}</Link></li>
                                                                 )
                                                             })}
                                                         </ul>
@@ -87,7 +87,7 @@ const Nav = () => {
                                                         <ul className="mb-0 mt-3">
                                                             {titan.map((item, index) => {
                                                                 return (
-                                                                    <li><Link to="/listing">{item}</Link></li>
+                                                                    <li><Link to="/products">{item}</Link></li>
                                                                 )
                                                             })}
                                                         </ul>
@@ -102,7 +102,7 @@ const Nav = () => {
                                             <Link><Button>Blog</Button></Link>
                                         </li> */}
                                         <li className="list-inline-item">
-                                            <Link><Button>Contact</Button></Link>
+                                            <Link to={"/contact"}><Button>Contact</Button></Link>
                                         </li>
                                         {/* <li className="list-inline-item">
                                             <Link><Button>Policies</Button></Link>

@@ -3,6 +3,9 @@ import "./Index.css";
 import Sidebar from "../../components/sidebar/Index";
 import Product from "../../components/product/Index";
 import Pagination from "@mui/material/Pagination";
+import { useSearchParams } from "react-router-dom";
+import { useAuth } from "../../components/context/AuthContext";
+import FadeLoader from "../../components/loader/Index";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -10,14 +13,17 @@ const Listing = () => {
   const [products, setProducts] = useState([]);
   const [filtered, setFiltered] = useState([]);
 
+  const [params] = useSearchParams();
+  const prebrand = params.get("brand") || "all";
+
   /* FILTER STATE */
   const [selectedBrands, setSelectedBrands] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 100000]);
+  const [priceRange, setPriceRange] = useState([0, 500]);
 
   /* PAGINATION STATE */
   const [page, setPage] = useState(1);
 
-  
+
 
   /* FETCH PRODUCTS */
   useEffect(() => {
@@ -78,6 +84,7 @@ const Listing = () => {
               products={products}
               setPage={setPage}
               setFiltered={setFiltered}
+              prebrand={prebrand}
             />
 
           </div>
@@ -85,18 +92,18 @@ const Listing = () => {
           {/* PRODUCTS */}
           <div className="col-sm-12 rightcontent">
             <div className="row">
-              {paginatedProducts.length ? (
-                paginatedProducts.map(product => (
-                  <div
-                    key={product.product_id}
-                    className="col-md-4 productsearch"
-                  >
-                    <Product data={product} />
-                  </div>
-                ))
-              ) : (
-                <p className="text-center">No products found</p>
-              )}
+                {paginatedProducts.length ? (
+                  paginatedProducts.map(product => (
+                    <div
+                      key={product.product_id}
+                      className="col-md-4 col-6 productsearch"
+                    >
+                      <Product data={product} />
+                    </div>
+                  ))
+                ) : (
+                  <FadeLoader />
+                )}
             </div>
 
             {/* PAGINATION */}

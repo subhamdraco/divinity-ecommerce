@@ -28,11 +28,11 @@ const Details = () => {
 
     const navigate = useNavigate();
 
-     const handleBuyNow = () => {
+    const handleBuyNow = () => {
         navigate("/checkout", {
-        state: {
-            product: product
-        }
+            state: {
+                product: product
+            }
         });
     };
 
@@ -66,6 +66,8 @@ const Details = () => {
         setproductKey(key)
     }
 
+    const isCombo = product?.data?.category?.toLowerCase() === "combo";
+
     return (
         <>
             <section className='detailspage'>
@@ -81,15 +83,22 @@ const Details = () => {
                 <div className='container mw-85'>
                     {loading ? <FadeLoader /> :
                         <div className="row">
-                            <div className="col-md-4">
-                                <div className='productzoom'>
-                                    <InnerImageZoom
-                                        src={productImage || product?.data?.thumbnail_url}
-                                        zoomSrc={productImage || product?.data?.thumbnail_url}
-                                        zoomType="hover"
-                                        zoomScale={2}
-                                        className="img-product"
-                                    />
+                            <div className={isCombo ? "col-md-6" : "col-md-4"}>
+                                <div className={`productzoom ${isCombo ? "combo-zoom" : ""}`}>
+                                    {isCombo ? (
+                                        <img
+                                            src={product.data.image}
+                                            alt={product.data.name}
+                                            className="combo-img"
+                                        />
+                                    ) : (
+                                        <InnerImageZoom
+                                            src={productImage}
+                                            zoomSrc={productImage}
+                                            zoomType="hover"
+                                            zoomScale={1}
+                                        />
+                                    )}
                                 </div>
                                 <div className='zoomslider'>
                                     <Slider {...settings}>
@@ -103,10 +112,10 @@ const Details = () => {
 
 
                             </div>
-                            <div className="col-md-8 productinfo">
+                            <div className={product?.data?.category === "Combo" ? "col-md-6 productinfo" : "col-md-8 productinfo"}>
                                 <h1 className='quicksand text-capitalize'>{product.data.name}, {product.data.brand}</h1>
                                 <div className='d-flex align-items-center'>
-                                    <Rating name="half-rating" defaultValue={3.5} precision={0.5} readOnly />
+                                    <Rating name="half-rating" defaultValue={4.5} precision={0.5} readOnly />
                                     <span> (32 reviews) </span>
                                 </div>
 
@@ -119,21 +128,32 @@ const Details = () => {
                                 </div>
 
 
+                                <div className="freeShakerDetail">
+                                    🎁 FREE SHAKER INCLUDED WITH THIS PRODUCT
+                                </div>
+
+
+
                                 <p>{product.data.description}</p>
 
-                                <h5>{product.data.category === "Fish Oil"? "No of Capsules: " : "Net Weight(in kgs): "}<span>{product.data.net_wt}</span></h5>
+                                <h5>{product.data.category === "Fish Oil" ? "No of Capsules: " : "Net Weight(in kgs): "}<span>{product.data.net_wt}</span></h5>
 
                                 <div className='addcartsection pt-4 pb-4 d-flex align-items-center'>
-                                    <span className='decrement' onClick={() => { if (quantity > 1) { setquantity(quantity - 1) } }}>-</span>
-                                    <div className='countsection'>
-                                        <input type='number' defaultValue={1} value={quantity}></input>
+                                    <div className='row'>
+                                        <div className='col-md-4 col-sm-12 d-flex align-items-center justify-content-center mb-1'>
+                                            <span className='decrement' onClick={() => { if (quantity > 1) { setquantity(quantity - 1) } }}>-</span>
+                                            <div className='countsection'>
+                                                <input type='number' defaultValue={1} value={quantity}></input>
+                                            </div>
+                                            <span className='increment' onClick={() => { if (quantity < product.data.quantity) { setquantity(quantity + 1) } }}>+</span>
+                                        </div>
+                                        <div className='col-md-4 col-sm-12 d-flex align-items-center justify-content-center mb-1'>
+                                            <Button onClick={handleBuyNow}><FlashOnIcon />Buy Now</Button>
+                                        </div>
+                                        <div className='col-md-4 col-sm-12 d-flex align-items-center justify-content-center mb-1'>
+                                            <AddToCartButton product={product.data} qty={quantity} />
+                                        </div>
                                     </div>
-                                    <span className='increment' onClick={() => { if (quantity < product.data.quantity) { setquantity(quantity + 1) } }}>+</span>
-
-                                    <Button className="ms-4" onClick={handleBuyNow}><FlashOnIcon />Buy Now</Button>
-                                     <AddtoWishlist user_id={user.id} product_id={id}/>
-                                     <AddToCartButton product={product.data} qty={quantity}/>
-                                    {/* <div className='wishlisttab ms-3' onClick={() => { setwishadded(!wishadded) }}><FavoriteIcon className={`wishicon ${wishadded ? "bg-red" : ""}`} /></div> */}
                                 </div>
                             </div>
                         </div>

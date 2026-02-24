@@ -5,19 +5,18 @@ import Banners from "../../components/banners/Index";
 import Product from "../../components/product/Index";
 import FadeLoader from "../../components/loader/Index";
 import './Index.css';
-import DailyBanner from "../../assets/images/banner/daily-banner.png";
+// import DailyBanner from "../../assets/images/banner/daily-banner.png";
+import DailyBanner from "../../assets/images/slider-small.jpeg"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
 import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import { Link } from "react-router-dom";
 
-
 const Home = () => {
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    
 
     useEffect(() => {
         fetch("https://divinityimpex.com/api/products")
@@ -34,124 +33,104 @@ const Home = () => {
 
     return (
         <>
-
             <HomeSlider />
             <CatSlider data={products} />
             <Banners />
 
-            <section className="homeproducts">
+            {/* ================= POPULAR PRODUCTS ================= */}
+            <section className="home-section">
                 <div className="container-fluid">
-                    <div className="d-flex align-items-center">
-                        <h2 className="hd quicksand mb-0 mt-0 ">
-                            Popular Products
-                        </h2>
-                        <ul className="list list-inline ms-auto filtertab me-4">
-                            <li className="list-inline-item">
-                                <a className="cursor">All</a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a className="cursor">Protein</a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a className="cursor">Soaps</a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a className="cursor">True Gain</a>
-                            </li>
-                        </ul>
+
+                    {/* HEADER - EXTREME LEFT */}
+                    <div className="section-header">
+                        <h2 className="section-title">Popular Products</h2>
+                        <Link to="/products" className="view-all">View All</Link>
                     </div>
 
-                    <div className="pt-3">
-                        <div className="productrow row">
+                    {/* CONTENT WITH PADDING */}
+                    <div className="section-inner">
+                        <div className="row product-grid">
                             {loading ? <FadeLoader /> :
-                                <>
-                                    {products.map((data, index) => {
-                                        if (data.product_cat_tag == "popular") {
-                                            return (
-                                                <div className="col-sm-4">
-                                                    <div className="item" id={index}>
-                                                        <Product data={data} />
-                                                    </div>
-                                                </div>
-                                            )
-                                        }
-                                    })}
-                                </>
+                                products
+                                    .filter(item => item.product_cat_tag === "popular")
+                                    .slice(0, 8)
+                                    .map((data, index) => (
+                                        <div className="col-6 col-md-4 col-lg-3 mb-4" key={index}>
+                                            <Product data={data} />
+                                        </div>
+                                    ))
                             }
                         </div>
                     </div>
+
                 </div>
             </section>
-            <br />
-            <section className="homeproductsrow2 pt-0 position-relative">
+
+
+            {/* ================= DAILY BEST SALES ================= */}
+            <section className="home-section light-bg">
                 <div className="container-fluid">
-                    <div className="d-flex align-items-center">
-                        <h2 className="hd quicksand mb-0 mt-0 ">
-                            Daily Best Sales
-                        </h2>
-                        <ul className="list list-inline ms-auto filtertab me-4">
-                            <li className="list-inline-item">
-                                <a className="cursor">Featured</a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a className="cursor">Popular</a>
-                            </li>
-                            <li className="list-inline-item">
-                                <a className="cursor">New Added</a>
-                            </li>
-                        </ul>
-                        <div className="daily-nav ms-auto">
-                            <div className="cat-prev"><KeyboardArrowLeftOutlinedIcon /></div>
-                            <div className="cat-next"><KeyboardArrowRightOutlinedIcon /></div>
+
+                    {/* HEADER - EXTREME LEFT */}
+                    <div className="section-header">
+                        <h2 className="section-title">Daily Best Sales</h2>
+
+                        <div className="daily-nav">
+                            <div className="daily-prev">
+                                <KeyboardArrowLeftOutlinedIcon />
+                            </div>
+                            <div className="daily-next">
+                                <KeyboardArrowRightOutlinedIcon />
+                            </div>
                         </div>
                     </div>
-                    <br />
-                    <div className="row">
-                        <div className="col-md-3 col-sm-12 position-relative">
-                            <img src={DailyBanner} className="w-100 daily-banner" />
-                        </div>
-                        <div className="col-md-9 col-sm-12 h-100">
-                            <Swiper
-                                modules={[Navigation, Autoplay]}
-                                slidesPerView={4}
-                                navigation={{
-                                    nextEl: ".cat-next",
-                                    prevEl: ".cat-prev",
-                                }}
-                                spaceBetween={20}
-                                autoplay={{
-                                    delay: 2500,
-                                    disableOnInteraction: false,
-                                }}
-                                speed={600}
-                                loop={true}
-                                breakpoints={{
-                                    1200: { slidesPerView: 3 },
-                                    1024: { slidesPerView: 3 },
-                                    768: { slidesPerView: 3 },
-                                    600: { slidesPerView: 1 },
-                                    320: { slidesPerView: 1 },
-                                }}
-                                className="daily-best-main h-100 d-flex">
-                                {loading ? <FadeLoader /> :
-                                    <>
-                                        {
-                                            products.map((data, index) => {
-                                                return (
-                                                    <SwiperSlide key={index}>
-                                                        <div className="item">
-                                                            <Product data={data} />
-                                                        </div>
-                                                    </SwiperSlide>
-                                                )
-                                            }
-                                            )
-                                        }
-                                    </>
-                                }
-                            </Swiper>
+
+                    {/* CONTENT WITH PADDING */}
+                    <div className="section-inner">
+                        <div className="row align-items-stretch mt-4">
+
+                            <div className="col-lg-4 d-none d-lg-block">
+                                <div className="daily-banner">
+                                    <img src={DailyBanner} alt="Daily Sale" />
+                                </div>
+                            </div>
+
+                            <div className="col-lg-8 col-12">
+                                <Swiper
+                                    modules={[Navigation, Autoplay]}
+                                    navigation={{
+                                        nextEl: ".daily-next",
+                                        prevEl: ".daily-prev",
+                                    }}
+                                    autoplay={{
+                                        delay: 3000,
+                                        disableOnInteraction: false,
+                                    }}
+                                    speed={600}
+                                    loop={true}
+                                    spaceBetween={15}
+                                    breakpoints={{
+                                        1400: { slidesPerView: 4 },
+                                        1200: { slidesPerView: 3 },
+                                        992: { slidesPerView: 3 },
+                                        768: { slidesPerView: 2 },
+                                        480: { slidesPerView: 2 },
+                                        320: { slidesPerView: 1 },
+                                    }}
+                                >
+                                    {loading ? <FadeLoader /> :
+                                        products.slice(0, 12).map((data, index) => (
+                                            <SwiperSlide key={index}>
+                                                <Product data={data} />
+                                            </SwiperSlide>
+                                        ))
+                                    }
+                                </Swiper>
+                            </div>
+
                         </div>
                     </div>
+
                 </div>
             </section>
         </>

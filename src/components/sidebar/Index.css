@@ -221,6 +221,10 @@
 ========================= */
 
 @media (max-width: 1000px) {
+
+    .sidebar img {
+        display: none;
+    }
     .sidebarwrapper {
         max-width: 100% !important;
         flex: 0 0 100% !important;

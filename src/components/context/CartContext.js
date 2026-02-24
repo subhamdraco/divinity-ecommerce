@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 
+
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
@@ -9,17 +10,21 @@ export const CartProvider = ({ children }) => {
 
     /* ---------------- FETCH CART ---------------- */
     const fetchCart = async () => {
-        if (!user?.id) return;
-
+        const user1 = JSON.parse(localStorage.getItem("user"));
+        
+        if (!user1?.id) return;
+        console.log(user1);
         try {
             const res = await fetch(
-                `https://divinityimpex.com/api/get-cart?user_id=${user.id}`
+                `https://divinityimpex.com/api/get-cart?user_id=${user1.id}`
             );
             const data = await res.json();
 
             if (data.success) {
                 setCart(data.cart);
             }
+
+            return data.cart
         } catch (err) {
             console.error("Fetch cart error:", err);
         }
@@ -44,7 +49,7 @@ export const CartProvider = ({ children }) => {
 
     /* ---------------- ADD TO CART ---------------- */
     const addToCart = async (product, qty = 1) => {
-        if (!user?.id) return alert("Please login first");
+        // if (!user?.id) return alert("Please login first");
 
         try {
             await fetch("https://divinityimpex.com/api/add-to-cart", {
@@ -149,6 +154,7 @@ export const CartProvider = ({ children }) => {
                 updateQty,
                 removeFromCart,
                 clearCart,
+                fetchCart,
                 subtotal
             }}
         >

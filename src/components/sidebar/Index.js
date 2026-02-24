@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useEffect} from "react";
 import "./Index.css";
 import FitnessCenterOutlinedIcon from "@mui/icons-material/FitnessCenterOutlined";
 import SoapIcon from "@mui/icons-material/Soap";
@@ -17,8 +17,30 @@ const Sidebar = ({
   applyFilters,
   products,
   setPage,
-  setFiltered
+  setFiltered,
+  prebrand
 }) => {
+
+  useEffect(() => {
+    if (!prebrand || prebrand === "ALL") return;
+    console.log(brands);
+    // Only run if brand exists
+    if (brands.includes(prebrand)) {
+      setSelectedBrands([prebrand]);
+      setPage(1);
+
+      // Auto apply filtering
+      const filtered = products.filter(
+        (p) =>
+          p.brand === prebrand &&
+          p.price >= priceRange[0] &&
+          p.price <= priceRange[1]
+      );
+
+      setFiltered(filtered);
+    }
+  }, [prebrand, brands]);
+
 
   const toggleBrand = (brand) => {
     setSelectedBrands(prev =>
@@ -28,13 +50,13 @@ const Sidebar = ({
     );
   };
 
-   /* CLEAR FILTERS */
-    const clearFilters = () => {
-      setSelectedBrands([]);
-      setPriceRange([0, 100]);
-      setFiltered(products);
-      setPage(1);
-    };
+  /* CLEAR FILTERS */
+  const clearFilters = () => {
+    setSelectedBrands([]);
+    setPriceRange([0, 500]);
+    setFiltered(products);
+    setPage(1);
+  };
 
   return (
     <div className="sidebar">
@@ -82,7 +104,7 @@ const Sidebar = ({
           onChange={(e, val) => setPriceRange(val)}
           valueLabelDisplay="auto"
           min={0}
-          max={100}
+          max={500}
           step={10}
           sx={{ color: "#E2CA78" }}
         />
@@ -100,19 +122,19 @@ const Sidebar = ({
           <Button className="btn btn-g" onClick={applyFilters}>
             <FilterAltIcon /> Filter
           </Button>
-           {/* CLEAR FILTER BUTTON */}
-            <div className="text-center mt-2">
-              <button
-                className="btn btn-g"
-                onClick={clearFilters}
-              >
-                Clear Filters
-              </button>
-            </div>
+          {/* CLEAR FILTER BUTTON */}
+          <div className="text-center mt-2">
+            <button
+              className="btn btn-g"
+              onClick={clearFilters}
+            >
+              Clear Filters
+            </button>
+          </div>
         </div>
       </div>
 
-      <img src={banner} className="w-100 h-100 listing-banner" />
+      {/* <img src={banner} className="w-100 h-100 listing-banner" /> */}
     </div>
   );
 };

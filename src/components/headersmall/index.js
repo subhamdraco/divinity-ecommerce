@@ -12,15 +12,17 @@ import axios from 'axios';
 import './index.css';
 import SignUpButton from '../../components/signupbutton/Index';
 import { useAuth } from "../../components/context/AuthContext";
+import { useCart } from "../../components/context/CartContext";
 
 const HeaderSmall = () => {
 
-    const {user, logout} = useAuth()
+    const { user, logout } = useAuth()
     const [isOpenDropdown, setisOpenDropdown] = useState(true)
     const [search, setSearch] = useState("");
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const debounceRef = useRef(null);
+    const { cart } = useCart();
 
     useEffect(() => {
         if (!search.trim()) {
@@ -60,6 +62,11 @@ const HeaderSmall = () => {
                                 <img src={logo} alt="logo" />
                             </div>
                             <div className="col-sm-6 d-flex justify-content-end align-items-center">
+                                <Link to={"/cart"} >
+                                    <span><ShoppingCartOutlinedIcon className="itemicon me-0" />
+                                        <span className="badge rounded-circle">{cart ? cart.length : 0}</span>
+                                    </span>
+                                </Link>
                                 <MenuOutlinedIcon className="hamburgermenu" onClick={() => setisOpenDropdown(!isOpenDropdown)} />
                                 {isOpenDropdown === false &&
                                     <div className="menuitems">
@@ -115,31 +122,24 @@ const HeaderSmall = () => {
                                                     <Button><Link to="/about">About Us</Link></Button>
                                                 </li>
                                                 <li className="list-group-item">
-                                                    <Button><Link to={"/listing"}>Brands</Link></Button>
-                                                </li>
-                                                {user && 
-                                                <>
-                                                <li className="list-group-item">
-                                                    <Button><Link to={"/listing"}>My Account</Link></Button>
+                                                    <Button><Link to={"/products"}>All Products</Link></Button>
                                                 </li>
                                                 <li className="list-group-item">
-                                                    <Button><Link to={"/listing"}>Order Tracking</Link></Button>
-                                                </li></>}
+                                                    <Button><Link to={"/products?brand=TITAN%20CORE"}>Titan Core</Link></Button>
+                                                </li>
                                                 <li className="list-group-item">
+                                                    <Button><Link to={"/products?brand=RESHU"}>Reshu</Link></Button>
+                                                </li>
+                                                <li className="list-group-item">
+                                                    <Button><Link to={"/cart"}>My Cart</Link></Button>
+                                                </li>
+                                                {/* <li className="list-group-item">
                                                     <Button><Link>Blog</Link></Button>
-                                                </li>
+                                                </li> */}
                                                 <li className="list-group-item">
-                                                    <Button><Link>Contact</Link></Button>
+                                                    <Button><Link to={"/contact"}>Contact</Link></Button>
                                                 </li>
-                                                <li className="list-group-item">
-                                                    <Button><Link>Policies</Link></Button>
-                                                </li>
-                                                <li className="list-group-item">
-                                                    <Button><Link>Carrers</Link></Button>
-                                                </li>
-                                                {user ? <li className="list-group-item">
-                                                    <Button onClick={logout}><Link>Sign Out</Link></Button>
-                                                </li>: <li className="list-group-item"><SignUpButton/></li>}
+
                                             </ul>
                                         </div>
                                     </div>

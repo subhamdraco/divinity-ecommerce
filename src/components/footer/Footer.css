@@ -53,6 +53,10 @@ footer ul{
     padding-left: 0px;
 }
 
+footer ul li a{
+    color: white;
+}
+
 .footernote {
     margin: auto;
     display: flex;

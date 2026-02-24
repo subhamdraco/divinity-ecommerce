@@ -1,20 +1,21 @@
 import { useCart } from "../../components/context/CartContext";
 import { useAuth } from "../../components/context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import shaker from '../../assets/images/shaker.jpeg';
 import "./Index.css";
 
 const Cart = () => {
   const { cart, updateQty, removeFromCart, subtotal } = useCart();
-  const { user } = useAuth();
+  const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
   const MAX_QTY = 10;
   const MIN_QTY = 1;
   /* ---------------- CHECKOUT ---------------- */
   const handleCheckout = () => {
-    if (!user || !user.id) {
-      navigate("/login");
-      return;
-    }
+    // if (!user || !user.id) {
+    //   navigate("/login");
+    //   return;
+    // }
     navigate("/checkout");
   };
 
@@ -24,7 +25,7 @@ const Cart = () => {
       <div className="cart-empty">
         <h2>Your cart is empty</h2>
         <p>Add premium products and experience quality.</p>
-        <Link to="/listing" className="btn-primary-gold">
+        <Link to="/products" className="btn-primary-gold">
           Explore Products
         </Link>
       </div>
@@ -96,6 +97,16 @@ const Cart = () => {
             </div>
           </div>
         ))}
+        <div className="cart-item">
+          <div className="cart-img">
+              <img src={shaker} alt="shaker" />
+            </div>
+            <div className="cart-info">
+              <h4>Shaker</h4>
+              <span className="price">Free</span>
+            </div>
+        </div>
+
       </div>
 
       {/* RIGHT */}
@@ -106,11 +117,6 @@ const Cart = () => {
           <div className="summary-row">
             <span>Subtotal</span>
             <span>{subtotal.toFixed(2)}AED</span>
-          </div>
-
-          <div className="summary-row">
-            <span>Shipping</span>
-            <span>Free</span>
           </div>
 
           <div className="summary-total">
