@@ -1,11 +1,12 @@
 /* ================= SECTION STRUCTURE ================= */
 
 .home-section {
-    padding: 60px 0;
+    padding: 70px 0 50px 0;
+    position: relative;
 }
 
 .light-bg {
-    background: #fafafa;
+    background: linear-gradient(180deg, #f8fafc, #ffffff);
 }
 
 /* Remove container padding */
@@ -15,9 +16,19 @@
 }
 
 /* Inner content padding */
-.section-inner {
+/* .section-inner {
     padding-left: 40px;
     padding-right: 40px;
+} */
+
+.home-section .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.home-section {
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 /* ================= HEADER ================= */
@@ -26,15 +37,36 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 25px;
-    padding-left: 0; /* EXTREME LEFT */
+    margin-bottom: 35px;
+}
+
+.home-section .section-header,
+.home-section .section-inner {
+    padding-left: 60px;
+    padding-right: 60px;
 }
 
 .section-title {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     margin: 0;
+    letter-spacing: 0.5px;
+    color: #0f2d4a;
+    position: relative;
 }
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #0f2d4a, #1f7a8c);
+    border-radius: 4px;
+}
+
+
 
 .view-all {
     position: relative;
@@ -72,8 +104,9 @@
 .daily-banner img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 16px;
+    max-height: 530px;
 }
 
 /* Navigation Arrows */
@@ -81,28 +114,126 @@
 .daily-nav {
     display: flex;
     gap: 10px;
+    align-items: center;
 }
 
 .daily-prev svg,
 .daily-next svg {
-    font-size: 26px;
-    padding: 6px;
+    font-size: 24px;
+    padding: 10px;
     border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    background: #ffffff;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
     cursor: pointer;
-    transition: 0.2s ease;
+    transition: all 0.3s ease;
 }
 
 .daily-prev svg:hover,
 .daily-next svg:hover {
-    transform: scale(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.15);
+}
+
+.home-section.light-bg .section-header {
+    margin-bottom: 25px;
+}
+
+.product-grid {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.product-grid > div {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.swiper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.home-section .section-inner .row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* ================= SKELETON LOADER ================= */
+
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background: #e9ecef;
+}
+
+.skeleton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    height: 100%;
+    width: 150%;
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.6) 50%,
+        rgba(255,255,255,0) 100%
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    100% {
+        left: 150%;
+    }
+}
+
+/* ================= IMAGE LOADING EFFECT ================= */
+
+.image-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.image-wrapper img.loaded {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ================= MODERN FADE IN ================= */
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 992px) {
     .section-inner {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .section-header {
         padding-left: 20px;
         padding-right: 20px;
     }

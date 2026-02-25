@@ -37,8 +37,8 @@ const Home = () => {
             <CatSlider data={products} />
             <Banners />
 
-            {/* ================= POPULAR PRODUCTS ================= */}
-            <section className="home-section">
+            {/* ================= POPULAR PRODUCTS ==a=============== */}
+            <section className="home-section fade-in">
                 <div className="container-fluid">
 
                     {/* HEADER - EXTREME LEFT */}
@@ -68,7 +68,7 @@ const Home = () => {
 
 
             {/* ================= DAILY BEST SALES ================= */}
-            <section className="home-section light-bg">
+            <section className="home-section light-bg fade-in">
                 <div className="container-fluid">
 
                     {/* HEADER - EXTREME LEFT */}
@@ -91,7 +91,13 @@ const Home = () => {
 
                             <div className="col-lg-4 d-none d-lg-block">
                                 <div className="daily-banner">
-                                    <img src={DailyBanner} alt="Daily Sale" />
+                                    <div className="image-wrapper">
+                                        <img
+                                            src={DailyBanner}
+                                            alt="Daily Sale"
+                                            onLoad={(e) => e.target.classList.add("loaded")}
+                                        />
+                                    </div>
                                 </div>
                             </div>
 

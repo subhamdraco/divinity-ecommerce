@@ -69,13 +69,13 @@
 }
 
 /* Section Header */
-.section-header {
+.section-header-about {
   text-align: center;
   max-width: 720px;
   margin: 0 auto 70px;
 }
 
-.section-header .label {
+.section-header-about .label {
   font-size: 14px;
   letter-spacing: 2px;
   font-weight: 600;
@@ -84,14 +84,14 @@
   margin-bottom: 12px;
 }
 
-.section-header h1 {
+.section-header-about h1 {
   font-family: "Quicksand", serif !important;
   font-size: 42px;
   font-weight: 600;
   margin-bottom: 16px;
 }
 
-.section-header p {
+.section-header-about p {
   font-size: 17px;
   line-height: 1.7;
   color: #555;

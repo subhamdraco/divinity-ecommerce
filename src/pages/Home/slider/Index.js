@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 import './Index.css';
 import HomesliderImg1 from '../../../assets/images/slider-1.jpeg';
-// import HomesliderImg2 from '../../../assets/images/slider-2.jpeg'
+import HomesliderImg2 from '../../../assets/images/slider-2.jpeg'
 import Button from '@mui/material/Button';
 
 const HomeSlider = () => {
@@ -26,7 +26,7 @@ const HomeSlider = () => {
                 <Slider {...settings} className="homeslider-main">
                     <div className="item">
                         <picture>
-                            <source srcset="https://divinityimpex.com/images/combo.jpeg" media="(max-width: 992px)" />
+                            <source srcset="https://divinityimpex.com/images/combo-banner-1.jpeg" media="(max-width: 992px)" />
                             <img src={HomesliderImg1} alt="slider-1" className="w-100 sliderimage-1" />
                         </picture>
                         {/* <div className="info">
@@ -41,8 +41,8 @@ const HomeSlider = () => {
                     </div>
                     <div className="item">
                         <picture>
-                            <source srcset="https://divinityimpex.com/images/combo-2.jpeg" media="(max-width: 992px)" />
-                            <img src={HomesliderImg1} alt="slider-2" className="w-100 sliderimage-2" />
+                            <source srcset="https://divinityimpex.com/images/combo-banner-2.jpeg" media="(max-width: 992px)" />
+                            <img src={HomesliderImg2} alt="slider-2" className="w-100 sliderimage-2" />
                         </picture>
                         {/* <source srcset={HomesliderImgSmall} media="(max-width: 992px)"></source> */}
                     </div>

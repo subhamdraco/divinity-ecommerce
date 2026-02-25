@@ -161,6 +161,61 @@
   color: #fff !important;
 }
 
+/* ==========================================
+   MODERN IMAGE LOADER (SAFE - NO BREAK)
+========================================== */
+
+.image-loader-wrapper {
+  position: relative;
+  overflow: hidden;
+  background: #f2f4f7;
+}
+
+/* Shimmer skeleton */
+.image-loader-wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.6) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  animation: shimmer 1.4s infinite;
+  z-index: 1;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  100% {
+    left: 150%;
+  }
+}
+
+/* Image hidden initially */
+.image-loader-wrapper img {
+  opacity: 0;
+  transform: scale(1.05);
+  transition: opacity 0.5s ease, transform 0.6s ease;
+  position: relative;
+  z-index: 2;
+}
+
+/* When image loads */
+.image-loader-wrapper img.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Remove shimmer when loaded */
+.image-loader-wrapper.loaded::before {
+  display: none;
+}
+
 /* ===============================
    RESPONSIVE
 ================================ */

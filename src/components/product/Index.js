@@ -18,14 +18,17 @@ const Product = ({ data }) => {
       )}
 
       {/* FREE SHAKER Ribbon */}
-      
-        <span className="freeShakerRibbon">
-          🎁 FREE SHAKER
-        </span>
+
+      <span className="freeShakerRibbon">
+        🎁 FREE SHAKER
+      </span>
 
       {/* Product Image */}
       <Link to={`/product/details/${data.product_id}`} className="imagewrapper">
-        <img src={data.image} alt={data.name} loading="lazy"/>
+        <img src={data.image} alt={data.name} loading="lazy" onLoad={(e) => {
+          e.target.classList.add("loaded");
+          e.target.parentElement.classList.add("loaded");
+        }} />
       </Link>
 
       {/* Info */}

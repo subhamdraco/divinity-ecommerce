@@ -47,7 +47,7 @@ const AddToCartBtn = ({ product , qty}) => {
 
     return (
         <button
-            className={`ms-auto add-to-cart-btn ${added ? "added" : ""}`}
+            className={`add-to-cart-btn ${added ? "added" : ""}`}
             onClick={handleAddToCart}
             disabled={added}
         >

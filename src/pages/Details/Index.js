@@ -1,49 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import './Index.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import FadeLoader from "../../components/loader/Index";
 import Rating from '@mui/material/Rating';
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'inner-image-zoom/lib/styles.min.css';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 import Button from "@mui/material/Button";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FlashOnIcon from '@mui/icons-material/FlashOn';
-import Slider from "react-slick";
-import "swiper/css";
 import { useAuth } from '../../components/context/AuthContext';
 import AddToCartButton from "../../components/addcartbutton/Index";
-import { useNavigate } from "react-router-dom";
-import AddtoWishlist from '../../components/addtowishlist/Index';
-
-
 
 const Details = () => {
 
-    const [product, setProduct] = useState([]);
+    const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [productImage, setproductImage] = useState(null);
+    const [productKey, setproductKey] = useState(0);
+    const [quantity, setquantity] = useState(1);
+    const [activeTab, setActiveTab] = useState("description");
+
     const { id } = useParams();
     const { user } = useAuth();
-
     const navigate = useNavigate();
-
-    const handleBuyNow = () => {
-        navigate("/checkout", {
-            state: {
-                product: product
-            }
-        });
-    };
-
 
     useEffect(() => {
         fetch(`https://divinityimpex.com/api/product?id=${id}`)
             .then((res) => res.json())
             .then((data) => {
-                setProduct(data);
-                setproductImage(data.data.thumbnail_url)
-                setLoading(false)
+                setProduct(data.data);
+                setproductImage(data.data.thumbnail_url);
+                setLoading(false);
             })
             .catch((err) => {
                 console.error("API Error:", err);
@@ -51,119 +39,256 @@ const Details = () => {
             });
     }, [id]);
 
+    const handleBuyNow = () => {
+        navigate("/checkout", { state: { product: product } });
+    };
+
+    const onThumbnailClick = (img, key) => {
+        setproductImage(img);
+        setproductKey(key);
+    };
+
+    if (loading) return <FadeLoader />;
+
+    const isCombo = product?.category?.toLowerCase() === "combo";
+
+    const discount =
+        product.old_price && product.old_price > product.price
+            ? Math.round(((product.old_price - product.price) / product.old_price) * 100)
+            : 0;
+
     var settings = {
         infinite: false,
         slidesToShow: 3,
         slidesToScroll: 1,
     };
 
-    const [productImage, setproductImage] = useState(null)
-    const [productKey, setproductKey] = useState(0)
-    const [quantity, setquantity] = useState(1)
+    const formatDescription = (html) => {
+        if (!html) return "";
 
-    const onThumbnailClick = (img, key) => {
-        setproductImage(img)
-        setproductKey(key)
-    }
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
 
-    const isCombo = product?.data?.category?.toLowerCase() === "combo";
+        const headings = doc.querySelectorAll("h3");
+
+        headings.forEach((heading) => {
+            if (heading.innerText.toLowerCase().includes("ingredient")) {
+                const nextElement = heading.nextElementSibling;
+
+                if (nextElement && nextElement.tagName === "P") {
+                    const items = nextElement.innerText.split(",");
+
+                    const ul = document.createElement("ul");
+
+                    items.forEach((item) => {
+                        const li = document.createElement("li");
+                        li.innerHTML = `
+                                <span class="ingredient-icon">✓</span>
+                                ${item.trim()}
+                            `;
+                        ul.appendChild(li);
+                    });
+
+                    nextElement.replaceWith(ul);
+                }
+            }
+        });
+
+        return doc.body.innerHTML;
+    };
 
     return (
-        <>
-            <section className='detailspage'>
-                <div className='breadcrumbwrapper2 mb-2'>
-                    <div className='container-fluid' style={{ "--bs-breadcrumb-divider": "'>'" }} aria-label="breadcrumb">
-                        <ol className="breadcrumb breadcrumb2">
-                            <li className="breadcrumb-item"><Link to="/">Home</Link></li>
-                            <li className="breadcrumb-item"><Link to="/">Products</Link></li>
-                            <li className="breadcrumb-item breadactive" aria-current="page">Details</li>
-                        </ol>
+        <section className='detailspage modern-details'>
+
+            <div className='breadcrumbwrapper2 mb-2 ms-2'>
+                <div className='container-fluid'>
+                    <ol className="breadcrumb breadcrumb2">
+                        <li className="breadcrumb-item"><Link to="/">Home</Link></li>
+                        <li className="breadcrumb-item"><Link to="/">Products</Link></li>
+                        <li className="breadcrumb-item breadactive">Details</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div className='container mw-85'>
+                <div className="row">
+
+                    {/* LEFT IMAGE SECTION */}
+                    <div className={isCombo ? "col-md-6" : "col-md-4"}>
+
+                        <div className={`productzoom ${isCombo ? "combo-zoom" : ""}`}>
+
+                            {discount > 0 && (
+                                <div className="modern-discount">-{discount}%</div>
+                            )}
+
+                            {isCombo ? (
+                                <img
+                                    src={product.image}
+                                    alt={product.name}
+                                    className="combo-img"
+                                />
+                            ) : (
+                                <InnerImageZoom
+                                    src={productImage}
+                                    zoomSrc={productImage}
+                                    zoomScale={1}
+                                />
+                            )}
+                        </div>
+
+                        <div className='zoomslider'>
+                            <Slider {...settings}>
+                                {product.images_json?.map((img, index) => (
+                                    <div
+                                        className={`slider-item ${productKey === index ? "thumbactive" : ""}`}
+                                        key={index}
+                                        onMouseEnter={() => onThumbnailClick(img, index)}
+                                    >
+                                        <img src={img} alt="thumb" />
+                                    </div>
+                                ))}
+                            </Slider>
+                        </div>
+                    </div>
+
+                    {/* RIGHT INFO SECTION */}
+                    <div className={isCombo ? "col-md-6 productinfo" : "col-md-8 productinfo"}>
+
+                        <h1 className="product-title">{product.name}</h1>
+
+                        {product?.description && (
+                            <p className="short-desc">
+                                {product.description}
+                            </p>
+                        )}
+
+
+                        <div className="meta-badges">
+                            <span className="brand-badge">{product.brand}</span>
+                            <span className="category-badge">{product.category}</span>
+                            {product.quantity > 0 ?
+                                <span className="stock in-stock">In Stock</span>
+                                :
+                                <span className="stock out-stock">Out of Stock</span>
+                            }
+                        </div>
+
+                        <div className='d-flex align-items-center mb-3'>
+                            <Rating defaultValue={4.5} precision={0.5} readOnly />
+                            <span className='ms-2'> (32 reviews) </span>
+                        </div>
+
+                        <div className='modern-price-section'>
+                            <span className='modern-price'>{product.price} AED</span>
+                            {product.old_price && (
+                                <span className='modern-oldprice'>
+                                    {product.old_price} AED
+                                </span>
+                            )}
+                        </div>
+
+                        <div className="freeShakerDetail">
+                            🎁 FREE SHAKER INCLUDED WITH THIS PRODUCT
+                        </div>
+
+                        <h6 className="mt-3">
+                            {product.category === "Fish Oil" ?
+                                "No of Capsules: "
+                                :
+                                "Net Weight(in kgs): "
+                            }
+                            <span>{product.net_wt}</span>
+                        </h6>
+
+                        {/* CART SECTION */}
+                        <div className="addcartsection modern-cart">
+
+                            {/* Quantity */}
+                            <div className="quantity-box">
+                                <button
+                                    type="button"
+                                    className="qty-btn"
+                                    onClick={() => quantity > 1 && setquantity(quantity - 1)}
+                                >
+                                    −
+                                </button>
+
+                                <input
+                                    type="number"
+                                    value={quantity}
+                                    readOnly
+                                />
+
+                                <button
+                                    type="button"
+                                    className="qty-btn"
+                                    onClick={() =>
+                                        quantity < product.quantity && setquantity(quantity + 1)
+                                    }
+                                >
+                                    +
+                                </button>
+                            </div>
+
+                            {/* Buttons */}
+                            <Button className="buy-btn" onClick={handleBuyNow}>
+                                <FlashOnIcon /> Buy Now
+                            </Button>
+
+                            <AddToCartButton product={product} qty={quantity} />
+
+                        </div>
                     </div>
                 </div>
-                <div className='container mw-85'>
-                    {loading ? <FadeLoader /> :
-                        <div className="row">
-                            <div className={isCombo ? "col-md-6" : "col-md-4"}>
-                                <div className={`productzoom ${isCombo ? "combo-zoom" : ""}`}>
-                                    {isCombo ? (
-                                        <img
-                                            src={product.data.image}
-                                            alt={product.data.name}
-                                            className="combo-img"
-                                        />
-                                    ) : (
-                                        <InnerImageZoom
-                                            src={productImage}
-                                            zoomSrc={productImage}
-                                            zoomType="hover"
-                                            zoomScale={1}
-                                        />
-                                    )}
-                                </div>
-                                <div className='zoomslider'>
-                                    <Slider {...settings}>
-                                        {product.data.images_json.map((img, index) => (
-                                            <div className={`slider-item ${productKey === index ? "thumbactive" : ""}`} key={productKey} onMouseEnter={() => onThumbnailClick(img, index)} onClick={() => setproductKey(index)}>
-                                                <img src={img} alt={"image"} />
-                                            </div>
-                                        ))}
-                                    </Slider>
-                                </div>
 
+                {/* MODERN TABS SECTION */}
+                <div className="modern-tabs">
 
-                            </div>
-                            <div className={product?.data?.category === "Combo" ? "col-md-6 productinfo" : "col-md-8 productinfo"}>
-                                <h1 className='quicksand text-capitalize'>{product.data.name}, {product.data.brand}</h1>
-                                <div className='d-flex align-items-center'>
-                                    <Rating name="half-rating" defaultValue={4.5} precision={0.5} readOnly />
-                                    <span> (32 reviews) </span>
-                                </div>
+                    <div className="tab-buttons">
+                        <button
+                            className={activeTab === "description" ? "active" : ""}
+                            onClick={() => setActiveTab("description")}
+                        >
+                            Description
+                        </button>
 
-                                <div className='pricesection d-flex align-items-center mb-3'>
-                                    <span className='text-g pricelarge'>{product.data.price} AED</span>
-                                    <div className='ms-2 d-flex flex-column'>
-                                        <span className='text-orange'>{product.data.discount}% Off</span>
-                                        <span className='oldprice'>{product.data.old_price} AED</span>
-                                    </div>
-                                </div>
+                        <button
+                            className={activeTab === "additional" ? "active" : ""}
+                            onClick={() => setActiveTab("additional")}
+                        >
+                            Ingredients
+                        </button>
 
+                        <button
+                            className={activeTab === "shipping" ? "active" : ""}
+                            onClick={() => setActiveTab("shipping")}
+                        >
+                            Shipping
+                        </button>
+                    </div>
 
-                                <div className="freeShakerDetail">
-                                    🎁 FREE SHAKER INCLUDED WITH THIS PRODUCT
-                                </div>
+                    <div className="tab-content-modern">
 
+                        {activeTab === "description" &&
+                            <div className="full-description" dangerouslySetInnerHTML={{ __html: product.full_description }} />
+                        }
 
+                        {activeTab === "additional" &&
+                            <div className="description-content" dangerouslySetInnerHTML={{ __html: formatDescription(product.additional_info) }} />
+                        }
 
-                                <p>{product.data.description}</p>
+                        {activeTab === "shipping" &&
+                            <div dangerouslySetInnerHTML={{ __html: product.shipping_info }} />
+                        }
 
-                                <h5>{product.data.category === "Fish Oil" ? "No of Capsules: " : "Net Weight(in kgs): "}<span>{product.data.net_wt}</span></h5>
+                    </div>
 
-                                <div className='addcartsection pt-4 pb-4 d-flex align-items-center'>
-                                    <div className='row'>
-                                        <div className='col-md-4 col-sm-12 d-flex align-items-center justify-content-center mb-1'>
-                                            <span className='decrement' onClick={() => { if (quantity > 1) { setquantity(quantity - 1) } }}>-</span>
-                                            <div className='countsection'>
-                                                <input type='number' defaultValue={1} value={quantity}></input>
-                                            </div>
-                                            <span className='increment' onClick={() => { if (quantity < product.data.quantity) { setquantity(quantity + 1) } }}>+</span>
-                                        </div>
-                                        <div className='col-md-4 col-sm-12 d-flex align-items-center justify-content-center mb-1'>
-                                            <Button onClick={handleBuyNow}><FlashOnIcon />Buy Now</Button>
-                                        </div>
-                                        <div className='col-md-4 col-sm-12 d-flex align-items-center justify-content-center mb-1'>
-                                            <AddToCartButton product={product.data} qty={quantity} />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
                 </div>
-            </section>
-        </>
-    )
-}
+
+            </div>
+        </section>
+    );
+};
 
 export default Details;
-
-// required columns- old price , tagline , 

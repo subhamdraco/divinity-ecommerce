@@ -1,9 +1,9 @@
 .add-to-cart-btn {
     /* display: inline-flex; */
-    align-items: center;
-    justify-content: center;
+    /* align-items: center;
+    justify-content: center; */
     /* gap: 0.5rem; */
-    padding: 0.6rem 1.2rem;
+    padding: 10px 25px !important;
     /* border-radius: 999px; */
     border: none;
     cursor: pointer;
@@ -14,6 +14,7 @@
     box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
     transition: all 0.3s ease-in-out;
     white-space: nowrap;
+    border-radius: 8px;
 }
 
 .add-to-cart-btn svg {

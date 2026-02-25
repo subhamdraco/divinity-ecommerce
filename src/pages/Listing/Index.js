@@ -92,18 +92,20 @@ const Listing = () => {
           {/* PRODUCTS */}
           <div className="col-sm-12 rightcontent">
             <div className="row">
-                {paginatedProducts.length ? (
-                  paginatedProducts.map(product => (
-                    <div
-                      key={product.product_id}
-                      className="col-md-4 col-6 productsearch"
-                    >
-                      <Product data={product} />
+              {paginatedProducts.length ? (
+                paginatedProducts.map(product => (
+                  <div
+                    key={product.product_id}
+                    className="col-md-4 col-6 productsearch"
+                  >
+                    <div className="image-loader-wrapper">
+                      <Product data={product}  />
                     </div>
-                  ))
-                ) : (
-                  <FadeLoader />
-                )}
+                  </div>
+                ))
+              ) : (
+                <FadeLoader />
+              )}
             </div>
 
             {/* PAGINATION */}
