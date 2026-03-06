@@ -30,8 +30,13 @@ const Listing = () => {
     fetch("https://divinityimpex.com/api/products")
       .then(res => res.json())
       .then(data => {
-        setProducts(data);
-        setFiltered(data);
+        const activeProducts = data.filter(
+          p => p.status?.toLowerCase() === "active" &&
+          p.category?.toLowerCase() !== "combo"
+        );
+
+        setProducts(activeProducts);
+        setFiltered(activeProducts);
       });
   }, []);
 
@@ -99,7 +104,7 @@ const Listing = () => {
                     className="col-md-4 col-6 productsearch"
                   >
                     <div className="image-loader-wrapper">
-                      <Product data={product}  />
+                      <Product data={product} />
                     </div>
                   </div>
                 ))

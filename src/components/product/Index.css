@@ -128,8 +128,8 @@
 
 .productname {
     font-size: 14px;
-    font-weight: 600;
-    min-height: 38px;
+    font-weight: 200;
+    min-height: 70px;
     margin-bottom: 8px;
     color: #222;
 }
@@ -175,7 +175,7 @@
 @media (max-width: 576px) {
 
     .imagewrapper {
-        height: 150px;
+        height: 170px;
         padding: 10px;
     }
 
@@ -198,4 +198,14 @@
         right: -50px;
     }
 
+    .productname{
+        height: 75px !important;
+    }
+
+}
+
+@media (max-width: 450px){
+.productname{
+        height: 100px !important;
+    }
 }

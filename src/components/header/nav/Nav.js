@@ -58,6 +58,9 @@ const Nav = () => {
                                                     <li>
                                                         <Link to={"/products?brand=RESHU"}>Reshu</Link>
                                                     </li>
+                                                     <li>
+                                                        <Link to={"/product/combo"}>Combos</Link>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </li>

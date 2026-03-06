@@ -1,0 +1,72 @@
+.reels-section{
+    max-width:1600px;
+    margin:60px auto;
+    padding:0 60px;
+}
+
+.section-title.reels-title{
+    margin-left: 25%;
+    margin-bottom: 2%;
+}
+
+/* GRID */
+
+.reels-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+/* CARD */
+
+.reel-card{
+    position:relative;
+    width:100%;
+    height:420px;   /* perfect reel height */
+    overflow:hidden;
+    border-radius:16px;
+    background:#000;
+    cursor:pointer;
+}
+
+/* VIDEO */
+
+.reel-card video{
+    width:100%;
+    height:100%;
+    object-fit:contain;   /* keeps video inside */
+    border-radius:16px;
+}
+
+/* Hover zoom */
+
+.reel-card:hover video{
+    transform:scale(1.05);
+    transition:0.4s ease;
+}
+
+/* RESPONSIVE */
+
+@media (max-width:992px){
+
+.reels-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+.reel-card{
+    height:360px;
+}
+
+}
+
+@media (max-width:576px){
+
+.reels-section{
+    padding:0 20px;
+}
+
+.reel-card{
+    height:300px;
+}
+
+}

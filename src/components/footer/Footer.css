@@ -1,64 +1,137 @@
 .footerwrapper {
-    padding: 3rem 0px;
-    padding-bottom: 0px !important;
+    padding: 60px 0 0 0;
+    background: #0a0a0a;
 }
 
-.footerwrapper .footerboxes .box{
-    background: #FBF7EA;
-    padding: 1rem 0.2rem;
-    border-radius: 1rem;
-    width: 90% !important;
+/* FEATURE BOXES */
+
+.footerboxes {
+    margin-bottom: 40px;
 }
+
+.footerwrapper .footerboxes .box {
+    background: #111111;
+    padding: 20px;
+    border-radius: 14px;
+    width: 95% !important;
+    border: 1px solid rgba(232, 98, 34, 0.15);
+    transition: all 0.3s ease;
+}
+
+.footerwrapper .footerboxes .box:hover {
+    transform: translateY(-6px);
+    border-color: #e86222;
+    box-shadow: 0 8px 30px rgba(232, 98, 34, 0.25);
+}
+
+/* ICON */
 
 .footerwrapper .footerboxes .box svg {
-    font-size: 3rem;
-    margin-left: auto;
-    padding-bottom: 0.5rem;
-    color: var(--primary-icon-color);
-    position: relative;
-    transition: all 0.3s ease-in-out;
-
+    font-size: 38px;
+    color: #e86222;
+    margin-right: 15px;
+    transition: 0.3s;
 }
 
 .footerwrapper .footerboxes .box:hover svg {
-    transform: translateY(-10px);
+    transform: scale(1.15);
 }
 
-.footerwrapper .footerboxes .box .info{
-    text-transform: capitalize;
-    line-height: 1.2rem;
-    padding: auto;
-    margin: auto;
+/* TEXT */
+
+.footerwrapper .footerboxes .box .info h5 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 3px;
 }
 
-.footerwrapper .footerboxes .box .info h5{
-    font-size: 1.3rem !important;
-    font-weight: 700 !important;
-}
-.footerwrapper .footerboxes .box .info p{
-    font-family: "Quicksand", serif !important;
-    font-size: 0.8rem;
+.footerwrapper .footerboxes .box .info p {
+    font-size: 13px;
+    color: #aaaaaa;
+    margin: 0;
 }
 
-footer{
-    width: 100%;
-    height: 100%;
-    background: black;
-    margin-bottom: 0px !important;
-    color: white;
+/* MAIN FOOTER */
+
+footer {
+    background: linear-gradient(to right, #000000, #0a0a0a);
+    padding: 40px 0 20px;
+    color: #ffffff;
 }
 
-footer ul{
+/* BRAND DESCRIPTION */
+
+.footer-brand-description {
+    background: #111111;
+    padding: 20px;
+    border-radius: 14px;
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+    border: 1px solid rgba(232, 98, 34, 0.15);
+}
+
+.footer-brand-description p {
+    margin: 0;
+    font-size: 14px;
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+/* LISTS */
+
+.footerlist {
     list-style: none;
-    padding-left: 0px;
+    padding: 0;
 }
 
-footer ul li a{
-    color: white;
+.footerlistheader h5 {
+    color: #e86222;
+    font-weight: 700;
+    margin-bottom: 15px;
 }
+
+.footerlist li {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.footerlist li a {
+    color: #cccccc;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footerlist li a:hover {
+    color: #e86222;
+}
+
+/* SOCIAL ICONS */
+
+footer ul.list-inline li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #111111;
+    border: 1px solid rgba(232, 98, 34, 0.2);
+    color: #ffffff;
+    font-size: 18px;
+    transition: all 0.3s;
+}
+
+footer ul.list-inline li a:hover {
+    background: #e86222;
+    transform: translateY(-4px);
+}
+
+/* COPYRIGHT */
 
 .footernote {
-    margin: auto;
-    display: flex;
-    justify-content: center;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 13px;
+    color: #888;
 }

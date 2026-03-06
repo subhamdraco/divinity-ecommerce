@@ -1,142 +1,100 @@
-/* ==================================
-   CATEGORY SLIDER SECTION
-================================== */
 
-.catslidersection {
-    width: 100%;
-    padding: 10px 0;
+
+/* SECTION */
+
+.category-section-cat{
+    max-width:1600px;
+    margin:auto;
+    padding:60px;
 }
 
-/* ==================================
-   TITLE
-================================== */
+/* GRID */
 
-.featuretitle {
-    position: relative;
+.category-grid-cat{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:20px;
 }
 
-.featuretitle h2 {
-    font-size: 1.6rem;
-    font-weight: 700;
+/* CARD */
+
+.category-card-cat{
+    background: linear-gradient(135deg, #000000, #e86222) !important;
+    border-radius:16px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    text-decoration:none;
+    transition:0.3s ease;
 }
 
-/* ==================================
-   CARD DESIGN (SMALL & CLEAN)
-================================== */
-
-.catslidersection .item {
-    display: flex;
-    justify-content: center;
-    padding: 0 !important;
+.category-card-cat:hover{
+    transform:translateY(-6px);
+    box-shadow:0 12px 25px rgba(0,0,0,0.08);
 }
 
-.cat-card {
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* IMAGE */
+
+.category-image-cat{
+    width:100%;
+    height:200px;
+    overflow:hidden;
 }
 
-.catslidersection .info {
-    width: 180px;
-    height: 200px;
-    background: #fff;
-    border-radius: 16px;
-    overflow: hidden;      /* important */
-    padding: 0;            /* remove padding */
-    display: flex;
+.category-image-cat img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
 }
 
-.catslidersection .info img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;     /* fills entire box */
-    display: block;
-    transition: 0.3s ease;
+/* TITLE */
+
+.category-title-cat{
+    padding:14px;
+    text-align:center;
+    font-size:18px;
+    font-weight:400;
+    color: white;
 }
 
-/* Hover Effects */
+/* HEADER */
 
-.catslidersection .item:hover .info {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+.section-header-cat{
+    margin-bottom:30px;
 }
 
-.catslidersection .item:hover img {
-    transform: scale(1.05);
+.section-title-cat{
+    font-size:24px;
+    font-weight:700;
 }
 
-/* ==================================
-   CATEGORY TITLE
-================================== */
+/* RESPONSIVE */
 
-.cat-title {
-    margin-top: 10px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--primary-text-color);
-    text-align: center;
-    text-transform: capitalize;
-}
+@media (max-width:1200px){
 
-/* ==================================
-   SLIDER MAIN
-================================== */
-
-.catslider-main {
-    padding: 5px 0;
-}
-
-/* ==================================
-   NAVIGATION
-================================== */
-
-.catslider-nav {
-    display: flex;
-    gap: 8px;
-    position: absolute;
-    right: 15px;   /* keeps inside container */
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-}
-
-
-.cat-prev svg,
-.cat-next svg {
-    font-size: 26px;
-    padding: 6px;
-    border-radius: 50%;
-    background: #fff;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.cat-prev svg:hover,
-.cat-next svg:hover {
-    transform: scale(1.1);
-}
-
-/* ==================================
-   RESPONSIVE
-================================== */
-
-@media (max-width: 768px) {
-
-    .catslidersection .info {
-        width: 120px;
-        height: 130px;
-        padding: 10px;
+    .category-grid-cat{
+        grid-template-columns:repeat(4,1fr);
     }
 
-    .cat-title {
-        font-size: 0.75rem;
-    }
 }
 
-@media (max-width: 500px) {
-    .catslider-nav {
-        display: none;
+@media (max-width:768px){
+
+    .category-grid-cat{
+        grid-template-columns:repeat(2,1fr);
     }
+
+    .category-section-cat{
+        padding:40px 20px;
+    }
+
+}
+
+@media (max-width:480px){
+
+    .category-grid-cat{
+        grid-template-columns:repeat(2,1fr);
+    }
+
 }

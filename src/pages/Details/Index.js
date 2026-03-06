@@ -20,10 +20,45 @@ const Details = () => {
     const [productKey, setproductKey] = useState(0);
     const [quantity, setquantity] = useState(1);
     const [activeTab, setActiveTab] = useState("description");
+    // 🔥 Combo Selection State
+    const [comboSelections, setComboSelections] = useState({});
+    const [allProducts, setAllProducts] = useState([]);
 
     const { id } = useParams();
     const { user } = useAuth();
     const navigate = useNavigate();
+
+    // 🔥 Handle Selection
+    const handleVariantChange = (id, value) => {
+        setComboSelections(prev => ({
+            ...prev,
+            [id]: value
+        }));
+    };
+
+    const generateComboName = () => {
+        const selectedProducts = Object.values(comboSelections)
+            .map(id => allProducts.find(p => p.product_id == id))
+            .filter(Boolean);
+
+        if (selectedProducts.length === 0) return product.name;
+
+        return `${product.name} - ${selectedProducts
+            .map(p => p.name)
+            .join(" + ")}`;
+    };
+
+    useEffect(() => {
+        fetch("https://divinityimpex.com/api/products")
+            .then(res => res.json())
+            .then(data => {
+                const activeProducts = data.filter(
+                    p => p.status === "active"
+                );
+                setAllProducts(activeProducts);
+            })
+            .catch(err => console.error("Products API Error:", err));
+    }, []);
 
     useEffect(() => {
         fetch(`https://divinityimpex.com/api/product?id=${id}`)
@@ -39,8 +74,85 @@ const Details = () => {
             });
     }, [id]);
 
-    const handleBuyNow = () => {
-        navigate("/checkout", { state: { product: product } });
+    // const handleBuyNow = async () => {
+
+    //     const response = await fetch(
+    //         "https://divinityimpex.com/api/create_combo_product.php",
+    //         {
+    //             method: "POST",
+    //             headers: { "Content-Type": "application/json" },
+    //             body: JSON.stringify({
+    //                 products: Object.values(comboSelections),
+    //                 combo_name: generateComboName()
+    //             })
+    //         }
+    //     );
+
+    //     const data = await response.json();
+    //     console.log(data);
+
+    //     navigate("/checkout", {
+    //         state: {
+    //             product: {
+    //                 ...product,
+    //                 name: isCombo ? generateComboName() : product.name,
+    //                 product_id: data.product_id
+    //             }
+    //         }
+    //     });
+    // };
+
+    const handleBuyNow = async () => {
+        try {
+
+            if (isCombo && Object.values(comboSelections).length === 0) {
+                alert("Please select all combo options");
+                return;
+            }
+
+            let comboProductId = product?.product_id; // default normal product id
+
+            if (isCombo) {
+
+                const response = await fetch(
+                    "https://divinityimpex.com/api/create-combo-products.php",
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            products: Object.values(comboSelections),
+                            combo_name: generateComboName()
+                        })
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error("Failed to create combo product");
+                }
+
+                const data = await response.json();
+
+                if (!data.success || !data.product_id) {
+                    throw new Error("Invalid response from server");
+                }
+
+                comboProductId = data.product_id; // ✅ UPDATE HERE
+            }
+
+            navigate("/checkout", {
+                state: {
+                    product: {
+                        ...(product || {}),
+                        name: isCombo ? generateComboName() : product?.name,
+                        product_id: comboProductId
+                    }
+                }
+            });
+
+        } catch (error) {
+            console.log("Buy Now Error:", error);
+            alert("Something went wrong. Please try again.");
+        }
     };
 
     const onThumbnailClick = (img, key) => {
@@ -51,6 +163,47 @@ const Details = () => {
     if (loading) return <FadeLoader />;
 
     const isCombo = product?.category?.toLowerCase() === "combo";
+
+    const comboProducts = isCombo
+        ? [
+            {
+                id: "main",
+                name: product?.name?.toLowerCase().includes("true gain")
+                    ? "💪 True Gain (Mass Gainer)"
+                    : "🥤 Whey Protein",
+                variants: allProducts.filter(p =>
+                    (product?.name?.toLowerCase().includes("true gain")
+                        ? p.name.toLowerCase().includes("true gain")
+                        : p.name.toLowerCase().includes("whey protein")) && p.category.toLowerCase() !== "combo"
+                )
+            },
+            {
+                id: "preworkout",
+                name: "⚡ Pre Workout",
+                variants: allProducts.filter(p =>
+                    p.name.toLowerCase().includes("pre workout") && p.category.toLowerCase() !== "combo"
+                )
+            },
+            {
+                id: "creatine",
+                name: "Creatine Monohydrate",
+                variants: allProducts.filter(p =>
+                    p.name.toLowerCase().includes("creatine") && p.category.toLowerCase() !== "combo"
+                )
+            },
+            {
+                id: "bcaa",
+                name: "🔥 Branched Chain Amino Acids",
+                variants: allProducts.filter(p =>
+                    p.name.toLowerCase().includes("branched") && p.category.toLowerCase() !== "combo"
+                )
+            }
+        ]
+        : [];
+
+
+
+
 
     const discount =
         product.old_price && product.old_price > product.price
@@ -114,7 +267,7 @@ const Details = () => {
                 <div className="row">
 
                     {/* LEFT IMAGE SECTION */}
-                    <div className={isCombo ? "col-md-6" : "col-md-4"}>
+                    <div className={isCombo ? "col-md-6" : "col-md-6"}>
 
                         <div className={`productzoom ${isCombo ? "combo-zoom" : ""}`}>
 
@@ -153,7 +306,7 @@ const Details = () => {
                     </div>
 
                     {/* RIGHT INFO SECTION */}
-                    <div className={isCombo ? "col-md-6 productinfo" : "col-md-8 productinfo"}>
+                    <div className={isCombo ? "col-md-6 productinfo" : "col-md-6 productinfo"}>
 
                         <h1 className="product-title">{product.name}</h1>
 
@@ -201,6 +354,8 @@ const Details = () => {
                             <span>{product.net_wt}</span>
                         </h6>
 
+                        
+
                         {/* CART SECTION */}
                         <div className="addcartsection modern-cart">
 
@@ -236,11 +391,47 @@ const Details = () => {
                                 <FlashOnIcon /> Buy Now
                             </Button>
 
-                            <AddToCartButton product={product} qty={quantity} />
+                            <AddToCartButton
+                                product={{
+                                    ...product,
+                                    name: isCombo ? generateComboName() : product.name
+                                }}
+                                qty={quantity}
+                                isCombo = {isCombo}
+                                comboSelections = {comboSelections}
+                            />
 
                         </div>
                     </div>
                 </div>
+
+                {/* 🔥 COMBO OPTIONS */}
+                        {isCombo && (
+                            <div className="combo-options mt-4">
+                                <h4>Select Your Variants</h4>
+
+                                {comboProducts.map((item) => (
+                                    <div key={item.id} className="combo-item mb-3">
+                                        <label className="fw-medium">{item.name}</label>
+
+                                        <select
+                                            className="form-select"
+                                            value={comboSelections[item.id] || ""}
+                                            onChange={(e) =>
+                                                handleVariantChange(item.id, e.target.value)
+                                            }
+                                        >
+                                            <option value="">Select Option</option>
+                                            {item.variants.map((variant) => (
+                                                <option key={variant.product_id} value={variant.product_id}>
+                                                    {variant.name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
 
                 {/* MODERN TABS SECTION */}
                 <div className="modern-tabs">

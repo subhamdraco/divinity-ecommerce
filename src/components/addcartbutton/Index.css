@@ -8,9 +8,9 @@
     border: none;
     cursor: pointer;
     font-size: 0.8rem;
-    font-weight: 600;
-    background: linear-gradient(135deg, #d4af37, #f5e48c);
-    color: #1a1a1a;
+    font-weight: 300;
+    background: linear-gradient(135deg, #000000, #e86222) !important;
+    color: #fff !important;
     box-shadow: 0 6px 20px rgba(212, 175, 55, 0.35);
     transition: all 0.3s ease-in-out;
     white-space: nowrap;
@@ -22,6 +22,7 @@
 }
 
 .add-to-cart-btn:hover {
+    background: linear-gradient(135deg, #e86222, #ff7a3c) !important;
     transform: translateY(-2px);
     box-shadow: 0 10px 28px rgba(212, 175, 55, 0.45);
 }

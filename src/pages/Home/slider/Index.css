@@ -1,9 +1,9 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css');
 
-/* .slick-slider {
-  overflow: hidden;
-} */
+.homeslider .slick-slide {
+  padding: 0px !important;
+}
 
 .homeslider {
     padding: 0px 0px;

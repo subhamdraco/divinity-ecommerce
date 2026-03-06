@@ -7,7 +7,7 @@ import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
 import { FaFacebookF } from "react-icons/fa6";
 import { CiYoutube } from "react-icons/ci";
 import { FaInstagram } from "react-icons/fa";
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -17,7 +17,7 @@ const Footer = () => {
                     <div className='container-fluid'>
                         <div className='row quicksand  text-center'>
                             <div className='col-sm-6 col-lg-3 d-flex justify-content-evenly'>
-                                <div className='box d-flex align-items-center w-100'>
+                                <div className='box d-flex align-items-center w-100 gap-3'>
                                     <span><WorkspacePremiumIcon /></span>
                                     <div className='info'>
                                         <h5>Premium quality</h5>
@@ -27,7 +27,7 @@ const Footer = () => {
 
                             </div>
                             <div className='col-sm-6 col-lg-3 d-flex justify-content-evenly'>
-                                <div className='box d-flex align-items-center w-100'>
+                                <div className='box d-flex align-items-center w-100 gap-3'>
                                     <span><ChildCareIcon /></span>
                                     <div className='info'>
                                         <h5>Crafted with care</h5>
@@ -36,7 +36,7 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className='col-sm-6 col-lg-3 d-flex justify-content-evenly'>
-                                <div className='box d-flex align-items-center w-100'>
+                                <div className='box d-flex align-items-center w-100 gap-3'>
                                     <span><LocalOfferIcon /></span>
                                     <div className='info'>
                                         <h5>Competitive pricing</h5>
@@ -45,7 +45,7 @@ const Footer = () => {
                                 </div>
                             </div>
                             <div className='col-sm-6 col-lg-3 d-flex justify-content-evenly'>
-                                <div className='box d-flex align-items-center w-100'>
+                                <div className='box d-flex align-items-center w-100 gap-3'>
                                     <span><AllInclusiveIcon /></span>
                                     <div className='info'>
                                         <h5>Sustainability focus</h5>
@@ -57,8 +57,19 @@ const Footer = () => {
                     </div>
                 </div>
 
+                {/* New Brand Description Section */}
+
+
                 <footer className='mt-4'>
                     <div className='container-fluid pt-2'>
+                        <div className="footer-brand-description container-fluid mt-4 text-center">
+                            <p>
+                                Titan Core is a premium sports nutrition brand available across UAE and GCC.
+                                Whether you are looking to buy whey protein in Dubai, mass gainer in Abu Dhabi,
+                                creatine in Sharjah, or BCAA across the GCC, Divinity Impex delivers quality gym
+                                supplements designed for performance-focused individuals.
+                            </p>
+                        </div>
                         <div className='row pt-2'>
                             <div className='col'>
                                 <ul className='footerlist'>
@@ -70,23 +81,10 @@ const Footer = () => {
                                 </ul>
                             </div>
 
-                            {/* <div className='col'>
-                                <ul className='footerlist'>
-                                    <li className='footerlistheader'><h5>FAQs</h5></li>
-                                    <li>Return Policy</li>
-                                    <li>Contact Us</li>
-                                    <li>Track Your Order</li>
-                                    <li>ABOUT US</li>
-                                </ul>
-                            </div> */}
-
                             <div className='col'>
                                 <ul className='footerlist'>
                                     <li className='footerlistheader'><h5>Our Quality</h5></li>
                                     <li><Link to="/about">About Us</Link></li>
-                                    {/* <li>Sustainability</li>
-                                    <li>Privacy Policy</li>
-                                    <li>Terms & Conditions</li> */}
                                     <li><Link to={"/products"}>EXPLORE</Link></li>
                                 </ul>
                             </div>
@@ -95,9 +93,7 @@ const Footer = () => {
                                 <ul className='footerlist'>
                                     <li className='footerlistheader'><h5>NEED HELP?</h5></li>
                                     <li>+971525914261</li>
-                                    {/* <li>WhatsApp</li> */}
                                     <li>exports@divinityimpex.com</li>
-                                    {/* <li>Brand Authorized Offline Stores</li> */}
                                 </ul>
                             </div>
 
@@ -118,6 +114,6 @@ const Footer = () => {
             </div>
         </>
     )
-}   
+}
 
 export default Footer;

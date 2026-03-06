@@ -7,24 +7,28 @@ const Combo = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://divinityimpex.com/api/products")
-      .then((res) => res.json())
-      .then((data) => {
-        // ✅ Filter directly from array
+    const fetchCombos = async () => {
+      try {
+        const res = await fetch("https://divinityimpex.com/api/products");
+        const data = await res.json();
+
         const comboProducts = data.filter(
           (item) =>
             item.category &&
             item.category.toLowerCase() === "combo" &&
-            item.status === "active"
+            item.status === "active" &&
+            item.image
         );
 
         setCombos(comboProducts);
-        setLoading(false);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error("API Error:", err);
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchCombos();
   }, []);
 
   return (

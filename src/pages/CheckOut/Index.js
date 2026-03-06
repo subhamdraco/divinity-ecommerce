@@ -40,7 +40,7 @@ const getDeliveryOptions = () => {
       key: "partner_same_day",
       label: "Same Day Delivery",
       desc: "Delivered today before 23:00",
-      price: 0
+      price: 22
     });
   }
 
@@ -62,52 +62,12 @@ const Checkout = () => {
   const API = "https://divinityimpex.com/api"
 
 
-  const createQuiqupOrder = async (order, cart) => {
 
-    const payload = {
-      order_id: order.order_number,
-
-      pickup: {
-        name: "Navire logistics services LLC warehouse",
-        phone: "+971525914261",
-        address1: "Ras al khor industrial area 2",
-        address2: "23rd street Ware house no 5",
-        city: "Dubai",
-        notes: "Pickup from loading bay"
-      },
-
-      delivery: {
-        name: order.shipping_name,
-        phone: order.shipping_phone,
-        address1: order.shipping_address1,
-        address2: order.shipping_address2,
-        city: order.shipping_city
-      },
-
-      items: cart.map(item => ({
-        name: item.name,
-        quantity: item.quantity
-      }))
-    };
-
-    const res = await fetch(
-      "https://divinityimpex.com/api/quiqup-create-order.php",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      }
-    );
-
-    const data = await res.json();
-    console.log("Quiqup Order Response:", data);
-
-    return data;
-  };
 
   /* ---------- COUNTRY CODES ---------- */
   const [countryCodes, setCountryCodes] = useState([]);
   const [loadingCodes, setLoadingCodes] = useState(true);
+  const [hasComboProduct, sethasComboProduct] = useState(false);
 
   /* ---------- FORM STATE ---------- */
   const [form, setForm] = useState({
@@ -121,12 +81,25 @@ const Checkout = () => {
 
   const [errors, setErrors] = useState({});
 
+  const hasAddedRef = useRef(false);
+
   useEffect(() => {
-    if (product && !hasProductRef.current) {
-      addToCart(product.data);
-      hasProductRef.current = true;
+    if (!product || hasAddedRef.current) return;
+
+    const exists = cart.some(item => item.product_id === product.product_id);
+
+    if (!exists) {
+      addToCart(product);
     }
+
+    hasAddedRef.current = true;
   }, [product]);
+
+  useEffect(() => {
+    sethasComboProduct(cart.some(
+      item => item.name?.toLowerCase().includes("combo")
+    ));
+  }, [cart]);
 
   /* ---------- LOAD COUNTRY PHONE CODES ---------- */
   useEffect(() => {
@@ -158,7 +131,6 @@ const Checkout = () => {
       })
       .catch(() => setLoadingCodes(false));
   }, []);
-
   /* ---------- VALIDATION ---------- */
   const validate = () => {
     const err = {};
@@ -208,7 +180,7 @@ const Checkout = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              amount: Math.round((subtotal + deliveryMethod.price) * 100),
+              amount: Math.round((subtotal + (hasComboProduct ? 0 : deliveryMethod.price)) * 100),
               order_number: data.order_number
             }),
           });
@@ -283,12 +255,12 @@ const Checkout = () => {
         ))}
         <div className="cart-item">
           <div className="cart-img">
-              <img src={shaker} alt="shaker" />
-            </div>
-            <div className="cart-info">
-              <h4>Shaker</h4>
-              <span className="price">Free</span>
-            </div>
+            <img src={shaker} alt="shaker" />
+          </div>
+          <div className="cart-info">
+            <h4>Shaker</h4>
+            <span className="price">Free</span>
+          </div>
         </div>
       </div>
 
@@ -375,7 +347,7 @@ const Checkout = () => {
               <div>
                 <strong>{opt.label}</strong>
                 <p>{opt.desc}</p>
-                <span>+ {opt.price} AED</span>
+                <span>{hasComboProduct ? "Free" : `+ ${opt.price} AED`}</span>
               </div>
             </label>
           ))}
@@ -388,7 +360,12 @@ const Checkout = () => {
 
           <div className="summary-total">
             <span>Total</span>
-            <span>{(subtotal + (deliveryMethod?.price || 0)).toFixed(2)} AED</span>
+            <span><div className="summary-total">
+              <span>Total&nbsp; </span>
+              <span>
+                {(subtotal + (hasComboProduct ? 0 : (deliveryMethod?.price || 0))).toFixed(2)} AED
+              </span>
+            </div></span>
           </div>
 
           {/* FALLBACK */}

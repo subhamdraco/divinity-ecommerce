@@ -91,7 +91,7 @@ const About = () => {
                         <div class="curl-line"></div>
                     </div>
 
-                    <div class="brand-intro-grid">
+                    {/* <div class="brand-intro-grid">
 
                         <div class="brand-intro">
                             <h2>RESHU</h2>
@@ -113,11 +113,11 @@ const About = () => {
                             </p>
                         </div>
 
-                    </div>
+                    </div> */}
 
                     <div class="section-divider"></div>
 
-                    <div class="brand-details dark">
+                    <div class="brand-details">
 
                         <h2 class="brand-title">💪 TITAN CORE – Nutrition Range</h2>
 
@@ -153,7 +153,7 @@ const About = () => {
 
                     <div class="section-divider"></div>
 
-                    <div class="brand-details">
+                    {/* <div class="brand-details">
                         <h2 class="brand-title">🧼 RESHU – Personal Care Range</h2>
 
                         <div class="tagline">
@@ -183,7 +183,7 @@ const About = () => {
                         <div class="brand-cta light">
                             Rediscover family care — the natural way with <strong>Reshu</strong>.
                         </div>
-                    </div>
+                    </div> */}
 
                 </div>
             </section>

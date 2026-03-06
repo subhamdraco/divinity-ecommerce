@@ -152,5 +152,5 @@ nav .nav li:hover .dropdownmenu{
     text-decoration: none;
     color: var(--primary-text-color);
     font-size: medium;
-    font-weight: 600;
+    font-weight: 300;
 }

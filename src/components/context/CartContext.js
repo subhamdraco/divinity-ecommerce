@@ -50,7 +50,8 @@ export const CartProvider = ({ children }) => {
     /* ---------------- ADD TO CART ---------------- */
     const addToCart = async (product, qty = 1) => {
         // if (!user?.id) return alert("Please login first");
-
+        console.log("Product");
+        console.log(product);
         try {
             await fetch("https://divinityimpex.com/api/add-to-cart", {
                 method: "POST",

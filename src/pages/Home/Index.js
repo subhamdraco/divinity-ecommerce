@@ -1,41 +1,54 @@
 import { React, useState, useEffect } from "react";
 import HomeSlider from '../Home/slider/Index';
-import CatSlider from "../../components/catslider/Index";
-import Banners from "../../components/banners/Index";
+import CategorySection from "../../components/catslider/Index";
+import Reels from "../../components/reels/Index";
 import Product from "../../components/product/Index";
 import FadeLoader from "../../components/loader/Index";
 import './Index.css';
 // import DailyBanner from "../../assets/images/banner/daily-banner.png";
+import Midbanner from "../../assets/images/banner/banner-1.jpeg";
 import DailyBanner from "../../assets/images/slider-small.jpeg"
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Autoplay } from "swiper/modules";
-import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
-import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
 import { Link } from "react-router-dom";
+
+import useEmblaCarousel from "embla-carousel-react";
 
 const Home = () => {
 
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const [emblaRef] = useEmblaCarousel({
+        loop: true,
+        align: "start",
+    });
+
     useEffect(() => {
-        fetch("https://divinityimpex.com/api/products")
-            .then((res) => res.json())
-            .then((data) => {
-                setProducts(data);
+        const fetchProducts = async () => {
+            try {
+                const res = await fetch("https://divinityimpex.com/api/products");
+                const data = await res.json();
+
+                const activeProducts = data.filter(
+                    p =>
+                        p.status?.toLowerCase() === "active" &&
+                        p.category?.toLowerCase() !== "combo"
+                );
+
+                setProducts(activeProducts);
+            } catch (error) {
+                console.error("API ERROR:", error);
+            } finally {
                 setLoading(false);
-            })
-            .catch((err) => {
-                console.error("API Error:", err);
-                setLoading(false);
-            });
+            }
+        };
+
+        fetchProducts();
     }, []);
 
     return (
         <>
             <HomeSlider />
-            <CatSlider data={products} />
-            <Banners />
+            <CategorySection />
 
             {/* ================= POPULAR PRODUCTS ==a=============== */}
             <section className="home-section fade-in">
@@ -66,79 +79,81 @@ const Home = () => {
                 </div>
             </section>
 
+            <div className="container-fluid mid-banner-container">
+                <div className="mid-banner">
+                    <img
+                        src={Midbanner}
+                        alt="Mid Banner"
+                        onLoad={(e) => e.target.classList.add("loaded")}
+                    />
+                </div>
+            </div>
 
-            {/* ================= DAILY BEST SALES ================= */}
+
+            {/* /* ================= DAILY BEST SALES ================= */}
+
             <section className="home-section light-bg fade-in">
+
                 <div className="container-fluid">
 
-                    {/* HEADER - EXTREME LEFT */}
                     <div className="section-header">
                         <h2 className="section-title">Daily Best Sales</h2>
-
-                        <div className="daily-nav">
-                            <div className="daily-prev">
-                                <KeyboardArrowLeftOutlinedIcon />
-                            </div>
-                            <div className="daily-next">
-                                <KeyboardArrowRightOutlinedIcon />
-                            </div>
-                        </div>
                     </div>
 
-                    {/* CONTENT WITH PADDING */}
                     <div className="section-inner">
+
                         <div className="row align-items-stretch mt-4">
+
+                            {/* LEFT BANNER */}
 
                             <div className="col-lg-4 d-none d-lg-block">
                                 <div className="daily-banner">
-                                    <div className="image-wrapper">
-                                        <img
-                                            src={DailyBanner}
-                                            alt="Daily Sale"
-                                            onLoad={(e) => e.target.classList.add("loaded")}
-                                        />
-                                    </div>
+                                    <img
+                                        src={DailyBanner}
+                                        alt="Daily Sale"
+                                    />
                                 </div>
                             </div>
 
+                            {/* PRODUCT SLIDER */}
+
                             <div className="col-lg-8 col-12">
-                                <Swiper
-                                    modules={[Navigation, Autoplay]}
-                                    navigation={{
-                                        nextEl: ".daily-next",
-                                        prevEl: ".daily-prev",
-                                    }}
-                                    autoplay={{
-                                        delay: 3000,
-                                        disableOnInteraction: false,
-                                    }}
-                                    speed={600}
-                                    loop={true}
-                                    spaceBetween={15}
-                                    breakpoints={{
-                                        1400: { slidesPerView: 4 },
-                                        1200: { slidesPerView: 3 },
-                                        992: { slidesPerView: 3 },
-                                        768: { slidesPerView: 2 },
-                                        480: { slidesPerView: 2 },
-                                        320: { slidesPerView: 1 },
-                                    }}
-                                >
-                                    {loading ? <FadeLoader /> :
-                                        products.slice(0, 12).map((data, index) => (
-                                            <SwiperSlide key={index}>
-                                                <Product data={data} />
-                                            </SwiperSlide>
-                                        ))
-                                    }
-                                </Swiper>
+
+                                {loading ? (
+                                    <FadeLoader />
+                                ) : (
+
+                                    <div className="embla">
+
+                                        <div className="embla__viewport" ref={emblaRef}>
+
+                                            <div className="embla__container">
+
+                                                {products.slice(0, 12).map((data, index) => (
+                                                    <div className="embla__slide" key={index}>
+                                                        <Product data={data} />
+                                                    </div>
+                                                ))}
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                )}
+
                             </div>
 
                         </div>
+
                     </div>
 
                 </div>
+
             </section>
+
+            <Reels />
         </>
     )
 }

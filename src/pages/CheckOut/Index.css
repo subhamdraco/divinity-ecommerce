@@ -193,7 +193,7 @@ textarea {
   display: block;
   margin-top: 0.3rem;
   font-weight: 600;
-  color: #d4af37;
+  color: #e86222;
 }
 
 .qty-control {
@@ -275,13 +275,13 @@ textarea {
 
 .summary-total {
   font-size: 1.2rem;
-  color: #d4af37;
+  color: #e86222;
 }
 
 .checkout-btn {
   width: 100%;
   padding: 0.8rem;
-  background: #d4af37;
+  background: linear-gradient(135deg, #000000, #e86222) !important;
   border: none;
   color: #fff;
   font-weight: 600;
@@ -292,7 +292,7 @@ textarea {
 }
 
 .checkout-btn:hover {
-  background: #b89336;
+ background: linear-gradient(135deg, #e86222, #ff7a3c) !important;
 }
 
 .error {
