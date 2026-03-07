@@ -15,10 +15,13 @@ const Listing = () => {
 
   const [params] = useSearchParams();
   const prebrand = params.get("brand") || "all";
+  const precategory = params.get("category") || "all";
 
   /* FILTER STATE */
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [priceRange, setPriceRange] = useState([0, 500]);
+
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   /* PAGINATION STATE */
   const [page, setPage] = useState(1);
@@ -32,7 +35,7 @@ const Listing = () => {
       .then(data => {
         const activeProducts = data.filter(
           p => p.status?.toLowerCase() === "active" &&
-          p.category?.toLowerCase() !== "combo"
+            p.category?.toLowerCase() !== "combo"
         );
 
         setProducts(activeProducts);
@@ -45,6 +48,13 @@ const Listing = () => {
     return [...new Set(products.map(p => p.brand).filter(Boolean))];
   }, [products]);
 
+  const categories = useMemo(() => {
+    return [...new Set(products.map(p => p.category).filter(Boolean))];
+  }, [products]);
+
+  // console.log(categories);
+  // console.log(precategory);
+
   /* APPLY FILTERS */
   const applyFilters = () => {
     let result = [...products];
@@ -55,13 +65,19 @@ const Listing = () => {
       );
     }
 
+    if (selectedCategories.length) {
+      result = result.filter(p =>
+        selectedCategories.includes(p.category)
+      );
+    }
+
     result = result.filter(p => {
       const price = Number(p.price);
       return price >= priceRange[0] && price <= priceRange[1];
     });
 
     setFiltered(result);
-    setPage(1); // 🔥 reset to first page after filtering
+    setPage(1);
   };
 
   /* PAGINATED PRODUCTS */
@@ -81,8 +97,11 @@ const Listing = () => {
           <div className="col-sm-12 sidebarwrapper">
             <Sidebar
               brands={brands}
+              categories={categories}
               selectedBrands={selectedBrands}
               setSelectedBrands={setSelectedBrands}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
               priceRange={priceRange}
               setPriceRange={setPriceRange}
               applyFilters={applyFilters}
@@ -90,6 +109,7 @@ const Listing = () => {
               setPage={setPage}
               setFiltered={setFiltered}
               prebrand={prebrand}
+              precategory={precategory}
             />
 
           </div>

@@ -81,11 +81,10 @@ const Home = () => {
 
             <div className="container-fluid mid-banner-container">
                 <div className="mid-banner">
-                    <img
-                        src={Midbanner}
-                        alt="Mid Banner"
-                        onLoad={(e) => e.target.classList.add("loaded")}
-                    />
+                    <picture>
+                        <source srcset="https://divinityimpex.com/images/banners/mid-banner-mobile.png" media="(max-width: 992px)" />
+                        <img src="https://divinityimpex.com/images/banners/mid-banner.png" alt="slider-2" className="w-100 sliderimage-2" />
+                    </picture>
                 </div>
             </div>
 

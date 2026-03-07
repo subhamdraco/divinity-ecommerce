@@ -55,9 +55,6 @@ const Nav = () => {
                                                     <li>
                                                         <Link to={"/products?brand=TITAN%20CORE"}>Titan Core</Link>
                                                     </li>
-                                                    <li>
-                                                        <Link to={"/products?brand=RESHU"}>Reshu</Link>
-                                                    </li>
                                                      <li>
                                                         <Link to={"/product/combo"}>Combos</Link>
                                                     </li>

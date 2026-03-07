@@ -38,35 +38,32 @@ const HomeSlider = () => {
                     </div> */}
                     <div className="item">
                         <picture> 
-                            <source srcset="https://divinityimpex.com/images/hero/slider-small.jpeg" media="(max-width: 992px)" />
+                            <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-01.png" media="(max-width: 992px)" />
                             <img src="https://divinityimpex.com/images/hero/eid-hero-3.jpeg" alt="slider-2" className="w-100 sliderimage-2" />
                         </picture>
-                        {/* <source srcset={HomesliderImgSmall} media="(max-width: 992px)"></source> */}
                     </div>
                     <div className="item">
                         <picture>
-                            <source srcset="https://divinityimpex.com/images/hero/slider-small.jpeg" media="(max-width: 992px)" />
+                            <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-02.png" media="(max-width: 992px)" />
                             <img src="https://divinityimpex.com/images/hero/hero-1.jpeg" alt="slider-1" className="w-100 sliderimage-1" />
                         </picture>
                     </div>
                     <div className="item">
                         <picture>
-                            <source srcset="https://divinityimpex.com/images/hero/slider-small.jpeg" media="(max-width: 992px)" />
+                            <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-03.png" media="(max-width: 992px)" />
                             <img src="https://divinityimpex.com/images/hero/hero-2.jpeg" alt="slider-2" className="w-100 sliderimage-2" />
                         </picture>
-                        {/* <source srcset={HomesliderImgSmall} media="(max-width: 992px)"></source> */}
                     </div>
                     <div className="item">
                         <picture>
-                            <source srcset="https://divinityimpex.com/images/hero/slider-small.jpeg" media="(max-width: 992px)" />
+                            <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-04.png" media="(max-width: 992px)" />
                             <img src="https://divinityimpex.com/images/hero/hero-3.jpeg" alt="slider-1" className="w-100 sliderimage-1" />
                         </picture>
                     </div>
                     <div className="item">
                         <picture> 
-                            <source srcset="https://divinityimpex.com/images/hero/slider-small.jpeg" media="(max-width: 992px)" />
+                            <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-05.png" media="(max-width: 992px)" />
                             <img src="https://divinityimpex.com/images/hero/hero-4.jpeg" alt="slider-2" className="w-100 sliderimage-2" />
-                            {/* <source srcset={HomesliderImgSmall} media="(max-width: 992px)"></source> */}
                         </picture>``
                     </div>
                     

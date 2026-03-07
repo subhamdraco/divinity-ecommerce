@@ -104,7 +104,8 @@
 }
 
 .hammenuitems ul li button a:hover{
-   background: var(--hover-color);
+   /* background: var(--hover-color); */
+   background: linear-gradient(135deg, #000000, #e86222) !important;
    color: #fff;
 }
 

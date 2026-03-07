@@ -128,7 +128,7 @@ const HeaderSmall = () => {
                                                     <Button><Link to={"/products?brand=TITAN%20CORE"}>Titan Core</Link></Button>
                                                 </li>
                                                 <li className="list-group-item">
-                                                    <Button><Link to={"/products?brand=RESHU"}>Reshu</Link></Button>
+                                                    <Button><Link to={"/product/combo"}>Combos</Link></Button>
                                                 </li>
                                                 <li className="list-group-item">
                                                     <Button><Link to={"/cart"}>My Cart</Link></Button>

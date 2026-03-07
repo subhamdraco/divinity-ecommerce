@@ -1,4 +1,4 @@
-import React , {useEffect} from "react";
+import React, { useEffect } from "react";
 import "./Index.css";
 import FitnessCenterOutlinedIcon from "@mui/icons-material/FitnessCenterOutlined";
 import SoapIcon from "@mui/icons-material/Soap";
@@ -10,37 +10,55 @@ import banner from "../../assets/images/banner/daily-banner.png";
 
 const Sidebar = ({
   brands,
+  categories,
   selectedBrands,
   setSelectedBrands,
+  selectedCategories,
+  setSelectedCategories,
   priceRange,
   setPriceRange,
   applyFilters,
   products,
   setPage,
   setFiltered,
-  prebrand
+  prebrand,
+  precategory
 }) => {
 
   useEffect(() => {
-    if (!prebrand || prebrand === "ALL") return;
-    console.log(brands);
-    // Only run if brand exists
-    if (brands.includes(prebrand)) {
+    let filtered = [...products];
+
+    // BRAND PARAM
+    if (prebrand && prebrand !== "all" && brands.includes(prebrand)) {
       setSelectedBrands([prebrand]);
-      setPage(1);
-
-      // Auto apply filtering
-      const filtered = products.filter(
-        (p) =>
-          p.brand === prebrand &&
-          p.price >= priceRange[0] &&
-          p.price <= priceRange[1]
-      );
-
-      setFiltered(filtered);
+      filtered = filtered.filter((p) => p.brand === prebrand);
     }
-  }, [prebrand, brands]);
 
+    // CATEGORY PARAM
+    if (precategory && precategory !== "all" && categories.includes(precategory)) {
+      setSelectedCategories([precategory]);
+      filtered = filtered.filter((p) => p.category === precategory);
+    }
+
+    // PRICE FILTER
+    filtered = filtered.filter(
+      (p) =>
+        p.price >= priceRange[0] &&
+        p.price <= priceRange[1]
+    );
+
+    setFiltered(filtered);
+    setPage(1);
+
+  }, [prebrand, precategory, brands, categories, products]);
+
+  const toggleCategory = (cat) => {
+    setSelectedCategories(prev =>
+      prev.includes(cat)
+        ? prev.filter(c => c !== cat)
+        : [...prev, cat]
+    );
+  };
 
   const toggleBrand = (brand) => {
     setSelectedBrands(prev =>
@@ -53,6 +71,7 @@ const Sidebar = ({
   /* CLEAR FILTERS */
   const clearFilters = () => {
     setSelectedBrands([]);
+    setSelectedCategories([]);
     setPriceRange([0, 500]);
     setFiltered(products);
     setPage(1);
@@ -63,7 +82,7 @@ const Sidebar = ({
 
       {/* CATEGORY / BRAND */}
       <div className="card border-0 shadow width-auto">
-        <h3 className="quicksand">Category</h3>
+        <h3 className="quicksand">Brands</h3>
 
         <div className="catlist">
           {brands.map((brand) => (
@@ -85,6 +104,38 @@ const Sidebar = ({
 
               <Checkbox
                 checked={selectedBrands.includes(brand)}
+                sx={{
+                  color: "#d4af37",
+                  "&.Mui-checked": { color: "#d4af37" }
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* CATEGORY FILTER */}
+      <div className="card border-0 shadow mt-4">
+        <h3 className="quicksand">Product Category</h3>
+
+        <div className="catlist">
+          {categories.map((cat) => (
+            <div
+              key={cat}
+              className="catitem d-flex align-items-center justify-content-between mb-2"
+              onClick={() => toggleCategory(cat)}
+            >
+              <div className="info d-flex align-items-center">
+                <span className="img">
+                </span>
+
+                <h4 className="mb-0 ms-3 quicksand">
+                  {cat}
+                </h4>
+              </div>
+
+              <Checkbox
+                checked={selectedCategories.includes(cat)}
                 sx={{
                   color: "#d4af37",
                   "&.Mui-checked": { color: "#d4af37" }

@@ -81,33 +81,33 @@ import "./Index.css";
 const categories = [
   {
     name: "WHEY PROTEIN",
-    slug: "whey-protein",
-    image: "https://divinityimpex.com/images/TITAN/whay/cc/1.png"
+    slug: "Whey%20Protein",
+    image: "https://divinityimpex.com/images/product/whey.png"
   },
   {
     name: "CREATINE MONOHYDRATE POWDER",
-    slug: "creatine",
-    image: "https://divinityimpex.com/images/TITAN/creatine/1.png"
+    slug: "Creatine%20Powder",
+    image: "https://divinityimpex.com/images/product/creatine.png"
   },
   {
     name: "OMEGA 3 FISH OIL CAPSULE",
-    slug: "fish-oil",
-    image: "https://divinityimpex.com/images/TITAN/fish_oil/1.png"
+    slug: "Fish%20Oil",
+    image: "https://divinityimpex.com/images/product/fish-oil.png"
   },
   {
     name: "BCAA / AMINO ACIDS",
-    slug: "bcaa",
-    image: "https://divinityimpex.com/images/TITAN/bcaa/br/1.png"
+    slug: "BCAA",
+    image: "https://divinityimpex.com/images/product/bcaa.png"
   },
   {
     name: "PRE - WORKOUT",
-    slug: "pre-workout",
-    image: "https://divinityimpex.com/images/TITAN/pre_workout/bb/1.png"
+    slug: "Pre%20Workout",
+    image: "https://divinityimpex.com/images/product/pre-workout.png"
   },
   {
     name: "TRUE GAIN",
-    slug: "true-gain",
-    image: "https://divinityimpex.com/images/TITAN/true_gain/b/1.png"
+    slug: "True%20Gain",
+    image: "https://divinityimpex.com/images/product/true.png"
   }
 ];
 
@@ -116,7 +116,7 @@ const CategorySection = () => {
     <section className="category-section-cat">
 
       <div className="section-header-cat">
-        <h2 className="section-title">Shop By Category</h2>
+        <h2 className="section-title section-cat-title">Shop By Category</h2>
       </div>
 
       <div className="category-grid-cat">

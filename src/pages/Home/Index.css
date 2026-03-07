@@ -32,9 +32,9 @@
 }
 
 .section-title {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: 700;
-    margin: auto auto;
+    /* margin: auto auto; */
     letter-spacing: 0.5px;
     color: #0f2d4a;
     position: relative;

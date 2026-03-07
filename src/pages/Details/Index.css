@@ -54,19 +54,31 @@
 /* ===================== PRODUCT ZOOM ===================== */
 
 .productzoom {
-    width: 100%;
+    /* width: 100%; */
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* display: flex; */
+    /* align-items: center;
+    justify-content: center; */
     border-radius: 6px;
 }
 
-.productzoom img {
+/* .productzoom img {
     width: 100%;
     height: auto;
     object-fit: contain;
     max-height: 450px;
+} */
+
+.zoom-wrapper {
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+}
+
+.zoom-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .combo-zoom img {
@@ -184,6 +196,7 @@
     transform: translateY(-2px);
     box-shadow: 0 12px 25px rgba(15, 45, 74, 0.35);
 }
+
 .countsection {
     width: 80px;
     border-radius: 8px;
@@ -283,8 +296,15 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 @keyframes detailPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.04); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
 }
 
 .freeShakerDetail::before {
@@ -299,9 +319,95 @@ input[type=number]::-webkit-outer-spin-button {
     animation: detailShine 1s linear infinite;
 }
 
+/* ================= VERTICAL PRODUCT GALLERY ================= */
+
+.image-gallery-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+/* vertical thumbnail column */
+
+.vertical-slider {
+    width: 90px;
+}
+
+.vertical-slider .slick-slider {
+    height: 420px;
+}
+
+.vertical-slider .slider-item {
+    height: 90px !important;
+}
+
+/* move arrows for vertical slider */
+
+.vertical-slider .slick-prev,
+.vertical-slider .slick-next {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.vertical-slider .slick-prev {
+    top: -25px;
+}
+
+.vertical-slider .slick-next {
+    bottom: -25px;
+}
+
+/* keep main image aligned */
+
+.productzoom {
+    flex: 1;
+}
+
 @keyframes detailShine {
-    0% { left: -100%; }
-    100% { left: 150%; }
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 150%;
+    }
+}
+
+
+/* ================= ZOOM TOOLTIP ================= */
+
+.zoom-image-wrapper {
+    position: relative;
+}
+
+.zoom-tooltip {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.75);
+    color: rgb(5, 5, 5);
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+    white-space: nowrap;
+}
+
+/* show tooltip on hover */
+
+.zoom-image-wrapper:hover .zoom-tooltip {
+    opacity: 1;
+}
+
+/* hide on mobile devices */
+
+@media (hover: none) {
+    .zoom-tooltip {
+        display: none;
+    }
 }
 
 /* ===================== MODERN SECTION ===================== */
@@ -420,7 +526,7 @@ input[type=number]::-webkit-outer-spin-button {
 .tab-buttons button:hover {
     background: linear-gradient(135deg, #e86222, #ff7a3c) !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(232,98,34,0.35);
+    box-shadow: 0 6px 18px rgba(232, 98, 34, 0.35);
 }
 
 /* ACTIVE TAB */
@@ -539,8 +645,142 @@ input[type=number]::-webkit-outer-spin-button {
     transition: 0.3s ease;
 }
 
-.full-description li{
+.full-description li {
     list-style: none;
+}
+
+/* ================= SIMILAR PRODUCTS ================= */
+
+.similar-products {
+    margin-top: 80px;
+}
+
+/* HEADER */
+
+.similar-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.similar-header h3 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #0f2d4a;
+}
+
+.similar-header p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* GRID */
+
+.similar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+/* CARD */
+
+.similar-card {
+    display: block;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    transition: all .35s ease;
+    text-decoration: none;
+}
+
+.similar-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* IMAGE */
+
+.similar-img-wrapper {
+    position: relative;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background: linear-gradient(180deg, #fafafa, #fff);
+}
+
+.similar-img-wrapper img {
+    max-height: 180px;
+    object-fit: contain;
+    transition: .35s;
+}
+
+.similar-card:hover img {
+    transform: scale(1.08);
+}
+
+/* DISCOUNT BADGE */
+
+.similar-discount {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: linear-gradient(135deg, #ff9f00, #ff3c00);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+/* INFO */
+
+.similar-info {
+    padding: 16px;
+}
+
+.similar-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    height: 40px;
+    overflow: hidden;
+}
+
+/* PRICE */
+
+.similar-price-wrap {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.similar-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: #e86222;
+}
+
+.similar-old {
+    font-size: 13px;
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* MOBILE */
+
+@media(max-width:768px) {
+
+    .similar-img-wrapper {
+        height: 170px;
+    }
+
+    .similar-img-wrapper img {
+        max-height: 140px;
+    }
+
 }
 
 /* Fade animation */
@@ -549,6 +789,7 @@ input[type=number]::-webkit-outer-spin-button {
         opacity: 0;
         transform: translateY(8px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -563,7 +804,8 @@ input[type=number]::-webkit-outer-spin-button {
     .modern-cart {
         flex-direction: column;
         align-items: stretch;
-        gap: 12px;   /* more breathing space on mobile */
+        gap: 12px;
+        /* more breathing space on mobile */
     }
 
     .quantity-box {
@@ -580,7 +822,8 @@ input[type=number]::-webkit-outer-spin-button {
     }
 
     .action-buttons button {
-        flex: 1;   /* buttons equal width */
+        flex: 1;
+        /* buttons equal width */
     }
 
     .buy-btn {

@@ -3,8 +3,13 @@ import './Index.css';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import FadeLoader from "../../components/loader/Index";
 import Rating from '@mui/material/Rating';
+
 import InnerImageZoom from 'react-inner-image-zoom';
 import 'inner-image-zoom/lib/styles.min.css';
+
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
+
 import Slider from "react-slick";
 import Button from "@mui/material/Button";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
@@ -23,6 +28,7 @@ const Details = () => {
     // 🔥 Combo Selection State
     const [comboSelections, setComboSelections] = useState({});
     const [allProducts, setAllProducts] = useState([]);
+    const [similarProducts, setSimilarProducts] = useState([]);
 
     const { id } = useParams();
     const { user } = useAuth();
@@ -74,33 +80,17 @@ const Details = () => {
             });
     }, [id]);
 
-    // const handleBuyNow = async () => {
+    useEffect(() => {
+        if (!product) return;
 
-    //     const response = await fetch(
-    //         "https://divinityimpex.com/api/create_combo_product.php",
-    //         {
-    //             method: "POST",
-    //             headers: { "Content-Type": "application/json" },
-    //             body: JSON.stringify({
-    //                 products: Object.values(comboSelections),
-    //                 combo_name: generateComboName()
-    //             })
-    //         }
-    //     );
+        const filtered = allProducts.filter(
+            (p) =>
+                p.category === product.category &&
+                p.product_id !== product.product_id
+        );
 
-    //     const data = await response.json();
-    //     console.log(data);
-
-    //     navigate("/checkout", {
-    //         state: {
-    //             product: {
-    //                 ...product,
-    //                 name: isCombo ? generateComboName() : product.name,
-    //                 product_id: data.product_id
-    //             }
-    //         }
-    //     });
-    // };
+        setSimilarProducts(filtered.slice(0, 8)); // show max 8
+    }, [product, allProducts]);
 
     const handleBuyNow = async () => {
         try {
@@ -212,8 +202,11 @@ const Details = () => {
 
     var settings = {
         infinite: false,
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
+        vertical: true,
+        verticalSwiping: true,
+        arrows: true
     };
 
     const formatDescription = (html) => {
@@ -248,6 +241,8 @@ const Details = () => {
         });
 
         return doc.body.innerHTML;
+
+    
     };
 
     return (
@@ -267,42 +262,78 @@ const Details = () => {
                 <div className="row">
 
                     {/* LEFT IMAGE SECTION */}
-                    <div className={isCombo ? "col-md-6" : "col-md-6"}>
+                    <div className="col-md-6">
 
-                        <div className={`productzoom ${isCombo ? "combo-zoom" : ""}`}>
+                        {isCombo ? (
 
-                            {discount > 0 && (
-                                <div className="modern-discount">-{discount}%</div>
-                            )}
+                            /* COMBO PRODUCT (NO THUMBNAILS) */
+                            <div className={`productzoom combo-zoom`}>
 
-                            {isCombo ? (
+                                {discount > 0 && (
+                                    <div className="modern-discount">-{discount}%</div>
+                                )}
+
                                 <img
                                     src={product.image}
                                     alt={product.name}
                                     className="combo-img"
+                                    style={{ width: "100%", maxWidth: "420px" }}
                                 />
-                            ) : (
-                                <InnerImageZoom
-                                    src={productImage}
-                                    zoomSrc={productImage}
-                                    zoomScale={1}
-                                />
-                            )}
-                        </div>
 
-                        <div className='zoomslider'>
-                            <Slider {...settings}>
-                                {product.images_json?.map((img, index) => (
-                                    <div
-                                        className={`slider-item ${productKey === index ? "thumbactive" : ""}`}
-                                        key={index}
-                                        onMouseEnter={() => onThumbnailClick(img, index)}
-                                    >
-                                        <img src={img} alt="thumb" />
+                            </div>
+
+                        ) : (
+
+                            /* NORMAL PRODUCT WITH THUMBNAILS */
+                            <div className="image-gallery-wrapper">
+
+                                {/* VERTICAL THUMBNAILS */}
+                                <div className="zoomslider vertical-slider">
+                                    <Slider {...settings}>
+                                        {product.images_json?.map((img, index) => (
+                                            <div
+                                                className={`slider-item ${productKey === index ? "thumbactive" : ""}`}
+                                                key={index}
+                                                onMouseEnter={() => onThumbnailClick(img, index)}
+                                            >
+                                                <img src={img} alt="thumb" />
+                                            </div>
+                                        ))}
+                                    </Slider>
+                                </div>
+
+                                {/* MAIN IMAGE */}
+                                <div className="productzoom">
+
+                                    {discount > 0 && (
+                                        <div className="modern-discount">-{discount}%</div>
+                                    )}
+
+                                    <div className="zoom-wrapper" style={{ width: "350px" }}>
+
+                                        <Zoom>
+                                            <img
+                                                src={productImage}
+                                                alt="product"
+                                                style={{
+                                                    width: "100%",
+                                                    height: "auto",
+                                                    cursor: "zoom-in",
+                                                    borderRadius: "8px"
+                                                }}
+                                            />
+                                        </Zoom>
+
+                                        <span className="zoom-tooltip">Click to zoom</span>
+
                                     </div>
-                                ))}
-                            </Slider>
-                        </div>
+
+                                </div>
+
+                            </div>
+
+                        )}
+
                     </div>
 
                     {/* RIGHT INFO SECTION */}
@@ -329,7 +360,7 @@ const Details = () => {
 
                         <div className='d-flex align-items-center mb-3'>
                             <Rating defaultValue={4.5} precision={0.5} readOnly />
-                            <span className='ms-2'> (32 reviews) </span>
+                            {/* <span className='ms-2'> (32 reviews) </span> */}
                         </div>
 
                         <div className='modern-price-section'>
@@ -354,7 +385,7 @@ const Details = () => {
                             <span>{product.net_wt}</span>
                         </h6>
 
-                        
+
 
                         {/* CART SECTION */}
                         <div className="addcartsection modern-cart">
@@ -397,8 +428,8 @@ const Details = () => {
                                     name: isCombo ? generateComboName() : product.name
                                 }}
                                 qty={quantity}
-                                isCombo = {isCombo}
-                                comboSelections = {comboSelections}
+                                isCombo={isCombo}
+                                comboSelections={comboSelections}
                             />
 
                         </div>
@@ -406,32 +437,98 @@ const Details = () => {
                 </div>
 
                 {/* 🔥 COMBO OPTIONS */}
-                        {isCombo && (
-                            <div className="combo-options mt-4">
-                                <h4>Select Your Variants</h4>
+                {isCombo && (
+                    <div className="combo-options mt-4">
+                        <h4>Select Your Variants</h4>
 
-                                {comboProducts.map((item) => (
-                                    <div key={item.id} className="combo-item mb-3">
-                                        <label className="fw-medium">{item.name}</label>
+                        {comboProducts.map((item) => (
+                            <div key={item.id} className="combo-item mb-3">
+                                <label className="fw-medium">{item.name}</label>
 
-                                        <select
-                                            className="form-select"
-                                            value={comboSelections[item.id] || ""}
-                                            onChange={(e) =>
-                                                handleVariantChange(item.id, e.target.value)
-                                            }
-                                        >
-                                            <option value="">Select Option</option>
-                                            {item.variants.map((variant) => (
-                                                <option key={variant.product_id} value={variant.product_id}>
-                                                    {variant.name}
-                                                </option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                ))}
+                                <select
+                                    className="form-select"
+                                    value={comboSelections[item.id] || ""}
+                                    onChange={(e) =>
+                                        handleVariantChange(item.id, e.target.value)
+                                    }
+                                >
+                                    <option value="">Select Option</option>
+                                    {item.variants.map((variant) => (
+                                        <option key={variant.product_id} value={variant.product_id}>
+                                            {variant.name}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
-                        )}
+                        ))}
+                    </div>
+                )}
+
+                {/* ================= SIMILAR PRODUCTS ================= */}
+
+                <div className="similar-products mt-5">
+
+                    
+
+                    {similarProducts.length > 0 && <div className="similar-header">
+                        <h3>🔥 Similar Products</h3>
+                        <p>You may also like these supplements</p>
+                    </div>}
+
+                    <div className="similar-grid">
+
+                        {similarProducts.map((item) => (
+
+                            <Link
+                                to={`/product/details/${item.product_id}`}
+                                className="similar-card"
+                                key={item.product_id}
+                            >
+
+                                <div className="similar-img-wrapper">
+
+                                    {item.old_price && item.old_price > item.price && (
+                                        <span className="similar-discount">
+                                            {Math.round(((item.old_price - item.price) / item.old_price) * 100)}% OFF
+                                        </span>
+                                    )}
+
+                                    <img
+                                        src={item.thumbnail_url || item.image}
+                                        alt={item.name}
+                                    />
+
+                                </div>
+
+                                <div className="similar-info">
+
+                                    <h5 className="similar-name">
+                                        {item.name}
+                                    </h5>
+
+                                    <div className="similar-price-wrap">
+
+                                        <span className="similar-price">
+                                            {item.price} AED
+                                        </span>
+
+                                        {item.old_price && (
+                                            <span className="similar-old">
+                                                {item.old_price} AED
+                                            </span>
+                                        )}
+
+                                    </div>
+
+                                </div>
+
+                            </Link>
+
+                        ))}
+
+                    </div>
+
+                </div>
 
                 {/* MODERN TABS SECTION */}
                 <div className="modern-tabs">
@@ -476,6 +573,8 @@ const Details = () => {
                     </div>
 
                 </div>
+
+
 
             </div>
         </section>
