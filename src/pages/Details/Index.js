@@ -10,7 +10,12 @@ import 'inner-image-zoom/lib/styles.min.css';
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+
 import Button from "@mui/material/Button";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FlashOnIcon from '@mui/icons-material/FlashOn';
@@ -200,14 +205,7 @@ const Details = () => {
             ? Math.round(((product.old_price - product.price) / product.old_price) * 100)
             : 0;
 
-    var settings = {
-        infinite: false,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        vertical: true,
-        verticalSwiping: true,
-        arrows: true
-    };
+
 
     const formatDescription = (html) => {
         if (!html) return "";
@@ -242,7 +240,7 @@ const Details = () => {
 
         return doc.body.innerHTML;
 
-    
+
     };
 
     return (
@@ -289,17 +287,50 @@ const Details = () => {
 
                                 {/* VERTICAL THUMBNAILS */}
                                 <div className="zoomslider vertical-slider">
-                                    <Slider {...settings}>
+
+                                    <div className="thumb-prev">▲</div>
+
+                                    <Swiper
+                                        modules={[Navigation]}
+                                        navigation={{
+                                            nextEl: ".thumb-next",
+                                            prevEl: ".thumb-prev"
+                                        }}
+                                        direction="vertical"
+                                        slidesPerView={4}
+                                        spaceBetween={10}
+                                        breakpoints={{
+                                            0: {
+                                                direction: "horizontal",
+                                                slidesPerView: 4
+                                            },
+                                            768: {
+                                                direction: "vertical",
+                                                slidesPerView: 4
+                                            }
+                                        }}
+                                        className="product-thumb-swiper"
+                                    >
+
                                         {product.images_json?.map((img, index) => (
-                                            <div
-                                                className={`slider-item ${productKey === index ? "thumbactive" : ""}`}
-                                                key={index}
-                                                onMouseEnter={() => onThumbnailClick(img, index)}
-                                            >
-                                                <img src={img} alt="thumb" />
-                                            </div>
+
+                                            <SwiperSlide key={index}>
+
+                                                <div
+                                                    className={`slider-item ${productKey === index ? "thumbactive" : ""}`}
+                                                    onMouseEnter={() => onThumbnailClick(img, index)}
+                                                    onClick={() => onThumbnailClick(img, index)}
+                                                >
+                                                    <img src={img} alt="thumb" />
+                                                </div>
+
+                                            </SwiperSlide>
+
                                         ))}
-                                    </Slider>
+
+                                    </Swiper>
+                                    <div className="thumb-next">▼</div>
+
                                 </div>
 
                                 {/* MAIN IMAGE */}
@@ -468,7 +499,7 @@ const Details = () => {
 
                 <div className="similar-products mt-5">
 
-                    
+
 
                     {similarProducts.length > 0 && <div className="similar-header">
                         <h3>🔥 Similar Products</h3>

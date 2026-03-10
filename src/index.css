@@ -15,6 +15,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 'RETRO FLORAL', sans-serif !important;
+  background: url("../src/assets/images/banner/bg.jpg") !important;
 }
 
 code {
