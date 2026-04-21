@@ -785,6 +785,56 @@ input[type=number]::-webkit-outer-spin-button {
     list-style: none;
 }
 
+/* ================= INGREDIENTS PREVIEW ================= */
+
+.ingredients-preview {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fafafa;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.ingredients-preview h6 {
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #0f2d4a;
+}
+
+/* Limit height (important UX) */
+.ingredients-content {
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Scrollbar styling */
+.ingredients-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.ingredients-content::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+
+/* Reuse your existing list styling */
+.ingredients-content ul {
+    padding-left: 0;
+}
+
+.ingredients-content li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.buysection{
+    display: flex;
+    justify-content: center;
+}
+
 /* ================= SIMILAR PRODUCTS ================= */
 
 .similar-products {

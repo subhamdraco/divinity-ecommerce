@@ -36,12 +36,12 @@ const HomeSlider = () => {
                             <img src={HomesliderImg2} alt="slider-2" className="sliderimage-2" />
                         </picture>
                     </div> */}
-                    <div className="item">
+                    {/* <div className="item">
                         <picture> 
                             <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-01.png" media="(max-width: 992px)" />
                             <img src="https://divinityimpex.com/images/hero/eid-hero-3.jpeg" alt="slider-2" className="w-100 sliderimage-2" />
                         </picture>
-                    </div>
+                    </div> */}
                     <div className="item">
                         <picture>
                             <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-02.png" media="(max-width: 992px)" />
