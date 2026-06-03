@@ -8,13 +8,13 @@
 }
 
 .light-bg {
-    background: linear-gradient(180deg, #f8fafc, #ffffff);
+    background: linear-gradient(180deg, var(--site-bg-elevated), var(--site-bg));
 }
 
 .section-header,
 .section-inner {
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: clamp(16px, 5vw, 60px);
+    padding-right: clamp(16px, 5vw, 60px);
 }
 
 .home-section .row {
@@ -34,9 +34,8 @@
 .section-title {
     font-size: 2rem;
     font-weight: 700;
-    /* margin: auto auto; */
     letter-spacing: 0.5px;
-    color: #0f2d4a;
+    color: var(--primary-text-color);
     position: relative;
 }
 
@@ -47,7 +46,7 @@
     bottom: -8px;
     width: 40px;
     height: 3px;
-    background: linear-gradient(90deg, #0f2d4a, #1f7a8c);
+    background: linear-gradient(90deg, var(--primary-icon-color), var(--color-light-g));
     border-radius: 4px;
 }
 
@@ -82,6 +81,8 @@
     border-radius: 16px;
     overflow: hidden;
     max-height: 500px;
+    background: var(--site-surface);
+    border: 1px solid var(--site-border);
 }
 
 .daily-banner img {
@@ -126,7 +127,7 @@
 @media (max-width: 576px) {
 
   .embla__slide {
-    min-width: 50%;
+    min-width: 100%;
   }
 
 }
@@ -145,13 +146,15 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #ffffff;
+    background: var(--site-surface);
+    border: 1px solid var(--site-border);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--site-shadow);
     cursor: pointer;
     transition: all 0.3s ease;
+    color: var(--primary-text-color);
 }
 
 .daily-prev svg,
@@ -186,7 +189,7 @@
 .skeleton {
     position: relative;
     overflow: hidden;
-    background: #e9ecef;
+    background: var(--site-surface-2);
 }
 
 .skeleton::after {
@@ -198,7 +201,7 @@
     width: 150%;
     background: linear-gradient(90deg,
             rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.6) 50%,
+            rgba(255, 255, 255, 0.08) 50%,
             rgba(255, 255, 255, 0) 100%);
     animation: shimmer 1.5s infinite;
 }
@@ -214,7 +217,7 @@
 .image-wrapper {
     position: relative;
     overflow: hidden;
-    background: #f5f5f5;
+    background: var(--site-surface-2);
 }
 
 .image-wrapper img {
@@ -236,8 +239,8 @@
 .mid-banner-container {
     max-width: 1600px;
     margin: 40px auto;
-    padding-left: 60px;
-    padding-right: 60px;
+    padding-left: clamp(16px, 5vw, 60px);
+    padding-right: clamp(16px, 5vw, 60px);
 }
 
 .mid-banner {
@@ -324,10 +327,13 @@
 
     .section-header {
         padding: 20px !important;
+        flex-wrap: wrap;
+        gap: 12px;
     }
 
     .section-inner {
-        padding: 0px !important;
+        padding-left: clamp(12px, 4vw, 20px) !important;
+        padding-right: clamp(12px, 4vw, 20px) !important;
     }
 
     .product-card {

@@ -1,9 +1,10 @@
 .nav {
     width: 100%;
-    height: 4rem;
+    min-height: 4rem;
     margin: auto;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: visible;
 }
 
 .nav .cattab {
@@ -68,19 +69,40 @@
     color: #fff !important;
 }
 
+/* About Us dropdown trigger (no wrapping Link — avoids nested anchors) */
+.nav nav ul li.about-nav > button.about-nav-trigger {
+    text-decoration: none !important;
+    font-size: 1.2rem;
+    color: #fff !important;
+    text-transform: capitalize !important;
+    padding: 0.2rem 1.5rem;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.nav nav ul li.about-nav > button.about-nav-trigger:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
 
 .nav nav .dropdownmenu{
     position: absolute;
-    top: 150%;
+    top: calc(100% + 4px);
     left: 0px;
     width: 100%;
+    min-width: 200px;
     height: auto;
-    background: #fff;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16) , 0 3px 6px rgba(0,0,0,0.23);
+    background: var(--site-surface);
+    border: 1px solid var(--site-border);
+    box-shadow: var(--site-shadow-lg);
     padding: 10px 0px;
-    z-index: 1024;
+    z-index: 11050;
     visibility: hidden;
-    transition: all 0.1s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
 }
 
 nav .dropdownmenu li{
@@ -97,7 +119,7 @@ nav .dropdownmenu ul li button{
     text-align: left !important;
     justify-content: flex-start !important;
     font-size: 13px;
-    color: var(--primary-text-color);
+    color: var(--primary-text-color) !important;
     text-transform: capitalize !important;
 
 }
@@ -106,11 +128,12 @@ nav .nav li a:hover{
     color: #fff !important;
 }
 
-nav .nav li:hover .dropdownmenu{
+nav .nav li:hover .dropdownmenu {
     position: absolute;
-    top: 100%;
-    visibility: inherit;
-
+    top: calc(100% + 4px);
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* ra */
@@ -135,22 +158,68 @@ nav .nav li:hover .dropdownmenu{
     color: var(--primary-icon-color) !important;
 } */
 
-.brands .dropdownmenu ul li {
+.brands .dropdownmenu ul li,
+.about-nav .dropdownmenu ul li {
     padding: 10% !important;
 }
 
-.brands .dropdownmenu ul li:hover{
+.brands .dropdownmenu ul li:hover,
+.about-nav .dropdownmenu ul li:hover{
     /* background-color: var(--hover-color); */
 }
 
-.brands .dropdownmenu ul li:hover a{
+.brands .dropdownmenu ul li:hover a,
+.about-nav .dropdownmenu ul li:hover a{
     color: var(--primary-icon-color) !important;
     font-size: large;
 }
 
-.brands .dropdownmenu ul li a{
+.brands .dropdownmenu ul li a,
+.about-nav .dropdownmenu ul li a{
     text-decoration: none;
     color: var(--primary-text-color);
     font-size: medium;
     font-weight: 300;
+}
+
+/* Center primary nav; overflow visible so dropdowns are not clipped */
+.nav .row.position-relative {
+    overflow: visible;
+}
+
+.nav .row > .col.d-flex.justify-content-center {
+    justify-content: center !important;
+    overflow: visible;
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+}
+
+.nav nav ul.list-inline {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.15rem;
+    row-gap: 0.25rem;
+}
+
+/* Brands / About: wider menu + sit above bar chrome */
+.nav nav ul li.brands,
+.nav nav ul li.about-nav {
+    position: relative;
+    z-index: 2;
+}
+
+.nav nav ul li.brands:hover,
+.nav nav ul li.about-nav:hover {
+    z-index: 11060;
+}
+
+.brands .dropdownmenu,
+.about-nav .dropdownmenu {
+    width: max-content;
+    min-width: 220px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
 }

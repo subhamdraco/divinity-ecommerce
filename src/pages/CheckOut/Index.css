@@ -152,6 +152,7 @@ textarea {
   flex-wrap: wrap;
   padding: 2rem;
   font-family: 'Quicksand', sans-serif;
+  background: var(--site-bg);
 }
 
 .cart-left-checkout {
@@ -165,17 +166,19 @@ textarea {
 .cart-title {
   font-size: 1.8rem;
   margin-bottom: 1rem;
+  color: var(--primary-text-color);
 }
 
 .cart-item {
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: #fff;
+  background: var(--site-surface);
+  border: 1px solid var(--site-border);
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+  box-shadow: var(--site-shadow);
 }
 
 .cart-item img {
@@ -187,6 +190,7 @@ textarea {
 
 .cart-info {
   flex: 1;
+  color: var(--primary-text-color);
 }
 
 .price {
@@ -206,9 +210,9 @@ textarea {
 .qty-control button {
   width: 30px;
   height: 30px;
-  border: 1px solid #d4af37;
-  background: #fff;
-  color: #333;
+  border: 1px solid var(--site-border);
+  background: var(--site-surface-2);
+  color: var(--primary-text-color);
   font-size: 1.2rem;
   border-radius: 4px;
   cursor: pointer;
@@ -217,8 +221,10 @@ textarea {
 .qty-control input {
   width: 50px;
   text-align: center;
-  border: 1px solid #ccc;
+  border: 1px solid var(--site-border);
   border-radius: 4px;
+  background: var(--site-surface-2);
+  color: var(--primary-text-color);
 }
 
 .remove-btn {
@@ -230,16 +236,18 @@ textarea {
 }
 
 .summary-card {
-  background: #fff;
+  background: var(--site-surface);
+  border: 1px solid var(--site-border);
   padding: 2rem;
   border-radius: 0.5rem;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  box-shadow: var(--site-shadow);
+  color: var(--primary-text-color);
 }
 
 .summary-card h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid var(--site-border);
   padding-bottom: 0.5rem;
 }
 
@@ -255,9 +263,11 @@ textarea {
 .phone-group select {
   padding: 0.7rem 1rem;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--site-border);
   font-size: 0.95rem;
   outline: none;
+  background: var(--site-surface-2);
+  color: var(--primary-text-color);
 }
 
 .phone-group {
@@ -296,7 +306,7 @@ textarea {
 }
 
 .error {
-  color: red;
+  color: #ff7b72;
   font-size: 0.8rem;
   margin-top: 0.2rem;
 }
@@ -304,10 +314,11 @@ textarea {
 .cart-empty {
   text-align: center;
   padding: 4rem 2rem;
+  color: var(--primary-text-color);
 }
 
 .btn-primary-gold {
-  background: #d4af37;
+  background: linear-gradient(135deg, #000000, #e86222);
   color: #fff;
   padding: 0.7rem 1.5rem;
   border-radius: 0.5rem;
@@ -317,12 +328,44 @@ textarea {
 }
 
 .btn-primary-gold:hover {
-  background: #b89336;
+  background: linear-gradient(135deg, #e86222, #ff7a3c);
 }
 
 .login-hint {
   font-size: 0.85rem;
-  color: #666;
+  color: var(--text-muted);
   margin-top: 0.5rem;
 }
 
+@media (max-width: 991px) {
+  .cart-wrapper {
+    flex-direction: column;
+    padding: 1.25rem clamp(12px, 4vw, 20px);
+    gap: 1.5rem;
+  }
+
+  .cart-left-checkout,
+  .cart-right-checkout {
+    flex: 1 1 100% !important;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .cart-wrapper {
+    padding: 1rem 12px;
+  }
+
+  .summary-card {
+    padding: 1.25rem;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .phone-group {
+    flex-direction: column;
+  }
+}

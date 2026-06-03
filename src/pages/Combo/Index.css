@@ -6,19 +6,21 @@
   text-align: center;
   margin-bottom: 30px;
   font-weight: 700;
+  color: var(--primary-text-color);
 }
 
 .combo-card {
-  border: 1px solid #eee;
+  border: 1px solid var(--site-border);
   border-radius: 12px;
   overflow: hidden;
   transition: 0.3s;
-  background: #fff;
+  background: var(--site-surface);
+  color: var(--primary-text-color);
 }
 
 .combo-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--site-shadow-lg);
 }
 
 .combo-card img {
@@ -33,7 +35,7 @@
 
 .tagline {
   font-size: 14px;
-  color: #666;
+  color: var(--text-muted);
   min-height: 40px;
 }
 

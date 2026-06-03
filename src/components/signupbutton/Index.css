@@ -9,7 +9,7 @@
   border: none;
   cursor: pointer;
   background: linear-gradient(135deg, var(--color-light-g), var(--primary-icon-color));
-  color: #ffff;
+  color: #fff;
   overflow: hidden; 
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   box-shadow: 0 12px 28px rgba(0,0,0,0.25);

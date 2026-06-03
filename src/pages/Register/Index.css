@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
-  --gold: #d4af37;
+  --gold: #e86222;
   --navy: #052a4a;
   --navy-dark: #031c30;
-  --gold-soft: #E2CA78;
-  --bg-light: #f8f9fb;
+  --gold-soft: #ff7a3c;
+  --bg-light: #0d1117;
 }
 
 * {
@@ -16,7 +16,7 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background: var(--bg-light);
-  color: var(--navy);
+  color: #e6edf3;
 }
 
 /* ---------- WRAPPER ---------- */
@@ -83,10 +83,12 @@ body {
 .auth-card {
   width: 100%;
   max-width: 420px;
-  background: #fff;
+  background: #161b22;
+  border: 1px solid rgba(255,255,255,0.1);
   padding: 3.5rem;
   border-radius: 20px;
-  box-shadow: 0 40px 120px rgba(5,42,74,.15);
+  box-shadow: 0 40px 120px rgba(0,0,0,.5);
+  color: #e6edf3;
 }
 
 /* ---------- HEAD ---------- */
@@ -99,7 +101,7 @@ body {
 
 .auth-card p {
   margin: .6rem 0 2.6rem;
-  color: #6b7a88;
+  color: #8b949e;
 }
 
 /* ---------- INPUT ---------- */
@@ -113,9 +115,10 @@ body {
   width: 100%;
   padding: 16px 14px;
   border-radius: 12px;
-  border: 1px solid #dfe5ea;
+  border: 1px solid rgba(255,255,255,0.12);
   font-size: 1rem;
-  color: var(--navy);
+  color: #e6edf3;
+  background: #21262d;
 }
 
 .field input:focus {
@@ -128,9 +131,9 @@ body {
   left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  background: #fff;
+  background: #161b22;
   padding: 0 6px;
-  color: #7b8a99;
+  color: #8b949e;
   pointer-events: none;
   transition: .3s;
 }
@@ -159,7 +162,7 @@ body {
 
 .auth-btn:hover {
   background: var(--gold);
-  color: var(--navy-dark);
+  color: #fff;
   transform: translateY(-1px);
 }
 

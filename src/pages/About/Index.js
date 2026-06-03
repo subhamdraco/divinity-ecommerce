@@ -1,246 +1,413 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import aboutHeroBanner from "../../assets/images/visionary/about-hero-context.jpg";
+import aboutVisionaryImage from "../../assets/images/visionary/about-image.jpg";
+import brandCardReshuNaomi from "../../assets/images/visionary/brand-reshu-naomi.jpg";
+import brandCardBonjourEspecial from "../../assets/images/visionary/brand-bonjour-especial.jpg";
+import brandCardTitanRuvo from "../../assets/images/visionary/brand-titan-ruvo.jpg";
 import "./Index.css";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  whileInView: { opacity: 1, y: 0 },
-};
-
+/** ISO 3166-1 alpha-2 codes for flagcdn.com. Africa uses illustrative regional flags. */
 const hubs = [
-  [
-    "China",
-    "Advanced manufacturing capabilities and high-tech sourcing solutions.",
-  ],
-  ["India", "Premium raw materials, R&D and formulation expertise."],
-  [
-    "Turkey",
-    "Premium personal care manufacturing aligned with international standards.",
-  ],
-  ["Africa", "Strong distribution networks and market understanding."],
-  ["UAE", "Strategic headquarters and global logistics gateway."],
+  {
+    title: "China",
+    desc: "Advanced manufacturing capabilities and high-tech sourcing solutions.",
+    flags: ["cn"],
+  },
+  {
+    title: "India",
+    desc: "Premium raw materials, R&D and formulation expertise.",
+    flags: ["in"],
+  },
+  {
+    title: "Turkey",
+    desc: "Premium personal care manufacturing aligned with international standards.",
+    flags: ["tr"],
+  },
+  {
+    title: "Africa",
+    desc: "Strong distribution networks and market understanding.",
+    flags: ["ng", "za", "ke"],
+  },
+  {
+    title: "UAE",
+    desc: "Strategic headquarters and global logistics gateway.",
+    flags: ["ae"],
+  },
 ];
 
 const brands = [
-  ["Reshu & Naomi", "Personal Care & Beauty"],
-  ["Bonjour & Especial", "Fragrance & Hygiene"],
-  ["Titan Core & Ruvo", "Sports Nutrition & Wellness"],
+  {
+    name: "Reshu & Naomi",
+    type: "Personal Care & Beauty",
+    image: brandCardReshuNaomi,
+  },
+  {
+    name: "Bonjour & Especial",
+    type: "Fragrance & Hygiene",
+    image: brandCardBonjourEspecial,
+  },
+  {
+    name: "Titan Core & Ruvo",
+    type: "Sports Nutrition & Wellness",
+    image: brandCardTitanRuvo,
+  },
 ];
 
 export default function About() {
   return (
     <div className="about-page container-fluid">
-      <section className="hero">
-        <div className="overlay" />
+      <section className="about-page__hero" aria-labelledby="about-hero-title">
         <div
-          className="hero-content"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1>Divinity Impex</h1>
-          <p>
-            Global FMCG & Healthcare Nutrition Manufacturing & Brand Development
-            Partner
+          className="about-page__hero-bg"
+          style={{ "--about-hero-img": `url(${aboutHeroBanner})` }}
+          aria-hidden="true"
+        />
+        <div className="about-page__hero-overlay" aria-hidden="true" />
+        <div className="about-page__hero-inner container-fluid">
+          <p className="about-page__eyebrow">Global FMCG &amp; healthcare nutrition</p>
+          <h1 id="about-hero-title" className="about-page__hero-title">
+            Divinity Impex
+          </h1>
+          <p className="about-page__hero-lead">
+            Manufacturing, sourcing &amp; brand development—built for modern
+            consumers worldwide.
           </p>
-          <a href="#vision" className="btn">
-            Explore Our Story
-          </a>
-        </div>
-      </section>
-
-      <section
-        id="vision"
-        className="section"
-        variants={fadeUp}
-        initial="hidden"
-        whileInView="whileInView"
-      >
-        <h2 className="section-title">About Divinity Impex</h2>
-        <p>
-          Founded with a vision to redefine excellence in the FMCG & Healthcare
-          industry, Divinity Impex has emerged as a trusted international
-          manufacturing, sourcing, and brand development powerhouse. With a
-          strong global footprint and a commitment to innovation, quality, and
-          strategic growth, the company specializes in developing
-          high-performance personal care, healthcare, hygiene, fragrance,
-          nutrition, and FMCG products tailored for modern consumers worldwide.<br/><br/>
-          At Divinity Impex, we believe that successful brands are built through
-          a perfect combination of market intelligence, world-class
-          manufacturing, premium ingredients, and consumer trust. Our approach
-          is driven by innovation, efficiency, and long-term value creation,
-          enabling us to deliver products that meet international standards
-          while remaining competitively priced for global markets.
-        </p>
-      </section>
-
-      <section className="stats">
-        <div>
-          <h3>5+</h3>
-          <span>Global Hubs</span>
-        </div>
-        <div>
-          <h3>100+</h3>
-          <span>Partners</span>
-        </div>
-        <div>
-          <h3>Multi-Continent</h3>
-          <span>Presence</span>
-        </div>
-        <div>
-          <h3>24/7</h3>
-          <span>Global Operations</span>
-        </div>
-      </section>
-
-      <section className="section">
-        <h2 className="section-title">Our Global Vision</h2>
-        <p>
-         Divinity Impex operates at the forefront of the global FMCG & Healthcare Nutrition ecosystem, developing and manufacturing products that resonate with consumers across multiple continents. Our mission is to create high-quality, accessible, and market-leading solutions that combine advanced research, strategic sourcing, and operational excellence.
-        </p>
-        <p>
-          From concept development to final production, every product under our umbrella reflects our dedication to safety, innovation, quality assurance, and customer satisfaction. Our integrated global network enables us to respond quickly to evolving market trends while maintaining uncompromising product standards.
-        </p>
-      </section>
-
-      <section className="section">
-        <h2 className="section-title">
-          International Presence & Procurement Network
-        </h2>
-        <p>
-          Our international business infrastructure spans across America,
-          Africa, Asia Pacific, Europe, and the Middle East, allowing us to
-          efficiently manage sourcing, production, logistics, and distribution
-          on a global scale.{" "}
-        </p>
-        <h2>Strategic Global Hubs</h2>
-        <div className="grid">
-          {hubs.map(([title, desc]) => (
-            <div whileHover={{ y: -8 }} className="card" key={title}>
-              <img
-                src={`https://picsum.photos/600/400?random=${title}`}
-                alt={title}
-              />
-              <h3>{title}</h3>
-              <p>{desc}</p>
-            </div>
-          ))}
-        </div>
-        <p>This global procurement ecosystem enables Divinity Impex to maintain exceptional product quality while optimizing costs and supply chain performance.</p>
-      </section>
-
-      <section className="section">
-        <h2 className="section-title">Our Trusted Brands</h2>
-        <p>Over the years, Divinity Impex has developed and expanded a diverse portfolio of successful in-house brands designed to meet the evolving demands of consumers worldwide.</p>
-        <div className="grid">
-          {brands.map(([name, type]) => (
-            <div className="brand-card" key={name}>
-              <img
-                src={`https://picsum.photos/500/300?random=${name}`}
-                alt={name}
-              />
-              <h3>{name}</h3>
-              <p>{type}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="section">
-        <h2 className="section-title">Data-Driven Product Development</h2>
-        <ul className="feature-list">
-          <li>Category size and growth analysis</li>
-          <li>Consumer behavior research</li>
-          <li>Pricing strategy and benchmarking</li>
-          <li>Competitor brand analysis</li>
-          <li>Product trend forecasting</li>
-          <li>Market demand evaluation</li>
-        </ul>
-      </section>
-
-      <section className="section">
-        <h2 className="section-title">
-          Strategic Sourcing & Manufacturing Excellence
-        </h2>
-        <div className="grid">
-          <div className="card">
-            <h3>Global Sourcing Expertise</h3>
-          </div>
-          <div className="card">
-            <h3>Partner Manufacturing Facilities</h3>
-          </div>
-          <div className="card">
-            <h3>Quality Assurance</h3>
+          <div className="about-page__hero-actions">
+            <a href="#about-story" className="about-page__btn about-page__btn--primary">
+              Explore our story
+            </a>
+            <Link to="/contact" className="about-page__btn about-page__btn--ghost">
+              Partner with us
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="section dark">
-        <h2 className="section-title">The Divinity Impex Volume Advantage</h2>
-        <p>
-          Our large-scale procurement capability enables premium quality
-          products at highly competitive pricing, helping distributors,
-          retailers and partners achieve stronger margins.
-        </p>
-      </section>
-
-      <section className="section">
-        <h2 className="section-title">
-          A Legacy Built on Confidence & Experience
-        </h2>
-        <p>
-          With decades of combined industry expertise and strong wholesale
-          distribution foundations, Divinity Impex continues to drive
-          sustainable growth across international markets.
-        </p>
-      </section>
-
-      <section className="section">
-        <h2 className="section-title">Visionary Leadership</h2>
-        <div className="leader">
-          <img
-            src="https://picsum.photos/400/500?random=rizwan"
-            alt="Rizwan Adatia"
-          />
-          <div>
-            <h3>Rizwan Adatia</h3>
-            <p>
-              Under the leadership of Rizwan Adatia, Divinity Impex continues to
-              expand its global influence through innovation, ethical business
-              practices and purpose-driven success.
+      <main className="about-page__main">
+        <section
+          id="about-story"
+          className="about-page__section about-page__section--surface"
+        >
+          <div className="about-page__container">
+            <h2 className="about-page__title">About Divinity Impex</h2>
+            <p className="about-page__prose">
+              Founded with a vision to redefine excellence in the FMCG &amp;
+              Healthcare industry, Divinity Impex has emerged as a trusted
+              international manufacturing, sourcing, and brand development
+              powerhouse. With a strong global footprint and a commitment to
+              innovation, quality, and strategic growth, the company specializes
+              in developing high-performance personal care, healthcare, hygiene,
+              fragrance, nutrition, and FMCG products tailored for modern consumers
+              worldwide.
+            </p>
+            <p className="about-page__prose">
+              At Divinity Impex, we believe that successful brands are built
+              through a perfect combination of market intelligence, world-class
+              manufacturing, premium ingredients, and consumer trust. Our approach
+              is driven by innovation, efficiency, and long-term value creation,
+              enabling us to deliver products that meet international standards
+              while remaining competitively priced for global markets.
             </p>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section">
-        <h2 className="section-title">Why Choose Divinity Impex</h2>
-        <div className="grid">
-          {[
-            "Global Expertise",
-            "International Sourcing",
-            "Manufacturing Standards",
-            "Distribution Infrastructure",
-            "Competitive Pricing",
-            "Product Innovation",
-            "Reliable Partnerships",
-            "Efficient Logistics",
-          ].map((i) => (
-            <div className="card" key={i}>
-              {i}
+        <section className="about-page__stats" aria-label="Company highlights">
+          <div className="about-page__container about-page__stats-grid">
+            <div className="about-page__stat">
+              <span className="about-page__stat-value">5+</span>
+              <span className="about-page__stat-label">Global hubs</span>
             </div>
-          ))}
-        </div>
-      </section>
+            <div className="about-page__stat">
+              <span className="about-page__stat-value">100+</span>
+              <span className="about-page__stat-label">Partners</span>
+            </div>
+            <div className="about-page__stat">
+              <span className="about-page__stat-value">Multi</span>
+              <span className="about-page__stat-label">Continent presence</span>
+            </div>
+            <div className="about-page__stat">
+              <span className="about-page__stat-value">24/7</span>
+              <span className="about-page__stat-label">Global operations</span>
+            </div>
+          </div>
+        </section>
 
-      <section className="cta">
-        <h2 className="section-title">
-          Let’s Build the Future of FMCG & Healthcare Nutrition Together
-        </h2>
-        <p>More than manufacturers — strategic growth partners.</p>
-        <a className="btn" href="/contact">
-          Contact Us
-        </a>
-      </section>
+        <section className="about-page__section">
+          <div className="about-page__container">
+            <h2 className="about-page__title">Our global vision</h2>
+            <p className="about-page__prose">
+              Divinity Impex operates at the forefront of the global FMCG &amp;
+              Healthcare Nutrition ecosystem, developing and manufacturing products
+              that resonate with consumers across multiple continents. Our mission is
+              to create high-quality, accessible, and market-leading solutions that
+              combine advanced research, strategic sourcing, and operational
+              excellence.
+            </p>
+            <p className="about-page__prose">
+              From concept development to final production, every product under our
+              umbrella reflects our dedication to safety, innovation, quality
+              assurance, and customer satisfaction. Our integrated global network
+              enables us to respond quickly to evolving market trends while
+              maintaining uncompromising product standards.
+            </p>
+          </div>
+        </section>
+
+        <section className="about-page__section about-page__section--surface">
+          <div className="about-page__container">
+            <h2 className="about-page__title">
+              International presence &amp; procurement
+            </h2>
+            <p className="about-page__prose">
+              Our international business infrastructure spans across America,
+              Africa, Asia Pacific, Europe, and the Middle East, allowing us to
+              efficiently manage sourcing, production, logistics, and distribution
+              on a global scale.
+            </p>
+            <h3 className="about-page__subtitle">Strategic global hubs</h3>
+            <div className="about-page__grid">
+              {hubs.map(({ title, desc, flags }) => (
+                <article className="about-page__card" key={title}>
+                  <div
+                    className={
+                      flags.length > 1
+                        ? "about-page__card-media about-page__card-media--hub about-page__card-media--hub-multi"
+                        : "about-page__card-media about-page__card-media--hub"
+                    }
+                  >
+                    {flags.map((code) => (
+                      <img
+                        key={code}
+                        className="about-page__hub-flag"
+                        src={`https://flagcdn.com/w160/${code}.png`}
+                        srcSet={`https://flagcdn.com/w320/${code}.png 2x`}
+                        alt=""
+                        loading="lazy"
+                        width={160}
+                        height={107}
+                        referrerPolicy="no-referrer"
+                      />
+                    ))}
+                  </div>
+                  <div className="about-page__card-body">
+                    <h4 className="about-page__card-title">{title}</h4>
+                    <p className="about-page__card-text">{desc}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <p className="about-page__prose about-page__prose--tight-top">
+              This global procurement ecosystem enables Divinity Impex to maintain
+              exceptional product quality while optimizing costs and supply chain
+              performance.
+            </p>
+          </div>
+        </section>
+
+        <section className="about-page__section">
+          <div className="about-page__container">
+            <h2 className="about-page__title">Our trusted brands</h2>
+            <p className="about-page__prose">
+              Over the years, Divinity Impex has developed and expanded a diverse
+              portfolio of successful in-house brands designed to meet the evolving
+              demands of consumers worldwide.
+            </p>
+            <div className="about-page__grid">
+              {brands.map(({ name, type, image }) => (
+                <article className="about-page__card about-page__card--brand" key={name}>
+                  <div className="about-page__card-media">
+                    <img
+                      src={image}
+                      alt=""
+                      loading="lazy"
+                      width={640}
+                      height={384}
+                    />
+                  </div>
+                  <div className="about-page__card-body">
+                    <h4 className="about-page__card-title">{name}</h4>
+                    <p className="about-page__card-text">{type}</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <p className="about-page__prose about-page__prose--tight-top">
+              In addition to these flagship brands, Divinity Impex continuously
+              develops innovative FMCG, Healthcare and personal care product lines
+              tailored for emerging global opportunities.
+            </p>
+          </div>
+        </section>
+
+        <section className="about-page__section about-page__section--surface">
+          <div className="about-page__container">
+            <h2 className="about-page__title">Data-driven product development</h2>
+            <p className="about-page__prose">
+              At Divinity Impex, every successful product begins with extensive
+              market intelligence and strategic research.
+            </p>
+            <ul className="about-page__feature-list">
+              <li>Category size and growth analysis</li>
+              <li>Consumer behavior research</li>
+              <li>Pricing strategy and benchmarking</li>
+              <li>Competitor brand analysis</li>
+              <li>Product trend forecasting</li>
+              <li>Market demand evaluation</li>
+            </ul>
+            <p className="about-page__prose about-page__prose--tight-top">
+              This data-driven methodology allows us to identify high-potential
+              product categories and create solutions that deliver real market
+              value.
+            </p>
+          </div>
+        </section>
+
+        <section className="about-page__section">
+          <div className="about-page__container">
+            <h2 className="about-page__title">
+              Strategic sourcing &amp; manufacturing excellence
+            </h2>
+            <p className="about-page__prose">
+              Our global sourcing strategy focuses on securing premium-quality raw
+              materials at highly competitive price points through an extensive
+              international supplier network.
+            </p>
+            <h3 className="about-page__subtitle">What sets our manufacturing apart?</h3>
+            <div className="about-page__grid">
+              <article className="about-page__card about-page__card--text">
+                <h4 className="about-page__card-title">Global sourcing expertise</h4>
+                <p className="about-page__card-text">
+                  We identify and procure the finest ingredients and materials from
+                  trusted suppliers worldwide.
+                </p>
+              </article>
+              <article className="about-page__card about-page__card--text">
+                <h4 className="about-page__card-title">Partner manufacturing facilities</h4>
+                <p className="about-page__card-text">
+                  Through strategic partnerships with high-output production
+                  facilities, we ensure scalable and seamless manufacturing
+                  capabilities.
+                </p>
+              </article>
+              <article className="about-page__card about-page__card--text">
+                <h4 className="about-page__card-title">Quality assurance</h4>
+                <p className="about-page__card-text">
+                  Every product undergoes rigorous multi-stage testing and compliance
+                  verification to meet international safety and quality certifications.
+                </p>
+              </article>
+            </div>
+            <blockquote className="about-page__pullquote">
+              Our manufacturing philosophy is centered around consistency, efficiency,
+              reliability, and innovation.
+            </blockquote>
+          </div>
+        </section>
+
+        <section className="about-page__section about-page__section--accent">
+          <div className="about-page__container about-page__container--narrow">
+            <h2 className="about-page__title about-page__title--on-dark">
+              The Divinity Impex volume advantage
+            </h2>
+            <p className="about-page__prose about-page__prose--on-dark">
+              Our large-scale procurement capability enables premium quality
+              products at highly competitive pricing, helping distributors,
+              retailers and partners achieve stronger margins.
+            </p>
+            <p className="about-page__prose about-page__prose--on-dark">
+              This volume advantage enables us to manufacture premium-quality products
+              at disruptive price points, creating exceptional value for distributors,
+              retailers, and business partners.
+            </p>
+            <p className="about-page__prose about-page__prose--on-dark">
+              By optimizing operational efficiency and procurement economics, we pass
+              these benefits directly to our partners, helping them achieve stronger
+              margins and long-term profitability.
+            </p>
+          </div>
+        </section>
+
+        <section className="about-page__section about-page__section--surface">
+          <div className="about-page__container">
+            <h2 className="about-page__title">
+              A legacy built on confidence &amp; experience
+            </h2>
+            <p className="about-page__prose">
+              With decades of combined industry expertise and strong wholesale
+              distribution foundations, Divinity Impex continues to drive sustainable
+              growth across international markets.
+            </p>
+          </div>
+        </section>
+
+        <section className="about-page__section">
+          <div className="about-page__container">
+            <h2 className="about-page__title">Visionary leadership</h2>
+            <div className="about-page__leader">
+              <div className="about-page__leader-media">
+                <img
+                  src={aboutVisionaryImage}
+                  alt="Visionary leadership at Divinity Impex"
+                  loading="lazy"
+                />
+              </div>
+              <div className="about-page__leader-body">
+                <h3 className="about-page__leader-name">Rizwan Adatia</h3>
+                <p className="about-page__prose">
+                  Under the leadership of Rizwan Adatia, Divinity Impex continues to
+                  expand its global influence through innovation, ethical business
+                  practices and purpose-driven success.
+                </p>
+              </div>
+            </div>
+            <br/>
+            <p>Beyond business growth, the company remains focused on creating meaningful value for communities, partners, and consumers worldwide.</p>
+          </div>
+        </section>
+
+        <section className="about-page__section about-page__section--surface">
+          <div className="about-page__container">
+            <h2 className="about-page__title">Why choose Divinity Impex</h2>
+            <div className="about-page__pill-grid">
+              {[
+                "Global FMCG & Healthcare Nutrition expertise",
+                "International sourcing network",
+                "High-quality manufacturing standards",
+                "Strong distribution infrastructure",
+                "Competitive pricing advantages",
+                "Market-driven product innovation",
+                "Reliable global partnerships",
+                "Premium personal care & nutrition brands",
+                "Efficient logistics and operational systems",
+                "Long-term business growth focus"
+              ].map((label) => (
+                <div className="about-page__pill" key={label}>
+                  {label}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="about-page__cta" aria-labelledby="about-cta-title">
+          <div className="about-page__cta-bg" aria-hidden="true" />
+          <div className="about-page__container about-page__container--narrow about-page__cta-inner">
+            <h2 id="about-cta-title" className="about-page__cta-title">
+              Let&apos;s build the future of FMCG &amp; healthcare nutrition together
+            </h2>
+            <p className="about-page__cta-lead">
+              At Divinity Impex, we are more than manufacturers — we are strategic growth partners committed to building powerful brands, delivering innovative products, and creating sustainable business success worldwide.
+            </p>
+            <p className="about-page__cta-lead">
+              Whether you are a distributor, retailer, private label partner, or international business collaborator, Divinity Impex offers the expertise, infrastructure, and vision to help you grow in today’s competitive global marketplace.
+            </p>
+            <Link to="/contact" className="about-page__btn about-page__btn--primary about-page__btn--lg">
+              Contact us
+            </Link>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

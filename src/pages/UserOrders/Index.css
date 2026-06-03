@@ -7,17 +7,20 @@
   font-size: 32px;
   font-weight: 600;
   margin-bottom: 30px;
+  color: var(--primary-text-color);
 }
 
 .order-card {
-  background: #fff;
+  background: var(--site-surface);
+  border: 1px solid var(--site-border);
   border-radius: 12px;
   padding: 22px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 18px;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+  box-shadow: var(--site-shadow);
+  color: var(--primary-text-color);
 }
 
 .order-meta {

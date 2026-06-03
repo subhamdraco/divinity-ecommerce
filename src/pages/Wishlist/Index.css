@@ -12,10 +12,11 @@
 }
 
 .wishlist-card {
-  background: #111827;
+  background: var(--site-surface);
+  border: 1px solid var(--site-border);
   border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  box-shadow: var(--site-shadow);
   transition: transform .2s;
 }
 

@@ -4,10 +4,10 @@
 
 .productthumb {
     width: 100%;
-    border: 1px solid #eee;
+    border: 1px solid var(--site-border);
     border-radius: 16px;
     overflow: hidden;
-    background: #fff;
+    background: var(--site-surface);
     position: relative;
     transition: 0.3s ease;
     display: flex;
@@ -122,7 +122,7 @@
 
 .catname {
     font-size: 12px;
-    color: #888;
+    color: var(--text-muted);
     margin-bottom: 3px;
 }
 
@@ -131,7 +131,7 @@
     font-weight: 200;
     min-height: 70px;
     margin-bottom: 8px;
-    color: #222;
+    color: var(--primary-text-color);
 }
 
 /* ===========================
@@ -148,13 +148,13 @@
 .price {
     font-size: 16px;
     font-weight: 700;
-    color: #111;
+    color: var(--primary-text-color);
 }
 
 .oldprice {
     font-size: 12px;
     text-decoration: line-through;
-    color: #999;
+    color: var(--text-muted);
 }
 
 /* ===========================

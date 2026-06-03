@@ -11,7 +11,9 @@ export default function MainLayout() {
     <>
       <HeaderSmall user={user} logout={logout}/>
       <Header user={user} logout={logout}/>
-      <Outlet />
+      <main id="main-content" className="site-main">
+        <Outlet />
+      </main>
       <Footer />
     </>
   );

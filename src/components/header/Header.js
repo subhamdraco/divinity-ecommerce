@@ -42,6 +42,7 @@ const Header = (props) => {
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const debounceRef = useRef(null);
+    const searchInputRef = useRef(null);
 
     const { cart } = useCart();
 
@@ -109,15 +110,15 @@ const Header = (props) => {
 
     return (
         <>
-            <div className="headerwrapper" ref={headerRef}>
+            <div className="headerwrapper site-fullbleed" ref={headerRef}>
                 <header className="pb-0">
                     <div className="container-fluid">
                         <div className="row">
-                            <div className="logowrapper col-sm-12 col-md-2 ps-2 d-flex align-items-center">
+                            <div className="logowrapper col-sm-12 col-md-4 ps-2 d-flex align-items-center">
                                 <img src={logo} alt="logo" className="logo" />
                             </div>
                             {/* Header Starts */}
-                            <div className="col-sm-12 col-md-5 d-flex align-items-center">
+                            <div className="col-sm-12 col-md-4 d-flex align-items-center">
                                 <div className="headersearch d-flex align-items-center">
                                     {/* Dropdown */}
                                     <GridViewOutlinedIcon className="itemicon" />
@@ -130,12 +131,20 @@ const Header = (props) => {
                                     >
                                         <div className="search">
                                             <input
+                                                ref={searchInputRef}
                                                 type="text"
                                                 placeholder="Search for items.."
                                                 value={search}
                                                 onChange={e => setSearch(e.target.value)}
                                             />
-                                            <SearchIcon className="searchIcon cursor" />
+                                            <button
+                                                type="button"
+                                                className="search-submit-btn"
+                                                aria-label="Focus search"
+                                                onClick={() => searchInputRef.current?.focus()}
+                                            >
+                                                <SearchIcon />
+                                            </button>
 
                                             {results.length > 0 && (
                                                 <ul className="search-dropdown">
@@ -162,7 +171,7 @@ const Header = (props) => {
                                 </div>
                             </div>
 
-                            <div className="col-sm-12 col-md-5 d-flex align-items-center">
+                            <div className="col-sm-12 col-md-4 d-flex align-items-center">
                                 <div className="ms-auto d-flex align-items-center">
                                     <div className="countrywrapper">
                                         <Select data={countryList} placeholder={countryList[0]} icon={<LocationOnOutlinedIcon className="itemicon" style={{ opacity: 0.4 }} />} />

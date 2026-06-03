@@ -27,7 +27,6 @@ const Nav = () => {
 
     return (
         <nav>
-            <div className="container-fluid">
                 <div className="nav d-flex align-items-center bg-g">
                     <div className="container-fluid">
                         <div className="row position-relative ">
@@ -39,14 +38,23 @@ const Nav = () => {
                             </Button>
                         </div> */}
 
-                            <div className="col d-flex justify-content-around position-static">
+                            <div className="col d-flex justify-content-center position-relative">
                                 <nav>
                                     <ul className="list list-inline mb-0 p-0">
                                         <li className="list-inline-item">
                                             <Link to="/"><Button>Home</Button></Link>
                                         </li>
-                                        <li className="list-inline-item">
-                                            <Link to="/about"><Button>About Us</Button></Link>
+                                        <li className="list-inline-item about-nav">
+                                            <Button type="button" className="about-nav-trigger">
+                                                About Us <KeyboardArrowDownIcon />
+                                            </Button>
+                                            <div className="dropdownmenu">
+                                                <ul>
+                                                    <li>
+                                                        <Link to="/about">Divinity Impex</Link>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </li>
                                         <li className="list-inline-item brands">
                                             <Link><Button>Brands <KeyboardArrowDownIcon /></Button></Link>
@@ -118,7 +126,6 @@ const Nav = () => {
                         </div>
                     </div>
                 </div>
-            </div>
         </nav>
     )
 }

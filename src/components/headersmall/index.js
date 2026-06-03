@@ -22,6 +22,7 @@ const HeaderSmall = () => {
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const debounceRef = useRef(null);
+    const drawerSearchInputRef = useRef(null);
     const { cart } = useCart();
 
     useEffect(() => {
@@ -54,7 +55,7 @@ const HeaderSmall = () => {
 
     return (
         <>
-            <div className="headersmall">
+            <div className="headersmall site-fullbleed">
                 <div className="container-fluid">
                     <ClickAwayListener onClickAway={() => setisOpenDropdown(true)}>
                         <div className="row">
@@ -84,12 +85,20 @@ const HeaderSmall = () => {
                                                 {/* <input type="text" placeholder="Search for items.." />
                                                 <SearchIcon className="searchIcon cursor" /> */}
                                                 <input
+                                                    ref={drawerSearchInputRef}
                                                     type="text"
                                                     placeholder="Search for items.."
                                                     value={search}
                                                     onChange={e => setSearch(e.target.value)}
                                                 />
-                                                <SearchIcon className="searchIcon cursor" />
+                                                <button
+                                                    type="button"
+                                                    className="search-submit-btn"
+                                                    aria-label="Focus search"
+                                                    onClick={() => drawerSearchInputRef.current?.focus()}
+                                                >
+                                                    <SearchIcon />
+                                                </button>
 
                                                 {results.length > 0 && (
                                                     <ul className="search-dropdown">

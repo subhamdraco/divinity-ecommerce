@@ -30,12 +30,15 @@
     flex-direction:column;
     text-decoration:none;
     transition:0.3s ease;
+    background: var(--site-surface);
+    border: 1px solid var(--site-border);
 }
 
 .category-card-cat:hover{
     transform:translateY(-6px);
-    box-shadow:0 12px 25px rgba(0,0,0,0.08);
-    background: linear-gradient(135deg,#e86222, #f8f9fb) !important;
+    box-shadow: var(--site-shadow);
+    background: linear-gradient(135deg, rgba(232, 98, 34, 0.35), var(--site-surface-2)) !important;
+    border-color: rgba(232, 98, 34, 0.45);
 }
 
 /* IMAGE */

@@ -1,20 +1,20 @@
 .contact-page {
   min-height: 100vh;
-  /* background: #0b1220; */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px;
+  padding: clamp(16px, 4vw, 30px);
   color: #e5e7eb;
 }
 
 .contact-container {
   width: 100%;
   max-width: 520px;
-  /* background: #111827; */
-  padding: 32px;
+  padding: clamp(20px, 4vw, 32px);
   border-radius: 16px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--site-shadow-lg);
+  background: var(--site-surface);
+  border: 1px solid var(--site-border);
 }
 
 .contact-container h1 {
@@ -40,9 +40,9 @@ color: var(--primary-text-color);
 .contact-form textarea {
   padding: 14px;
   border-radius: 10px;
-  border: 1px solid #1f2937;
-  /* background: #020617; */
-  color: #e5e7eb;
+  border: 1px solid var(--site-border);
+  background: var(--site-surface-2);
+  color: var(--primary-text-color);
   font-size: 14px;
 }
 
@@ -54,7 +54,7 @@ color: var(--primary-text-color);
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
-  border-color: #f59e0b;
+  border-color: var(--primary-icon-color);
 }
 
 .contact-form button {
@@ -82,10 +82,10 @@ color: var(--primary-text-color);
 
 .contact-info {
   margin-top: 24px;
-  border-top: 1px solid #1f2937;
+  border-top: 1px solid var(--site-border);
   padding-top: 16px;
   text-align: center;
-  color: #9ca3af;
+  color: var(--text-muted);
 }
 
 .contact-info p {

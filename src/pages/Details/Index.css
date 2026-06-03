@@ -1,11 +1,46 @@
+/* ===================== PAGE SHELL ===================== */
+
+.detailspage {
+    background-color: var(--site-bg);
+    color: var(--primary-text-color);
+}
+
+/* Right column: explicit dark card (Bootstrap body/bg was bleeding through before import fix) */
+.detailspage .productinfo {
+    background: var(--site-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--site-radius);
+    padding: clamp(1rem, 2.5vw, 1.75rem);
+    box-shadow: var(--site-shadow);
+}
+
+.detailspage .row > .col-md-6:first-child {
+    background: var(--site-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--site-radius);
+    padding: clamp(1rem, 2vw, 1.5rem);
+    box-shadow: var(--site-shadow);
+}
+
+.detailspage .buysection {
+    margin-top: 1.25rem;
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    background: var(--site-surface);
+    border: 1px solid var(--site-border);
+    border-radius: var(--site-radius);
+    box-shadow: var(--site-shadow);
+    display: flex;
+    justify-content: center;
+}
+
 /* ===================== BREADCRUMB ===================== */
 
 .breadcrumbwrapper2 {
     width: 100%;
     margin-top: 5px;
     padding: 1.1rem 0;
-    border-bottom: 1px solid rgba(15, 45, 74, 0.08);
-    background: linear-gradient(to right, #ffffff, #f7fbff);
+    border-bottom: 1px solid var(--site-border);
+    background: linear-gradient(to right, var(--site-bg-elevated), var(--site-surface));
 }
 
 .breadcrumb2 {
@@ -30,7 +65,7 @@
 .detailspage .productinfo h1 {
     font-weight: 400;
     opacity: 1;
-    color: #0f2d4a;
+    color: var(--primary-text-color);
     letter-spacing: 0.3px;
 }
 
@@ -48,7 +83,7 @@
     font-size: 1.2rem;
     font-weight: 600;
     text-decoration: line-through;
-    color: #c0c0c0;
+    color: var(--text-muted);
 }
 
 /* ===================== PRODUCT ZOOM ===================== */
@@ -100,13 +135,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--site-border);
     border-radius: 8px;
     transition: 0.3s ease;
+    background: var(--site-surface);
 }
 
 .zoomslider .slider-item:hover {
-    border-color: rgba(0, 0, 0, 0.4);
+    border-color: var(--primary-icon-color);
 }
 
 .zoomslider .slider-item img {
@@ -116,7 +152,8 @@
 }
 
 .thumbactive {
-    border: 1px solid var(--primary-icon-color) !important;
+    border: 2px solid var(--primary-icon-color) !important;
+    box-shadow: 0 0 0 1px rgba(232, 98, 34, 0.25);
 }
 
 .zoomslider .slick-arrow {
@@ -140,10 +177,11 @@
 .quantity-box {
     display: flex;
     align-items: center;
-    border: 1px solid #ddd;
+    border: 1px solid var(--site-border);
     border-radius: 8px;
     overflow: hidden;
     height: 45px;
+    background: var(--site-surface);
 }
 
 /* INPUT */
@@ -154,7 +192,8 @@
     outline: none;
     font-size: 15px;
     font-weight: 600;
-    background: #fff;
+    background: var(--site-surface-2);
+    color: var(--primary-text-color);
 }
 
 /* REMOVE ARROWS */
@@ -170,6 +209,7 @@
     height: 45px;
     border: none;
     background: linear-gradient(135deg, #000000, #e86222) !important;
+    color: #fff;
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
@@ -177,7 +217,8 @@
 }
 
 .qty-btn:hover {
-    background: #e8e8e8;
+    background: var(--site-surface-2) !important;
+    color: var(--primary-text-color);
 }
 
 /* BUY BUTTON */
@@ -212,6 +253,8 @@
     text-align: center;
     border: none;
     outline: none;
+    background: var(--site-surface-2);
+    color: var(--primary-text-color);
 }
 
 .decrement,
@@ -269,13 +312,13 @@ input[type=number]::-webkit-outer-spin-button {
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    border: 1px solid var(--primary-text-color);
+    border: 1px solid var(--site-border);
 }
 
 .wishlisttab svg {
     padding: 5px;
     font-size: 1.8rem;
-    color: #949090;
+    color: var(--text-muted);
 }
 
 /* ===================== FREE SHAKER BADGE ===================== */
@@ -351,39 +394,46 @@ input[type=number]::-webkit-outer-spin-button {
     height: 420px;
 }
 
-.slider-item {
+.detailspage .image-gallery-wrapper .slider-item {
     height: 90px;
     padding: 6px;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: 1px solid var(--site-border);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all .3s ease;
+    background: var(--site-surface);
 }
 
-.slider-item img {
+.detailspage .image-gallery-wrapper .slider-item img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.slider-item:hover {
-    border-color: #000;
+.detailspage .image-gallery-wrapper .slider-item:hover {
+    border-color: var(--primary-icon-color);
 }
 
-.thumbactive {
-    border: 2px solid #000;
+.detailspage .image-gallery-wrapper .slider-item.thumbactive {
+    border: 2px solid var(--primary-icon-color);
+    box-shadow: 0 0 0 1px rgba(232, 98, 34, 0.25);
 }
 
 /* ================= SWIPER ARROWS ================= */
 
-.swiper-button-prev,
-.swiper-button-next {
-    color: #000;
+.detailspage .swiper-button-prev,
+.detailspage .swiper-button-next {
+    color: var(--primary-icon-color);
     width: 25px;
     height: 25px;
+}
+
+.detailspage .swiper-button-prev::after,
+.detailspage .swiper-button-next::after {
+    font-size: 1.25rem;
 }
 
 /* ================= MOBILE ================= */
@@ -521,11 +571,12 @@ input[type=number]::-webkit-outer-spin-button {
     bottom: 12px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.75);
-    color: rgb(5, 5, 5);
+    background: rgba(22, 27, 34, 0.92);
+    color: var(--primary-text-color);
     font-size: 12px;
     padding: 6px 12px;
     border-radius: 20px;
+    border: 1px solid var(--site-border);
     opacity: 0;
     pointer-events: none;
     transition: opacity .3s ease;
@@ -556,6 +607,25 @@ input[type=number]::-webkit-outer-spin-button {
     font-size: 28px;
     font-weight: 700;
     margin-bottom: 10px;
+    color: var(--primary-text-color);
+}
+
+.detailspage .product-title {
+    color: var(--primary-text-color);
+}
+
+.detailspage .short-desc {
+    color: var(--text-muted);
+}
+
+.detailspage .productinfo h6 {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.detailspage .productinfo h6 span {
+    color: var(--primary-text-color);
+    font-weight: 600;
 }
 
 .meta-badges {
@@ -580,17 +650,21 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .category-badge {
-    background: #f1f1f1;
+    background: var(--site-surface-2);
+    color: var(--primary-text-color);
+    border: 1px solid var(--site-border);
 }
 
 .in-stock {
-    background: #e6f7ec;
-    color: #0a7d3b;
+    background: rgba(46, 160, 67, 0.18);
+    color: #56d364;
+    border: 1px solid rgba(46, 160, 67, 0.35);
 }
 
 .out-stock {
-    background: #fdeaea;
-    color: #b30000;
+    background: rgba(248, 81, 73, 0.15);
+    color: #ff7b72;
+    border: 1px solid rgba(248, 81, 73, 0.35);
 }
 
 .modern-price-section {
@@ -603,23 +677,24 @@ input[type=number]::-webkit-outer-spin-button {
 .modern-price {
     font-size: 32px;
     font-weight: 700;
+    color: var(--primary-icon-color);
 }
 
 .modern-oldprice {
     text-decoration: line-through;
-    color: #999;
+    color: var(--text-muted);
 }
 
 .modern-discount {
     position: absolute;
     top: 10px;
     left: 10px;
-    background: linear-gradient(135deg, #ffbb00, #cccfcf);
-    color: #5a5757;
+    background: linear-gradient(135deg, #b45309, #e86222);
+    color: #fff;
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 17px;
-    box-shadow: 0 8px 20px rgba(15, 45, 74, 0.25);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
     z-index: 999;
 }
 
@@ -627,50 +702,58 @@ input[type=number]::-webkit-outer-spin-button {
 
 .modern-tabs {
     margin-top: 60px;
-    background: #ffffff;
+    background: var(--site-surface);
+    border: 1px solid var(--site-border);
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(15, 45, 74, 0.08);
+    box-shadow: var(--site-shadow);
     position: relative;
 }
 
 /* TAB BUTTON WRAPPER */
 .tab-buttons {
     display: inline-flex;
-    background: #f5f7fa;
+    background: var(--site-surface-2);
     padding: 6px;
     border-radius: 50px;
     gap: 5px;
     margin-bottom: 30px;
 }
 
-/* TAB BUTTON */
+/* TAB BUTTON — inactive subtle, active branded */
 .tab-buttons button {
-    border: none;
-    background: linear-gradient(135deg, #000000, #e86222) !important;
+    border: 1px solid transparent;
+    background: transparent !important;
     padding: 10px 22px;
     border-radius: 50px;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 14px;
     cursor: pointer;
-    color: white;
+    color: var(--text-muted);
     transition: all 0.3s ease;
     position: relative;
+    box-shadow: none;
+    transform: none;
 }
 
-/* HOVER EFFECT */
-.tab-buttons button:hover {
-    background: linear-gradient(135deg, #e86222, #ff7a3c) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(232, 98, 34, 0.35);
+.tab-buttons button:hover:not(.active) {
+    background: var(--site-surface) !important;
+    color: var(--primary-text-color);
+    border-color: var(--site-border);
 }
 
 /* ACTIVE TAB */
 .tab-buttons button.active {
+    background: linear-gradient(135deg, #000000, #e86222) !important;
+    border-color: transparent;
+    color: #fff !important;
+    box-shadow: 0 8px 22px rgba(232, 98, 34, 0.35);
+    transform: translateY(-1px);
+}
+
+.tab-buttons button.active:hover {
     background: linear-gradient(135deg, #e86222, #ff7a3c) !important;
-    color: #fff;
-    box-shadow: 0 8px 20px rgba(15, 45, 74, 0.25);
-    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(232, 98, 34, 0.45);
 }
 
 
@@ -679,14 +762,15 @@ input[type=number]::-webkit-outer-spin-button {
     animation: fadeInTab 0.4s ease;
     font-size: 15px;
     line-height: 1.9;
-    color: #444;
+    color: var(--text-muted);
 }
 
 /* CONTENT HEADINGS */
 .tab-content-modern h2,
 .tab-content-modern h3 {
     margin-top: 20px;
-    font-weight: 400;
+    font-weight: 500;
+    color: var(--primary-text-color);
 }
 
 /* CONTENT LIST */
@@ -698,12 +782,47 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 8px;
 }
 
+/* CMS HTML inside tabs */
+.detailspage .full-description {
+    color: var(--text-muted);
+}
+
+.detailspage .full-description h1,
+.detailspage .full-description h2,
+.detailspage .full-description h3,
+.detailspage .full-description h4,
+.detailspage .full-description h5,
+.detailspage .full-description h6 {
+    color: var(--primary-text-color);
+}
+
+.detailspage .full-description a {
+    color: var(--primary-icon-color);
+}
+
+.detailspage .full-description table {
+    border-color: var(--site-border);
+}
+
+.detailspage .MuiRating-iconEmpty {
+    color: var(--site-border-strong) !important;
+}
+
+/* react-medium-image-zoom: library uses a solid white overlay */
+[data-rmiz-modal-overlay="visible"] {
+    background-color: rgba(13, 17, 23, 0.94) !important;
+}
+
+[data-rmiz-modal-overlay="hidden"] {
+    background-color: rgba(13, 17, 23, 0) !important;
+}
+
 /* ================= PRODUCT DESCRIPTION ================= */
 
 .description-content {
     font-size: 15px;
     line-height: 1.8;
-    color: #444;
+    color: var(--text-muted);
 }
 
 .description-content h3 {
@@ -711,7 +830,7 @@ input[type=number]::-webkit-outer-spin-button {
     margin-bottom: 10px;
     font-size: 25px;
     font-weight: 400;
-    color: #0f2d4a;
+    color: var(--primary-text-color);
     position: relative;
 }
 
@@ -719,7 +838,7 @@ input[type=number]::-webkit-outer-spin-button {
     content: "";
     width: 40px;
     height: 2px;
-    background: #0f2d4a;
+    background: var(--primary-icon-color);
     position: absolute;
     bottom: -6px;
     left: 0;
@@ -727,7 +846,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .description-content p {
     margin-bottom: 15px;
-    color: #555;
+    color: var(--text-muted);
 }
 
 /* Stylish Circle Check Icon */
@@ -758,13 +877,13 @@ input[type=number]::-webkit-outer-spin-button {
     align-items: center;
     margin-bottom: 10px;
     font-size: 14px;
-    color: #444;
+    color: var(--text-muted);
 }
 
 .ingredient-icon {
     width: 22px;
     height: 22px;
-    background: linear-gradient(135deg, #0f2d4a, #1f7a8c);
+    background: linear-gradient(135deg, var(--color-navy-deep), var(--primary-icon-color));
     color: #fff;
     font-size: 12px;
     font-weight: bold;
@@ -790,15 +909,15 @@ input[type=number]::-webkit-outer-spin-button {
 .ingredients-preview {
     margin-top: 20px;
     padding: 15px;
-    background: #fafafa;
+    background: var(--site-surface-2);
     border-radius: 12px;
-    border: 1px solid #eee;
+    border: 1px solid var(--site-border);
 }
 
 .ingredients-preview h6 {
     font-weight: 600;
     margin-bottom: 10px;
-    color: #0f2d4a;
+    color: var(--primary-text-color);
 }
 
 /* Limit height (important UX) */
@@ -814,7 +933,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .ingredients-content::-webkit-scrollbar-thumb {
-    background: #ccc;
+    background: var(--site-border-strong);
     border-radius: 10px;
 }
 
@@ -828,14 +947,9 @@ input[type=number]::-webkit-outer-spin-button {
     align-items: center;
     margin-bottom: 8px;
     font-size: 13px;
+    color: var(--text-muted);
 }
 
-.buysection{
-    display: flex;
-    justify-content: center;
-}
-
-/* ================= SIMILAR PRODUCTS ================= */
 
 .similar-products {
     margin-top: 80px;
@@ -851,11 +965,11 @@ input[type=number]::-webkit-outer-spin-button {
 .similar-header h3 {
     font-size: 28px;
     font-weight: 600;
-    color: #0f2d4a;
+    color: var(--primary-text-color);
 }
 
 .similar-header p {
-    color: #777;
+    color: var(--text-muted);
     font-size: 14px;
 }
 
@@ -871,17 +985,17 @@ input[type=number]::-webkit-outer-spin-button {
 
 .similar-card {
     display: block;
-    background: #fff;
+    background: var(--site-surface);
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid #eee;
+    border: 1px solid var(--site-border);
     transition: all .35s ease;
     text-decoration: none;
 }
 
 .similar-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--site-shadow-lg);
 }
 
 /* IMAGE */
@@ -893,7 +1007,7 @@ input[type=number]::-webkit-outer-spin-button {
     align-items: center;
     justify-content: center;
     padding: 15px;
-    background: linear-gradient(180deg, #fafafa, #fff);
+    background: linear-gradient(180deg, var(--site-surface-2), var(--site-surface));
 }
 
 .similar-img-wrapper img {
@@ -929,7 +1043,7 @@ input[type=number]::-webkit-outer-spin-button {
 .similar-name {
     font-size: 14px;
     font-weight: 500;
-    color: #333;
+    color: var(--primary-text-color);
     height: 40px;
     overflow: hidden;
 }
@@ -952,7 +1066,7 @@ input[type=number]::-webkit-outer-spin-button {
 .similar-old {
     font-size: 13px;
     text-decoration: line-through;
-    color: #999;
+    color: var(--text-muted);
 }
 
 /* MOBILE */

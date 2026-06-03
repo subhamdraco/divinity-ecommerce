@@ -1,12 +1,39 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Quicksand:wght@300..700&display=swap');
- */
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap'); */
 
 :root {
-  --primary-icon-color : #e86222;
-  --primary-text-color: #052a4a;
-  --hover-color: 	  #052a4a;
+  /* Brand */
+  --primary-icon-color: #e86222;
   --color-light-g: #ff7a3c;
+  --color-navy-deep: #052a4a;
+
+  /* Dark theme — text & surfaces */
+  --primary-text-color: #e6edf3;
+  --text-muted: #8b949e;
+  --text-inverse: #0d1117;
+  --hover-color: #ff9a5c;
+
+  --site-bg: #0d1117;
+  --site-bg-elevated: #111820;
+  --site-surface: #161b22;
+  --site-surface-2: #21262d;
+  --site-border: rgba(255, 255, 255, 0.1);
+  --site-border-strong: rgba(255, 255, 255, 0.16);
+
+  --site-radius: 14px;
+  --site-radius-sm: 10px;
+  --site-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  --site-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.55);
+  --site-max: 1440px;
+  --header-h: 4rem;
+
+  /*
+   * Logo is raster-in-SVG (embedded PNGs) — not path fills. Default filter adds a
+   * light outer glow so black wordmark (“Divinity”) reads on dark headers. Tweak or
+   * set to `none` if you replace the asset with a light / vector logo.
+   * Stronger option (inverts all logo colors): invert(1);
+   */
+  --logo-filter: brightness(1.12) contrast(1.06) drop-shadow(0 0 1px #e6edf3)
+    drop-shadow(0 0 2px #e6edf3) drop-shadow(0 0 4px rgba(13, 17, 23, 0.92));
 }
 
 * {
@@ -15,91 +42,240 @@
   box-sizing: border-box;
 }
 
-.btn-g{
-  background: linear-gradient(135deg, #000000, #e86222) !important;
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+  background-color: var(--site-bg);
+  /* Avoid 100vw / scrollbar mismatch causing horizontal jump while scrolling */
+  scrollbar-gutter: stable;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+.btn-g {
+  background: linear-gradient(135deg, #1a0a06, #e86222) !important;
   color: #fff !important;
   padding: 8px 18px !important;
-  border-radius: 6px !important;
+  border-radius: 8px !important;
   text-transform: capitalize !important;
   font-weight: 600;
   border: none;
   transition: all 0.3s ease-in-out;
 }
 
-.btn-g:hover{
+.btn-g:hover {
   background: linear-gradient(135deg, #e86222, #ff7a3c) !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(232,98,34,0.35);
+  box-shadow: 0 6px 18px rgba(232, 98, 34, 0.45);
 }
 
-::placeholder{
-
+::placeholder {
   font-size: 0.8rem;
+  color: var(--text-muted);
 }
-
-/* h1, h2, h3, h4, p{
-  font-family: "Playfair Display", serif !important;
-} */
 
 body {
-  color: var(--primary-text-color);
-  font-family: "Inter", sans-serif;
+  color: var(--primary-text-color) !important;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
   overflow-x: hidden;
+  background: var(--site-bg) !important;
+  line-height: 1.5;
 }
 
+/* Bootstrap / MUI surfaces on dark */
+.card {
+  background-color: var(--site-surface) !important;
+  color: var(--primary-text-color) !important;
+  border-color: var(--site-border) !important;
+}
+
+.card-header {
+  background-color: var(--site-surface-2) !important;
+  color: var(--primary-text-color) !important;
+  border-bottom-color: var(--site-border) !important;
+}
+
+.list-group-item {
+  background-color: var(--site-surface) !important;
+  color: var(--primary-text-color) !important;
+  border-color: var(--site-border) !important;
+}
+
+.modal-content {
+  background-color: var(--site-surface) !important;
+  color: var(--primary-text-color) !important;
+  border: 1px solid var(--site-border) !important;
+}
+
+.modal-header,
+.modal-footer {
+  border-color: var(--site-border) !important;
+}
+
+.form-control,
+.form-select {
+  background-color: var(--site-surface-2) !important;
+  color: var(--primary-text-color) !important;
+  border-color: var(--site-border) !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-icon-color);
+  box-shadow: 0 0 0 0.15rem rgba(232, 98, 34, 0.25);
+}
+
+/* Fluid horizontal padding */
 .container-fluid {
-  padding: 0px 45px;
+  width: 100%;
+  max-width: var(--site-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(12px, 4vw, 45px);
+  padding-right: clamp(12px, 4vw, 45px);
 }
 
-.cursor{
-   cursor: pointer;
+/* Break out of site-main width — full viewport chrome (header, nav, compact bar) */
+.site-fullbleed {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.site-fullbleed .container-fluid {
+  max-width: none;
+  width: 100%;
+}
+
+.site-main {
+  display: block;
+  min-height: 50vh;
+  background: var(--site-bg);
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 .bg-g {
   background: linear-gradient(to right, #000000 0%, #3a1a0c 50%, #e86222 100%) !important;
 }
 
-.text-g{
+.text-g {
   color: var(--primary-icon-color);
 }
 
-.bg-navy{
-  background-color: var(--primary-text-color) !important;
+.bg-navy {
+  background-color: var(--color-navy-deep) !important;
+  color: var(--primary-text-color) !important;
 }
 
-.text-orange{
-  color: linear-gradient(135deg, #e86222, #ff7a3c) !important;
+.text-orange {
+  color: var(--primary-icon-color) !important;
 }
 
-.hd{
-  font-size: 2rem !important;
+.hd {
+  font-size: clamp(1.35rem, 4vw, 2rem) !important;
   font-weight: 600 !important;
-  padding-left: 1rem;
+  padding-left: 0;
+  color: var(--primary-text-color) !important;
 }
 
-/* .monserrat{
-  font-family: "Montserrat", serif !important;
-}
-
-.playfair{
-  font-family: "Playfair Display", serif !important;
-}
-.quicksand{
-  font-family: "Quicksand", serif !important;
-} */
-
-.transition{
+.transition {
   transition: all 0.3s ease-in-out;
 }
 
-.h-330px{
+.h-330px {
   height: 300px !important;
 }
 
-.bg-red{
-  color: red !important;
+.bg-red {
+  color: #f85149 !important;
 }
 
-a , a svg{
+a,
+a svg {
   text-decoration: none !important;
+  color: inherit;
+}
+
+/* MUI: default text buttons on dark bar */
+.MuiButton-text {
+  color: inherit;
+}
+
+/* Pagination on dark */
+.MuiPaginationItem-root {
+  color: var(--primary-text-color) !important;
+}
+
+.MuiPaginationItem-root.Mui-selected {
+  background-color: var(--primary-icon-color) !important;
+  color: #fff !important;
+}
+
+/* MUI inputs, labels, menus on dark */
+.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: var(--site-border) !important;
+}
+
+.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--site-border-strong) !important;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-icon-color) !important;
+}
+
+.MuiInputBase-input,
+.MuiOutlinedInput-input {
+  color: var(--primary-text-color) !important;
+}
+
+.MuiInputLabel-root {
+  color: var(--text-muted) !important;
+}
+
+.MuiInputLabel-root.Mui-focused {
+  color: var(--primary-icon-color) !important;
+}
+
+.MuiPaper-root.MuiMenu-paper,
+.MuiPopover-paper {
+  background-color: var(--site-surface) !important;
+  color: var(--primary-text-color) !important;
+  border: 1px solid var(--site-border);
+}
+
+.MuiMenuItem-root {
+  color: var(--primary-text-color) !important;
+}
+
+.MuiMenuItem-root:hover {
+  background-color: var(--site-surface-2) !important;
+}
+
+@media (max-width: 576px) {
+  .MuiButton-root {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

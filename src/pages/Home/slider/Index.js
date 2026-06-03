@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 import './Index.css';
-import Button from '@mui/material/Button';
 
 const HomeSlider = () => {
     var settings = {
@@ -18,8 +17,8 @@ const HomeSlider = () => {
         speed: 500
     };
     return (
-        <section className="homeslider">
-            <div className="container-fluid position-relative">
+        <section className="homeslider site-fullbleed">
+            <div className="homeslider-inner position-relative">
                 <Link to="https://divinityimpex.com/products">
                 <Slider {...settings} className="homeslider-main">
                     {/* <Link to="https://divinityimpex.com/product/combo">
@@ -64,7 +63,7 @@ const HomeSlider = () => {
                         <picture> 
                             <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-05.png" media="(max-width: 992px)" />
                             <img src="https://divinityimpex.com/images/hero/hero-4.jpeg" alt="slider-2" className="w-100 sliderimage-2" />
-                        </picture>``
+                        </picture>
                     </div>
                     
                 </Slider>
