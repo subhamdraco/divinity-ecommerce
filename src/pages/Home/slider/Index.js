@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 import './Index.css';
-import HomesliderImg1 from '../../../assets/images/slider-1.jpeg';
-import HomesliderImg2 from '../../../assets/images/slider-2.jpeg'
 import Button from '@mui/material/Button';
 
 const HomeSlider = () => {
@@ -24,24 +22,26 @@ const HomeSlider = () => {
             <div className="container-fluid position-relative">
                 <Link to="https://divinityimpex.com/products">
                 <Slider {...settings} className="homeslider-main">
-                    {/* <div className="item">
+                    {/* <Link to="https://divinityimpex.com/product/combo">
+                    <div className="item">
                         <picture>
-                            <source srcset="https://divinityimpex.com/images/combo-banner-1.jpeg" media="(max-width: 992px)" />
-                            <img src={HomesliderImg1} alt="slider-1" className="sliderimage-1" />
+                            <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-banner-250.jpg" media="(max-width: 992px)" />
+                            <img src="https://divinityimpex.com/images/hero/hero-banner-eid.jpg" alt="slider-1" className="sliderimage-1" />
                         </picture>
                     </div>
-                    <div className="item">
+                    </Link> */}
+                    {/* <div className="item">
                         <picture>
                             <source srcset="https://divinityimpex.com/images/combo-banner-2.jpeg" media="(max-width: 992px)" />
                             <img src={HomesliderImg2} alt="slider-2" className="sliderimage-2" />
                         </picture>
                     </div> */}
-                    <div className="item">
+                    {/* <div className="item">
                         <picture> 
                             <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-01.png" media="(max-width: 992px)" />
                             <img src="https://divinityimpex.com/images/hero/eid-hero-3.jpeg" alt="slider-2" className="w-100 sliderimage-2" />
                         </picture>
-                    </div>
+                    </div> */}
                     <div className="item">
                         <picture>
                             <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-02.png" media="(max-width: 992px)" />
@@ -50,7 +50,7 @@ const HomeSlider = () => {
                     </div>
                     <div className="item">
                         <picture>
-                            <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-03.png" media="(max-width: 992px)" />
+                            <source srcset="https://divinityimpex.com/images/hero/mobile/mobile-02.png" media="(max-width: 992px)" />
                             <img src="https://divinityimpex.com/images/hero/hero-2.jpeg" alt="slider-2" className="w-100 sliderimage-2" />
                         </picture>
                     </div>

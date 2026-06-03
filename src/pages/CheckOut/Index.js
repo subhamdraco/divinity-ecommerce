@@ -21,7 +21,8 @@ const getDeliveryOptions = () => {
     key: "partner_next_day",
     label: "Next Day Delivery",
     desc: "Delivered tomorrow before 23:00",
-    price: 22
+    price: 0
+    // price: 22
   });
 
   // 4 Hours: 08:00 – 18:00
@@ -30,7 +31,8 @@ const getDeliveryOptions = () => {
       key: "partner_4hr",
       label: "4 Hours Delivery",
       desc: "Delivered within 4 hours ( After 6pm will receive a 4hr deliver at 12pm the next day.)",
-      price: 35
+      price: 0
+      // price: 35
     });
   }
 
@@ -40,7 +42,8 @@ const getDeliveryOptions = () => {
       key: "partner_same_day",
       label: "Same Day Delivery",
       desc: "Delivered today before 23:00",
-      price: 22
+      price: 0
+      // price: 22
     });
   }
 

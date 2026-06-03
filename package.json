@@ -15,6 +15,7 @@
     "axios": "^1.13.2",
     "bootstrap": "^5.3.8",
     "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.40.0",
     "inner-image-zoom": "^1.0.1",
     "react": "^19.2.0",
     "react-bootstrap": "^2.10.10",

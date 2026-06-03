@@ -34,7 +34,7 @@ const Combo = () => {
   return (
     <section className="combo-page">
       <div className="container">
-        <h2 className="text-center mb-4 mt-4">🔥 Combo Offers</h2>
+        <h2 className="text-center mb-4 mt-4">🔥 Offers</h2>
 
         {loading ? (
           <FadeLoader />

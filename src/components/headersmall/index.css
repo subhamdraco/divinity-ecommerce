@@ -1,6 +1,8 @@
 .headersmall {
     width: 100%;
     height: auto;
+    /* background-color: #000000; */
+    color: white;
 }
 
 .headersmall .row .col-sm-4 {
@@ -47,7 +49,7 @@
 }
 
 .headersmall .row>[class*="col-"]:last-child ul {
-    margin-left: 80% !important;
+    margin-left: 0% !important;
 }
 
 .headersmall .row>[class*="col-"]:first-child {
@@ -56,6 +58,7 @@
 
 .hamburgermenu {
     cursor: pointer;
+    color: #fff;
 }
 
 .dash{

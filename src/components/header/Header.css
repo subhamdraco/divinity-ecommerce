@@ -13,7 +13,7 @@ header {
 } */
  .headerwrapper {
     transition: all 0.3s ease-in-out;
-    background: #fff;
+    /* background: #000; */
  }
 
  .headerwrapper.fixed{
