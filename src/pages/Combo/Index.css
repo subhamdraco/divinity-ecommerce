@@ -47,7 +47,7 @@
 
 .price {
   font-weight: 600;
-  color: #000;
+  color: var(--primary-text-color);
 }
 
 .old-price {
@@ -60,7 +60,7 @@
   display: inline-block;
   margin-top: 10px;
   padding: 6px 12px;
-  background: black;
+  background: linear-gradient(135deg, #052a4a, #e86222);
   color: white;
   border-radius: 6px;
   text-decoration: none;

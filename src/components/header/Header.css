@@ -5,6 +5,19 @@ header {
     padding: 5px 0px;
     overflow: visible;
 }
+
+/* Entire toolbar (row + slot) stacks above .site-navbar so the search dropdown is not covered */
+header > .container-fluid {
+    position: relative;
+    z-index: 5;
+}
+
+/* Reserve space so the nav’s negative margin overlaps here, not the logo/search row */
+.header-nav-slot {
+    flex-shrink: 0;
+    height: 18px;
+    pointer-events: none;
+}
 /* .headerwrapper{
     position: sticky;
     top: 0px;
@@ -18,6 +31,8 @@ header {
     overflow: visible;
     background: var(--site-bg-elevated);
     border-bottom: 1px solid var(--site-border);
+    position: relative;
+    z-index: 20;
  }
 
  .headerwrapper.fixed{
@@ -61,22 +76,27 @@ header .countrywrapper .selectdrop .openselect .arrow{
     display: block;
     height: auto;
     width: auto;
-    max-width: 100%;
-    /* Wide wordmark: column width was the real cap — use full logowrapper + tall cap */
-    max-height: clamp(80px, 12vw, 128px);
+    max-width: min(280px, 100%);
+    /* Wordmark — modest cap; between previous small and original */
+    max-height: clamp(74px, 11vw, 116px);
     object-fit: contain;
     object-position: left center;
     padding-bottom: 4px;
     filter: var(--logo-filter, none);
+    flex-shrink: 0;
 }
 
 header .headersearch {
     width: 100%;
+    max-width: 100%;
     height: 45px;
     border: 1px solid var(--site-border);
     background: var(--site-surface-2);
     padding: 10px 20px;
     border-radius: 0.35rem;
+    position: relative;
+    z-index: 0;
+    box-sizing: border-box;
 }
 
 header .headersearch .selectdrop{
@@ -273,7 +293,7 @@ header .headertabs li .accountdropdownmenu li button:hover svg{
   border: 1px solid var(--site-border);
   border-radius: 12px;
   box-shadow: var(--site-shadow-lg);
-  z-index: 999;
+  z-index: 12000;
   max-height: 360px;
   overflow-y: auto;
 }
@@ -320,6 +340,25 @@ header .headertabs li .accountdropdownmenu li button:hover svg{
     align-items: center;
     justify-content: flex-start;
     flex-shrink: 0;
+    position: relative;
+    z-index: 0;
+    overflow: visible;
+    min-width: 0;
+}
+
+header > .container-fluid > .row > .logowrapper {
+    margin-left: calc(-1 * clamp(12px, 4vw, 45px));
+}
+
+.searchwrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 0;
+    overflow: visible;
+    min-width: 0;
 }
 
 /* .headersmallwrapper{
@@ -330,6 +369,12 @@ header .headertabs li .accountdropdownmenu li button:hover svg{
     display: flex;
     align-items: center;
 } */
+
+@media (max-width: 767.98px) {
+  header .logo {
+    object-position: left center;
+  }
+}
 
 @media(max-width: 1228px) {
     .headersmall{
@@ -345,8 +390,8 @@ header .headertabs li .accountdropdownmenu li button:hover svg{
 /* Desktop header refinements (layout only) */
 @media (min-width: 1229px) and (max-width: 1400px) {
   header .logo {
-    max-width: 100%;
-    max-height: clamp(72px, 11vw, 112px);
+    max-width: min(260px, 100%);
+    max-height: clamp(68px, 10vw, 104px);
   }
 
   header .headertabs {

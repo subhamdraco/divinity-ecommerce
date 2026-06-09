@@ -63,9 +63,18 @@ const HeaderSmall = () => {
                                 <img src={logo} alt="logo" />
                             </div>
                             <div className="col-sm-6 d-flex justify-content-end align-items-center">
-                                <Link to={"/cart"} >
-                                    <span><ShoppingCartOutlinedIcon className="itemicon me-0" />
-                                        <span className="badge rounded-circle">{cart ? cart.length : 0}</span>
+                                <Link to="/cart" className="headersmall-cart-link">
+                                    <span className="headersmall-cart-inner">
+                                        <span className="headersmall-cart-iconWrap">
+                                            <ShoppingCartOutlinedIcon
+                                                className="itemicon"
+                                                aria-hidden
+                                            />
+                                            <span className="headersmall-cart-badge badge rounded-circle">
+                                                {cart ? cart.length : 0}
+                                            </span>
+                                        </span>
+                                        <span className="headersmall-cart-label">Cart</span>
                                     </span>
                                 </Link>
                                 <MenuOutlinedIcon className="hamburgermenu" onClick={() => setisOpenDropdown(!isOpenDropdown)} />

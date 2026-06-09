@@ -291,7 +291,7 @@ textarea {
 .checkout-btn {
   width: 100%;
   padding: 0.8rem;
-  background: linear-gradient(135deg, #000000, #e86222) !important;
+  background: linear-gradient(135deg, #052a4a, #e86222) !important;
   border: none;
   color: #fff;
   font-weight: 600;
@@ -318,7 +318,7 @@ textarea {
 }
 
 .btn-primary-gold {
-  background: linear-gradient(135deg, #000000, #e86222);
+  background: linear-gradient(135deg, #052a4a, #e86222);
   color: #fff;
   padding: 0.7rem 1.5rem;
   border-radius: 0.5rem;

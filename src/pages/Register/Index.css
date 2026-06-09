@@ -5,7 +5,7 @@
   --navy: #052a4a;
   --navy-dark: #031c30;
   --gold-soft: #ff7a3c;
-  --bg-light: #0d1117;
+  --bg-light: #f4f6f8;
 }
 
 * {
@@ -16,7 +16,7 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background: var(--bg-light);
-  color: #e6edf3;
+  color: #0f172a;
 }
 
 /* ---------- WRAPPER ---------- */
@@ -83,12 +83,12 @@ body {
 .auth-card {
   width: 100%;
   max-width: 420px;
-  background: #161b22;
-  border: 1px solid rgba(255,255,255,0.1);
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.1);
   padding: 3.5rem;
   border-radius: 20px;
-  box-shadow: 0 40px 120px rgba(0,0,0,.5);
-  color: #e6edf3;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.1);
+  color: #0f172a;
 }
 
 /* ---------- HEAD ---------- */
@@ -101,7 +101,7 @@ body {
 
 .auth-card p {
   margin: .6rem 0 2.6rem;
-  color: #8b949e;
+  color: #64748b;
 }
 
 /* ---------- INPUT ---------- */
@@ -115,10 +115,10 @@ body {
   width: 100%;
   padding: 16px 14px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(15, 23, 42, 0.12);
   font-size: 1rem;
-  color: #e6edf3;
-  background: #21262d;
+  color: #0f172a;
+  background: #f8fafc;
 }
 
 .field input:focus {
@@ -131,9 +131,9 @@ body {
   left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  background: #161b22;
+  background: #ffffff;
   padding: 0 6px;
-  color: #8b949e;
+  color: #64748b;
   pointer-events: none;
   transition: .3s;
 }

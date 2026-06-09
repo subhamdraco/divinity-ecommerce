@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import aboutHeroBanner from "../../assets/images/visionary/about-hero-context.jpg";
 import aboutVisionaryImage from "../../assets/images/visionary/about-image.jpg";
+import aboutAyanangshuImage from "../../assets/images/visionary/about-ayanangshu-chowdhury.png";
 import brandCardReshuNaomi from "../../assets/images/visionary/brand-reshu-naomi.jpg";
 import brandCardBonjourEspecial from "../../assets/images/visionary/brand-bonjour-especial.jpg";
 import brandCardTitanRuvo from "../../assets/images/visionary/brand-titan-ruvo.jpg";
@@ -341,28 +342,175 @@ export default function About() {
           </div>
         </section>
 
-        <section className="about-page__section">
-          <div className="about-page__container">
-            <h2 className="about-page__title">Visionary leadership</h2>
-            <div className="about-page__leader">
-              <div className="about-page__leader-media">
+        <section
+          className="about-page__section about-page__section--vision"
+          aria-labelledby="about-vision-title"
+        >
+          <div className="about-page__container about-page__container--vision">
+            <header className="about-page__vision-header">
+              <p className="about-page__vision-eyebrow">People behind the vision</p>
+              <h2 id="about-vision-title" className="about-page__title">
+                Visionary leadership
+              </h2>
+              <p className="about-page__vision-lead">
+                Founders, advisors, and strategists shaping how Divinity Impex serves partners
+                and communities worldwide.
+              </p>
+            </header>
+
+            <article className="about-page__vision-spotlight">
+              <div className="about-page__vision-spotlight-media">
                 <img
                   src={aboutVisionaryImage}
-                  alt="Visionary leadership at Divinity Impex"
+                  alt="Rizwan Adatia, founder and visionary behind Divinity Impex"
                   loading="lazy"
                 />
+                <div className="about-page__vision-spotlight-media-cap" aria-hidden="true">
+                  <span className="about-page__vision-spotlight-media-cap-line" />
+                </div>
               </div>
-              <div className="about-page__leader-body">
-                <h3 className="about-page__leader-name">Rizwan Adatia</h3>
-                <p className="about-page__prose">
-                  Under the leadership of Rizwan Adatia, Divinity Impex continues to
-                  expand its global influence through innovation, ethical business
-                  practices and purpose-driven success.
-                </p>
+              <div className="about-page__vision-spotlight-body">
+                <div className="about-page__vision-spotlight-head">
+                  <h3 className="about-page__vision-name">Rizwan Adatia</h3>
+                  <ul className="about-page__vision-tags" aria-label="Roles and titles">
+                    <li>Chairman – COGEF Group</li>
+                    <li>Chairman – RAF Global</li>
+                    <li>Vision Exports UAE</li>
+                    <li>Motivational speaker</li>
+                  </ul>
+                </div>
+                <div className="about-page__vision-bio">
+                  <p>
+                    The man behind us, the founder of our company and our Managing Director.
+                  </p>
+                  <p>
+                    He is a visionary entrepreneur, philanthropist, and advocate for positive
+                    change — a motivational speaker and businessman who shares his life
+                    experience and helps others grow through positive influence.
+                  </p>
+                  <p>
+                    From humble beginnings in Porbandar, Gujarat to a thriving network of
+                    businesses across 10+ African countries — a story worth telling. He is
+                    also the Director of{" "}
+                    <a
+                      href="https://www.cogefgroup.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="about-page__vision-inline-link"
+                    >
+                      COGEF Group
+                    </a>
+                    .
+                  </p>
+                  <p>
+                    His vision enabled robust ecosystems irrespective of challenges. His
+                    personal philanthropy inspired{" "}
+                    <a
+                      href="https://rafglobal.org/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="about-page__vision-inline-link"
+                    >
+                      RAF Global
+                    </a>
+                    , an international NGO supporting communities across India and Africa in
+                    food, health, and education.
+                  </p>
+                  <p>
+                    He is co-owner of Vision Exports &amp;{" "}
+                    <a
+                      href="https://www.ayulinternational.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="about-page__vision-inline-link"
+                    >
+                      Ayul International
+                    </a>{" "}
+                    in the UAE, and owner of{" "}
+                    <a
+                      href="https://www.divinityimpex.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="about-page__vision-inline-link"
+                    >
+                      Divinity Impex
+                    </a>{" "}
+                    in the UAE. He leads a team of more than 3,000+ professionals.
+                  </p>
+                </div>
+                <div className="about-page__vision-actions">
+                  <span className="about-page__vision-actions-label">Official links</span>
+                  <div className="about-page__vision-actions-row">
+                    <a
+                      href="https://www.rizwanadatia.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="about-page__vision-pill"
+                    >
+                      rizwanadatia.com
+                    </a>
+                    <a
+                      href="https://www.facebook.com/iamrizwanadatia"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="about-page__vision-pill about-page__vision-pill--ghost"
+                    >
+                      Facebook — view more
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-            <br/>
-            <p>Beyond business growth, the company remains focused on creating meaningful value for communities, partners, and consumers worldwide.</p>
+            </article>
+
+            <article className="about-page__vision-spotlight about-page__vision-spotlight--follow">
+              <div className="about-page__vision-spotlight-media">
+                <img
+                  src={aboutAyanangshuImage}
+                  alt="Ayanangshu A. Chowdhury, strategy consultant at Divinity Impex LLC"
+                  loading="lazy"
+                />
+                <div className="about-page__vision-spotlight-media-cap" aria-hidden="true">
+                  <span className="about-page__vision-spotlight-media-cap-line" />
+                </div>
+              </div>
+              <div className="about-page__vision-spotlight-body">
+                <div className="about-page__vision-spotlight-head">
+                  <h3 className="about-page__vision-name">Ayanangshu A. Chowdhury</h3>
+                  <ul className="about-page__vision-tags" aria-label="Roles and titles">
+                    <li>Strategy consultant</li>
+                    <li>Divinity Impex LLC</li>
+                    <li>FMCG &amp; brand strategy</li>
+                  </ul>
+                </div>
+                <div className="about-page__vision-bio">
+                  <p>
+                    The strategy consultant at Divinity Impex LLC, with extensive experience
+                    working alongside leading FMCG companies. He brings a strong strategic
+                    mindset backed by practical industry exposure, helping brands navigate
+                    competitive markets and accelerate sustainable growth.
+                  </p>
+                  <p>
+                    With expertise in FMCG brand strategy, market expansion, portfolio
+                    planning, and go-to-market execution, he plays a critical role in shaping
+                    business direction and long-term growth strategies at Divinity Impex. His
+                    approach combines market intelligence, consumer insights, and data-driven
+                    analysis to build scalable and resilient brands.
+                  </p>
+                  <p>
+                    At Divinity Impex LLC, he contributes to strategic planning, brand
+                    positioning, pricing strategy, and channel development, ensuring alignment
+                    between business objectives and market opportunities. He supports the
+                    company&apos;s vision of building trusted, high-performance consumer brands
+                    across regional and international markets.
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <p className="about-page__vision-footnote">
+              Beyond business growth, the company remains focused on creating meaningful value
+              for communities, partners, and consumers worldwide.
+            </p>
           </div>
         </section>
 

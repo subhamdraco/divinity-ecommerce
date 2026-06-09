@@ -119,7 +119,7 @@
 .checkout-btn {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #000000, #e86222);
+  background: linear-gradient(135deg, #052a4a, #e86222);
   color: #fff;
   border: none;
   font-size: 15px;
@@ -152,7 +152,7 @@
   display: inline-block;
   margin-top: 15px;
   padding: 12px 22px;
-  background: linear-gradient(135deg, #000000, #e86222);
+  background: linear-gradient(135deg, #052a4a, #e86222);
   color: #fff;
   text-decoration: none;
   border-radius: 8px;

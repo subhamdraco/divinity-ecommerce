@@ -113,13 +113,13 @@ const Header = (props) => {
             <div className="headerwrapper site-fullbleed" ref={headerRef}>
                 <header className="pb-0">
                     <div className="container-fluid">
-                        <div className="row">
-                            <div className="logowrapper col-sm-12 col-md-4 ps-2 d-flex align-items-center">
+                        <div className="row align-items-center align-items-md-end g-0">
+                            <div className="logowrapper col-sm-12 col-md-4 ps-0 d-flex align-items-center justify-content-start">
                                 <img src={logo} alt="logo" className="logo" />
                             </div>
                             {/* Header Starts */}
-                            <div className="col-sm-12 col-md-4 d-flex align-items-center">
-                                <div className="headersearch d-flex align-items-center">
+                            <div className="searchwrapper col-sm-12 col-md-4 px-2 d-flex align-items-center justify-content-center justify-content-md-start">
+                                <div className="headersearch d-flex align-items-center w-100">
                                     {/* Dropdown */}
                                     <GridViewOutlinedIcon className="itemicon" />
                                     {/* <Select data={categories} placeholder={"All Categories"} icon={false} /> */}
@@ -212,6 +212,8 @@ const Header = (props) => {
                                 </div>
                             </div>
                         </div>
+                        {/* Catches .site-navbar negative margin so the bar does not cover logo/search */}
+                        <div className="header-nav-slot" aria-hidden="true" />
                     </div>
                     <Nav />
                 </header>

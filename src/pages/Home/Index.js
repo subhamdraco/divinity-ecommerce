@@ -91,7 +91,7 @@ const Home = () => {
 
             {/* /* ================= DAILY BEST SALES ================= */}
 
-            <section className="home-section light-bg fade-in">
+            <section className="home-section home-section--daily-best light-bg fade-in">
 
                 <div className="container-fluid">
 
@@ -101,22 +101,24 @@ const Home = () => {
 
                     <div className="section-inner">
 
-                        <div className="row align-items-stretch mt-4">
+                        <div className="row align-items-stretch mt-4 g-lg-4">
 
                             {/* LEFT BANNER */}
 
-                            <div className="col-lg-4 d-none d-lg-block">
+                            <div className="col-lg-4 d-none d-lg-block daily-best-banner-col">
                                 <div className="daily-banner">
                                     <img
                                         src={DailyBanner}
                                         alt="Daily Sale"
+                                        loading="lazy"
+                                        decoding="async"
                                     />
                                 </div>
                             </div>
 
                             {/* PRODUCT SLIDER */}
 
-                            <div className="col-lg-8 col-12">
+                            <div className="col-lg-8 col-12 daily-best-slider-col">
 
                                 {loading ? (
                                     <FadeLoader />

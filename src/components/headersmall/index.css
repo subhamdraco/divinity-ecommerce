@@ -3,9 +3,10 @@
   width: 100%;
   position: relative;
   z-index: 10050;
-  background: linear-gradient(90deg, #052a4a 0%, #0a1f35 45%, #1a0a06 100%);
-  color: #fff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  background: var(--site-bg-elevated, #ffffff);
+  color: var(--primary-text-color, #0f172a);
+  border-bottom: 1px solid var(--site-border, rgba(15, 23, 42, 0.1));
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.06);
   padding: 0.55rem 0;
 }
 
@@ -27,12 +28,19 @@
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
+  /* Slight drop so the mark sits a touch lower in the bar */
+  padding-top: 0.5rem;
+}
+
+.headersmall .container-fluid > .row > .left-logo {
+  margin-left: calc(-1 * clamp(12px, 4vw, 45px) - (var(--bs-gutter-x, 1.5rem) / 2));
+  padding-left: 0 !important;
 }
 
 .left-logo img {
-  max-height: clamp(56px, 14vw, 84px);
+  max-height: clamp(52px, 12vw, 78px);
   width: auto;
-  max-width: min(320px, 72vw);
+  max-width: min(280px, 68vw);
   object-fit: contain;
   object-position: left center;
   filter: var(--logo-filter, none);
@@ -46,10 +54,70 @@
 }
 
 .headersmall .row > [class*="col-"]:last-child a {
+  color: var(--primary-text-color);
+}
+
+/* Cart row: [icon + overlapping count] + “Cart” — matches desktop-style treatment */
+.headersmall-cart-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex !important;
+  align-items: center;
+}
+
+.headersmall-cart-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.headersmall-cart-iconWrap {
   position: relative;
   display: inline-flex;
   align-items: center;
-  color: #fff;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.headersmall-cart-iconWrap .itemicon {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  margin: 0 !important;
+  line-height: 0 !important;
+}
+
+.headersmall-cart-iconWrap .itemicon svg {
+  display: block;
+}
+
+.headersmall-cart-badge {
+  position: absolute !important;
+  top: -14px;
+  right: -8px;
+  left: auto !important;
+  transform: none !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  width: auto;
+  padding: 0 4px !important;
+  margin: 0 !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+  border: 2px solid var(--site-bg-elevated, #fff);
+  box-sizing: content-box;
+}
+
+.headersmall-cart-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary-text-color, #0f172a);
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .headersmall .row > [class*="col-"]:last-child ul {
@@ -62,7 +130,7 @@
 
 .hamburgermenu {
   cursor: pointer;
-  color: #fff !important;
+  color: var(--primary-text-color) !important;
   font-size: 1.75rem !important;
   padding: 6px;
   border-radius: 10px;
@@ -70,11 +138,11 @@
 }
 
 .hamburgermenu:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(15, 23, 42, 0.06);
 }
 
 .headersmall .itemicon {
-  color: #fff !important;
+  color: var(--primary-icon-color) !important;
   font-size: 1.75rem !important;
 }
 
@@ -248,7 +316,7 @@
 }
 
 .hammenuitems ul li button a:hover {
-  background: linear-gradient(135deg, #000000, #e86222) !important;
+  background: linear-gradient(135deg, #052a4a, #e86222) !important;
   color: #fff !important;
   border-radius: 8px;
 }

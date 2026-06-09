@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   padding: clamp(16px, 4vw, 30px);
-  color: #e5e7eb;
+  color: var(--primary-text-color);
 }
 
 .contact-container {
