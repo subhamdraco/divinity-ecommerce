@@ -65,7 +65,7 @@ export default function About() {
           aria-hidden="true"
         />
         <div className="about-page__hero-overlay" aria-hidden="true" />
-        <div className="about-page__hero-inner container-fluid">
+        <div className="about-page__hero-inner">
           <p className="about-page__eyebrow">Global FMCG &amp; healthcare nutrition</p>
           <h1 id="about-hero-title" className="about-page__hero-title">
             Divinity Impex

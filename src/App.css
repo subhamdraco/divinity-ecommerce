@@ -141,6 +141,16 @@ body {
   margin-right: calc(50% - 50vw);
 }
 
+/* 100vw is often wider than the layout on mobile (scrollbar, iOS) → horizontal scroll / “broken” page */
+@media (max-width: 576px) {
+  .site-fullbleed {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
 .site-fullbleed .container-fluid {
   max-width: none;
   width: 100%;
@@ -150,6 +160,8 @@ body {
   display: block;
   min-height: 50vh;
   background: var(--site-bg);
+  max-width: 100%;
+  min-width: 0;
 }
 
 .cursor {

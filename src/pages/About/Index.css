@@ -20,6 +20,11 @@
   color: var(--about-text);
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   min-height: 100vh;
+  /* Long URLs / labels + body overflow-x: hidden — wrap instead of clipping */
+  overflow-wrap: anywhere;
+  word-break: normal;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .about-page *,
@@ -31,6 +36,7 @@
 .about-page__main {
   position: relative;
   z-index: 0;
+  padding-bottom: env(safe-area-inset-bottom, 0);
 }
 
 /* ——— Hero ——— */
@@ -42,34 +48,60 @@
   justify-content: center;
   text-align: center;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .about-page__hero-bg {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 120% 80% at 50% 100%, rgba(232, 98, 34, 0.22), transparent 55%),
+    radial-gradient(ellipse 120% 80% at 50% 100%, rgba(232, 98, 34, 0.12), transparent 55%),
     var(--about-hero-img) center / cover no-repeat;
-  transform: scale(1.02);
+  /* scale(1.02) caused subpixel overflow past hero on narrow viewports */
+  transform: none;
 }
 
 .about-page__hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    165deg,
-    rgba(255, 255, 255, 0.88) 0%,
-    rgba(248, 250, 252, 0.82) 45%,
-    rgba(241, 245, 249, 0.94) 100%
-  );
+  /* No floating card — soft center glow for dark text + photo visible toward edges */
+  background:
+    radial-gradient(
+      ellipse 105% 78% at 50% 44%,
+      rgba(255, 255, 255, 0.88) 0%,
+      rgba(255, 255, 255, 0.5) 42%,
+      rgba(255, 255, 255, 0.08) 62%,
+      transparent 72%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0) 32%,
+      rgba(255, 255, 255, 0) 68%,
+      rgba(15, 23, 42, 0.08) 100%
+    );
 }
 
 .about-page__hero-inner {
   position: relative;
   z-index: 1;
+  width: 100%;
   max-width: 52rem;
+  min-width: 0;
+  margin-inline: auto;
   padding-block: clamp(3rem, 8vw, 5rem);
   padding-inline: clamp(1rem, 4vw, 2.5rem);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .about-page__hero-overlay {
+    background: linear-gradient(
+      168deg,
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(248, 250, 252, 0.72) 45%,
+      rgba(241, 245, 249, 0.85) 100%
+    );
+  }
 }
 
 .about-page__eyebrow {
@@ -77,26 +109,31 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--about-brand-soft);
+  color: var(--about-brand);
   margin-bottom: 1rem;
 }
 
 .about-page__hero-title {
-  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-size: clamp(1.85rem, 9vw, 4rem);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--about-text);
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  text-shadow:
+    0 0 28px rgba(255, 255, 255, 0.85),
+    0 1px 2px rgba(255, 255, 255, 0.9);
+  overflow-wrap: anywhere;
 }
 
 .about-page__hero-lead {
   margin-top: 1.25rem;
   font-size: clamp(1.05rem, 2.2vw, 1.25rem);
   line-height: 1.65;
-  color: var(--about-muted);
+  color: var(--about-text);
+  opacity: 0.82;
   max-width: 36rem;
   margin-inline: auto;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.75);
 }
 
 .about-page__hero-actions {
@@ -157,6 +194,19 @@
   transform: translateY(-2px);
 }
 
+/* Hero: “Partner with us” — white label on photo */
+.about-page__hero .about-page__btn--ghost {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(15, 23, 42, 0.32);
+}
+
+.about-page__hero .about-page__btn--ghost:hover {
+  color: #fff;
+  background: rgba(232, 98, 34, 0.45);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
 .about-page__btn--lg {
   padding: 1rem 2rem;
   font-size: 1rem;
@@ -164,8 +214,11 @@
 
 /* ——— Sections ——— */
 .about-page__container {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: var(--about-max);
+  min-width: 0;
   margin-inline: auto;
   padding-inline: clamp(1rem, 4vw, 2.5rem);
   padding-block: clamp(3rem, 6vw, 4.5rem);
@@ -188,6 +241,7 @@
   content: "";
   position: absolute;
   inset: 0;
+  z-index: 0;
   background-image: radial-gradient(
     rgba(15, 23, 42, 0.05) 1px,
     transparent 1px
@@ -210,10 +264,12 @@
 .about-page__title {
   font-size: clamp(1.75rem, 3.5vw, 2.35rem);
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.25;
   text-align: center;
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
+  /* WebKit: background-clip text can clip descenders on tight line-heights */
+  padding-bottom: 0.08em;
   background: linear-gradient(135deg, #052a4a 0%, #0f172a 45%, var(--about-brand-soft) 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -241,7 +297,7 @@
   font-size: 1.05rem;
   line-height: 1.85;
   color: var(--about-muted);
-  max-width: 56rem;
+  max-width: min(56rem, 100%);
   margin-inline: auto;
   margin-bottom: 1.25rem;
 }
@@ -468,8 +524,8 @@
 /* ——— Pull quote ——— */
 .about-page__pullquote {
   margin: 2.5rem auto 0;
-  max-width: 48rem;
-  padding: 1.5rem 1.75rem;
+  max-width: min(48rem, 100%);
+  padding: 1.5rem 1.25rem;
   border-left: 4px solid var(--about-brand);
   border-radius: 0 var(--about-radius-sm) var(--about-radius-sm) 0;
   background: rgba(232, 98, 34, 0.08);
@@ -517,11 +573,14 @@
 
 .about-page__vision-spotlight {
   display: grid;
-  grid-template-columns: min(340px, 42vw) 1fr;
+  /* minmax(0, 1fr) lets the text column shrink on narrow widths instead of clipping */
+  grid-template-columns: min(340px, 42vw) minmax(0, 1fr);
   gap: 0;
   align-items: stretch;
-  max-width: 72rem;
+  width: 100%;
+  max-width: min(72rem, 100%);
   margin-inline: auto;
+  min-width: 0;
   border-radius: var(--about-radius);
   overflow: hidden;
   border: 1px solid var(--about-border);
@@ -539,10 +598,14 @@
   object-position: center 22%;
 }
 
+/* Leader spotlight photos — “Visionary leadership” */
 .about-page__vision-spotlight-media {
   position: relative;
-  min-height: min(420px, 55vh);
+  min-width: 0;
+  min-height: min(560px, 68vh);
   background: linear-gradient(160deg, var(--about-navy) 0%, #0f172a 100%);
+  overflow: hidden;
+  border-radius: inherit;
 }
 
 .about-page__vision-spotlight-media img {
@@ -591,6 +654,15 @@
   flex-direction: column;
   gap: 0;
   min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Column flex items default min-width:auto → can’t shrink → overflows card + clips */
+.about-page__vision-spotlight-body > * {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .about-page__vision-spotlight-head {
@@ -606,6 +678,7 @@
   letter-spacing: -0.02em;
   color: var(--about-text);
   line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .about-page__vision-tags {
@@ -615,6 +688,8 @@
   margin: 0;
   padding: 0;
   list-style: none;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .about-page__vision-tags li {
@@ -626,16 +701,20 @@
   background: rgba(232, 98, 34, 0.1);
   border: 1px solid rgba(232, 98, 34, 0.22);
   border-radius: 999px;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .about-page__vision-bio {
   font-size: 0.98rem;
   line-height: 1.78;
   color: var(--about-muted);
+  overflow-wrap: anywhere;
 }
 
 .about-page__vision-bio p {
   margin: 0 0 1rem;
+  max-width: 100%;
 }
 
 .about-page__vision-bio p:last-child {
@@ -652,6 +731,7 @@
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.15em;
+  overflow-wrap: anywhere;
 }
 
 .about-page__vision-inline-link:hover {
@@ -794,9 +874,46 @@
     grid-template-columns: 1fr;
   }
 
+  /* Stacked layout: taller portrait frame for leader photos */
   .about-page__vision-spotlight-media {
-    min-height: min(320px, 42vh);
-    aspect-ratio: 16 / 11;
+    min-height: min(400px, 55vh);
+    aspect-ratio: 3 / 4;
+  }
+}
+
+/* iPhone SE / narrow phones — avoid oversized hero, forced multi-column grids, overflow */
+@media (max-width: 420px) {
+  .about-page__hero {
+    min-height: min(70svh, 480px);
+    min-height: min(70vh, 480px);
+  }
+
+  .about-page__hero-inner {
+    padding-block: clamp(1.75rem, 6vw, 3rem);
+  }
+
+  .about-page__eyebrow {
+    letter-spacing: 0.14em;
+    font-size: 0.7rem;
+  }
+
+  .about-page__stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-page__grid,
+  .about-page__feature-list,
+  .about-page__pill-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-page__stat {
+    padding: 1.2rem 0.85rem;
+  }
+
+  .about-page__stat-label {
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
   }
 }
 
