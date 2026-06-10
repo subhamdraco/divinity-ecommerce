@@ -113,10 +113,21 @@ const categories = [
 
 const CategorySection = () => {
   return (
-    <section className="category-section-cat">
+    <section className="category-section-cat home-categories" aria-labelledby="home-categories-heading">
 
-      <div className="section-header-cat">
-        <h2 className="section-title section-cat-title">Shop By Category</h2>
+      <div className="section-header-cat home-categories__header">
+        <div className="home-categories__titles">
+          <p className="category-eyebrow">Browse the range</p>
+          <h2 id="home-categories-heading" className="section-title section-cat-title">
+            Shop by category
+          </h2>
+          <p className="home-categories__lede">
+            Jump straight into whey, creatine, pre-workout, and more — each category is curated for your stack.
+          </p>
+        </div>
+        <Link to="/products" className="home-categories__cta">
+          View all products
+        </Link>
       </div>
 
       <div className="category-grid-cat">

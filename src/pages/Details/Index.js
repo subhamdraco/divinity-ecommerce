@@ -4,9 +4,6 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import FadeLoader from "../../components/loader/Index";
 import Rating from "@mui/material/Rating";
 
-import InnerImageZoom from "react-inner-image-zoom";
-import "inner-image-zoom/lib/styles.min.css";
-
 import Zoom from "react-medium-image-zoom";
 import "react-medium-image-zoom/dist/styles.css";
 
@@ -17,9 +14,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import Button from "@mui/material/Button";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
-import { useAuth } from "../../components/context/AuthContext";
 import AddToCartButton from "../../components/addcartbutton/Index";
 
 const Details = () => {
@@ -35,7 +30,6 @@ const Details = () => {
   const [similarProducts, setSimilarProducts] = useState([]);
 
   const { id } = useParams();
-  const { user } = useAuth();
   const navigate = useNavigate();
 
   // 🔥 Handle Selection
@@ -48,7 +42,9 @@ const Details = () => {
 
   const generateComboName = () => {
     const selectedProducts = Object.values(comboSelections)
-      .map((id) => allProducts.find((p) => p.product_id == id))
+      .map((pid) =>
+        allProducts.find((p) => String(p.product_id) === String(pid)),
+      )
       .filter(Boolean);
 
     if (selectedProducts.length === 0) return product.name;
@@ -92,6 +88,16 @@ const Details = () => {
 
     setSimilarProducts(filtered.slice(0, 8)); // show max 8
   }, [product, allProducts]);
+
+  useEffect(() => {
+    if (!product) return;
+    const imgs =
+      Array.isArray(product.images_json) && product.images_json.length > 0
+        ? product.images_json
+        : [product.image || product.thumbnail_url].filter(Boolean);
+    setproductKey(0);
+    setproductImage(product.thumbnail_url || imgs[0] || null);
+  }, [product?.product_id]);
 
   const handleBuyNow = async () => {
     try {
@@ -204,6 +210,11 @@ const Details = () => {
         )
       : 0;
 
+  const galleryImages =
+    Array.isArray(product?.images_json) && product.images_json.length > 0
+      ? product.images_json
+      : [product?.image || product?.thumbnail_url].filter(Boolean);
+
   const formatDescription = (html) => {
     if (!html) return "";
 
@@ -239,245 +250,277 @@ const Details = () => {
   };
 
   return (
-    <section className="detailspage modern-details">
-      <div className="breadcrumbwrapper2 mb-2 ms-2">
-        <div className="container-fluid">
-          <ol className="breadcrumb breadcrumb2">
+    <section className="detailspage modern-details pdp-page">
+      <nav className="pdp-breadcrumb" aria-label="Breadcrumb">
+        <div className="container-fluid pdp-breadcrumb__inner">
+          <ol className="breadcrumb breadcrumb2 pdp-breadcrumb__list">
             <li className="breadcrumb-item">
               <Link to="/">Home</Link>
             </li>
             <li className="breadcrumb-item">
-              <Link to="/">Products</Link>
+              <Link to="/products">Products</Link>
             </li>
-            <li className="breadcrumb-item breadactive">Details</li>
+            <li className="breadcrumb-item breadactive" aria-current="page">
+              {product.name?.length > 48
+                ? `${product.name.slice(0, 48)}…`
+                : product.name}
+            </li>
           </ol>
         </div>
-      </div>
+      </nav>
 
-      <div className="container mw-85">
-        <div className="row">
-          {/* LEFT IMAGE SECTION */}
-          <div className="col-md-6">
-            {isCombo ? (
-              /* COMBO PRODUCT (NO THUMBNAILS) */
-              <div className={`productzoom combo-zoom`}>
-                {discount > 0 && (
-                  <div className="modern-discount">-{discount}%</div>
-                )}
-
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="combo-img"
-                  style={{ width: "100%", maxWidth: "420px" }}
-                />
-              </div>
-            ) : (
-              /* NORMAL PRODUCT WITH THUMBNAILS */
-              <div className="image-gallery-wrapper">
-                {/* VERTICAL THUMBNAILS */}
-                <div className="zoomslider vertical-slider">
-                  <div className="thumb-prev">▲</div>
-
-                  <Swiper
-                    modules={[Navigation]}
-                    navigation={{
-                      nextEl: ".thumb-next",
-                      prevEl: ".thumb-prev",
-                    }}
-                    direction="vertical"
-                    slidesPerView={4}
-                    spaceBetween={10}
-                    breakpoints={{
-                      0: {
-                        direction: "horizontal",
-                        slidesPerView: 4,
-                      },
-                      768: {
-                        direction: "vertical",
-                        slidesPerView: 4,
-                      },
-                    }}
-                    className="product-thumb-swiper"
-                  >
-                    {product.images_json?.map((img, index) => (
-                      <SwiperSlide key={index}>
-                        <div
-                          className={`slider-item ${productKey === index ? "thumbactive" : ""}`}
-                          onMouseEnter={() => onThumbnailClick(img, index)}
-                          onClick={() => onThumbnailClick(img, index)}
-                        >
-                          <img src={img} alt="thumb" />
-                        </div>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                  <div className="thumb-next">▼</div>
-                </div>
-
-                {/* MAIN IMAGE */}
-                <div className="productzoom">
+      <div className="container mw-85 pdp-container">
+        <div className="row g-4 pdp-main-row">
+          <div className="col-12 col-lg-5 pdp-gallery-col">
+            <div className="pdp-gallery-card">
+              {isCombo ? (
+                <div className="productzoom combo-zoom pdp-main-zoom">
                   {discount > 0 && (
-                    <div className="modern-discount">-{discount}%</div>
+                    <div className="modern-discount pdp-discount-badge">
+                      {discount}% off
+                    </div>
+                  )}
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="combo-img pdp-combo-img"
+                  />
+                </div>
+              ) : (
+                <div className="image-gallery-wrapper pdp-gallery">
+                  {galleryImages.length > 1 && (
+                    <div className="zoomslider vertical-slider pdp-thumbs">
+                      <div className="thumb-prev" aria-hidden="true">
+                        ▲
+                      </div>
+                      <Swiper
+                        modules={[Navigation]}
+                        navigation={{
+                          nextEl: ".thumb-next",
+                          prevEl: ".thumb-prev",
+                        }}
+                        direction="vertical"
+                        slidesPerView={4}
+                        spaceBetween={10}
+                        breakpoints={{
+                          0: {
+                            direction: "horizontal",
+                            slidesPerView: 4,
+                          },
+                          768: {
+                            direction: "vertical",
+                            slidesPerView: 4,
+                          },
+                        }}
+                        className="product-thumb-swiper"
+                      >
+                        {galleryImages.map((img, index) => (
+                          <SwiperSlide key={index}>
+                            <div
+                              className={`slider-item pdp-thumb-item ${productKey === index ? "thumbactive" : ""}`}
+                              onMouseEnter={() => onThumbnailClick(img, index)}
+                              onClick={() => onThumbnailClick(img, index)}
+                              role="button"
+                              tabIndex={0}
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                  e.preventDefault();
+                                  onThumbnailClick(img, index);
+                                }
+                              }}
+                            >
+                              <img src={img} alt="" />
+                            </div>
+                          </SwiperSlide>
+                        ))}
+                      </Swiper>
+                      <div className="thumb-next" aria-hidden="true">
+                        ▼
+                      </div>
+                    </div>
                   )}
 
-                  <div className="zoom-wrapper" style={{ width: "350px" }}>
-                    <Zoom>
-                      <img
-                        src={productImage}
-                        alt="product"
-                        style={{
-                          width: "100%",
-                          height: "auto",
-                          cursor: "zoom-in",
-                          borderRadius: "8px",
-                        }}
-                      />
-                    </Zoom>
-
-                    <span className="zoom-tooltip">Click to zoom</span>
+                  <div className="productzoom pdp-main-zoom">
+                    {discount > 0 && (
+                      <div className="modern-discount pdp-discount-badge">
+                        {discount}% off
+                      </div>
+                    )}
+                    <div className="zoom-wrapper pdp-zoom-wrapper">
+                      <Zoom>
+                        <img
+                          src={productImage || galleryImages[0]}
+                          alt={product.name}
+                          className="pdp-main-img"
+                        />
+                      </Zoom>
+                      <span className="zoom-tooltip">Click to zoom</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
-
-          {/* RIGHT INFO SECTION */}
-          <div
-            className={
-              isCombo ? "col-md-6 productinfo" : "col-md-6 productinfo"
-            }
-          >
-            <h1 className="product-title">{product.name}</h1>
-
-            {product?.description && (
-              <p className="short-desc">{product.description}</p>
-            )}
-
-            <div className="meta-badges">
-              <span className="brand-badge">{product.brand}</span>
-              <span className="category-badge">{product.category}</span>
-              {product.quantity > 0 ? (
-                <span className="stock in-stock">In Stock</span>
-              ) : (
-                <span className="stock out-stock">Out of Stock</span>
               )}
             </div>
+          </div>
 
-            <div className="d-flex align-items-center mb-3">
-              <Rating defaultValue={4.5} precision={0.5} readOnly />
-              {/* <span className='ms-2'> (32 reviews) </span> */}
-            </div>
+          <div className="col-12 col-lg-7 pdp-buy-col">
+            <div className="pdp-buy-card productinfo">
+              <p className="pdp-eyebrow">Official store</p>
+              <h1 className="product-title pdp-title">{product.name}</h1>
 
-            <div className="modern-price-section">
-              <span className="modern-price">{product.price} AED</span>
-              {product.old_price && (
-                <span className="modern-oldprice">{product.old_price} AED</span>
+              {product?.description && (
+                <p className="short-desc pdp-subtitle">{product.description}</p>
               )}
-            </div>
-            {/* 🔥 INGREDIENTS PREVIEW (RIGHT SIDE) */}
-            {product?.additional_info && (
-              <div className="ingredients-preview">
-                {/* <h6>Ingredients</h6> */}
 
-                <div
-                  className="ingredients-content"
-                  dangerouslySetInnerHTML={{
-                    __html: formatDescription(product.additional_info),
-                  }}
-                />
+              <div className="meta-badges pdp-badges">
+                <span className="brand-badge">{product.brand}</span>
+                <span className="category-badge">{product.category}</span>
+                {product.quantity > 0 ? (
+                  <span className="stock in-stock">In stock</span>
+                ) : (
+                  <span className="stock out-stock">Out of stock</span>
+                )}
               </div>
-            )}
-            <div className="freeShakerDetail">
-              🎁 FREE SHAKER INCLUDED WITH THIS PRODUCT
+
+              <div className="pdp-rating-row d-flex align-items-center flex-wrap gap-2 mb-2">
+                <Rating value={4.5} precision={0.5} readOnly />
+                <span className="pdp-rating-text">4.5 · Trusted quality</span>
+              </div>
+
+              <div className="modern-price-section pdp-price-block">
+                <div className="pdp-price-main">
+                  <span className="modern-price pdp-price">{product.price}</span>
+                  <span className="pdp-currency">AED</span>
+                </div>
+                {product.old_price && (
+                  <div className="pdp-price-secondary">
+                    <span className="modern-oldprice pdp-mrp">
+                      MRP {product.old_price} AED
+                    </span>
+                    {discount > 0 && (
+                      <span className="pdp-save-pill">{discount}% off</span>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <ul className="pdp-trust-list" aria-label="Purchase benefits">
+                <li>Secure checkout</li>
+                <li>Fast dispatch</li>
+                <li>Authentic product</li>
+              </ul>
+
+              {product?.additional_info && (
+                <div className="ingredients-preview pdp-ingredients-preview">
+                  <h3 className="pdp-side-heading">Key highlights</h3>
+                  <div
+                    className="ingredients-content"
+                    dangerouslySetInnerHTML={{
+                      __html: formatDescription(product.additional_info),
+                    }}
+                  />
+                </div>
+              )}
+
+              <div className="freeShakerDetail pdp-offer-chip">
+                Free shaker on eligible orders
+              </div>
+
+              <div className="pdp-spec-row">
+                <span className="pdp-spec-label">
+                  {product.category === "Fish Oil"
+                    ? "Capsules"
+                    : "Net weight"}
+                </span>
+                <span className="pdp-spec-value">{product.net_wt}</span>
+              </div>
+
+              {isCombo && (
+                <div className="combo-options pdp-combo-options">
+                  <h3 className="pdp-side-heading">Build your combo</h3>
+                  {comboProducts.map((item) => (
+                    <div key={item.id} className="combo-item mb-3">
+                      <label className="fw-medium pdp-combo-label">{item.name}</label>
+                      <select
+                        className="form-select pdp-combo-select"
+                        value={comboSelections[item.id] || ""}
+                        onChange={(e) =>
+                          handleVariantChange(item.id, e.target.value)
+                        }
+                      >
+                        <option value="">Select option</option>
+                        {item.variants.map((variant) => (
+                          <option
+                            key={variant.product_id}
+                            value={variant.product_id}
+                          >
+                            {variant.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className="buysection pdp-buysection" id="pdp-buy">
+                <div className="addcartsection modern-cart pdp-actions">
+                  <div className="quantity-box pdp-qty">
+                    <button
+                      type="button"
+                      className="qty-btn"
+                      onClick={() => quantity > 1 && setquantity(quantity - 1)}
+                      aria-label="Decrease quantity"
+                    >
+                      −
+                    </button>
+                    <input
+                      type="number"
+                      value={quantity}
+                      readOnly
+                      aria-label="Quantity"
+                    />
+                    <button
+                      type="button"
+                      className="qty-btn"
+                      onClick={() =>
+                        quantity < product.quantity &&
+                        setquantity(quantity + 1)
+                      }
+                      aria-label="Increase quantity"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <Button className="buy-btn pdp-buy-now" onClick={handleBuyNow}>
+                    <FlashOnIcon /> Buy now
+                  </Button>
+
+                  <AddToCartButton
+                    product={{
+                      ...product,
+                      name: isCombo ? generateComboName() : product.name,
+                    }}
+                    qty={quantity}
+                    isCombo={isCombo}
+                    comboSelections={comboSelections}
+                  />
+                </div>
+              </div>
             </div>
-            <h6 className="mt-3">
-            {product.category === "Fish Oil"
-              ? "No of Capsules: "
-              : "Net Weight(in kgs): "}
-            <span>{product.net_wt}</span>
-          </h6>
           </div>
-          
-            <div className="buysection">
-                
-
-          {/* CART SECTION */}
-          <div className="addcartsection modern-cart">
-            {/* Quantity */}
-            <div className="quantity-box">
-              <button
-                type="button"
-                className="qty-btn"
-                onClick={() => quantity > 1 && setquantity(quantity - 1)}
-              >
-                −
-              </button>
-
-              <input type="number" value={quantity} readOnly />
-
-              <button
-                type="button"
-                className="qty-btn"
-                onClick={() =>
-                  quantity < product.quantity && setquantity(quantity + 1)
-                }
-              >
-                +
-              </button>
-            </div>
-
-            {/* Buttons */}
-            <Button className="buy-btn" onClick={handleBuyNow}>
-              <FlashOnIcon /> Buy Now
-            </Button>
-
-            <AddToCartButton
-              product={{
-                ...product,
-                name: isCombo ? generateComboName() : product.name,
-              }}
-              qty={quantity}
-              isCombo={isCombo}
-              comboSelections={comboSelections}
-            />
-          </div>
-            </div>
         </div>
 
-        {/* 🔥 COMBO OPTIONS */}
-        {isCombo && (
-          <div className="combo-options mt-4">
-            <h4>Select Your Variants</h4>
+        {/* Similar products */}
 
-            {comboProducts.map((item) => (
-              <div key={item.id} className="combo-item mb-3">
-                <label className="fw-medium">{item.name}</label>
-
-                <select
-                  className="form-select"
-                  value={comboSelections[item.id] || ""}
-                  onChange={(e) => handleVariantChange(item.id, e.target.value)}
-                >
-                  <option value="">Select Option</option>
-                  {item.variants.map((variant) => (
-                    <option key={variant.product_id} value={variant.product_id}>
-                      {variant.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* ================= SIMILAR PRODUCTS ================= */}
-
-        <div className="similar-products mt-5">
+        <div className="similar-products pdp-similar">
           {similarProducts.length > 0 && (
-            <div className="similar-header">
-              <h3>🔥 Similar Products</h3>
-              <p>You may also like these supplements</p>
+            <div className="similar-header pdp-similar-header">
+              <p className="pdp-similar-eyebrow">You may also like</p>
+              <h3 className="pdp-similar-title">Similar products</h3>
+              <p className="pdp-similar-sub">
+                More from the same category, curated for your stack.
+              </p>
             </div>
           )}
 
@@ -518,7 +561,7 @@ const Details = () => {
         </div>
 
         {/* MODERN TABS SECTION */}
-        <div className="modern-tabs">
+        <div className="modern-tabs pdp-tabs">
           <div className="tab-buttons">
             <button
               className={activeTab === "description" ? "active" : ""}
@@ -546,7 +589,9 @@ const Details = () => {
             {activeTab === "description" && (
               <div
                 className="full-description"
-                dangerouslySetInnerHTML={{ __html: product.full_description }}
+                dangerouslySetInnerHTML={{
+                  __html: product.full_description || "<p>No description available.</p>",
+                }}
               />
             )}
 
@@ -554,14 +599,19 @@ const Details = () => {
               <div
                 className="description-content"
                 dangerouslySetInnerHTML={{
-                  __html: formatDescription(product.additional_info),
+                  __html: product.additional_info
+                    ? formatDescription(product.additional_info)
+                    : "<p>No ingredients list available.</p>",
                 }}
               />
             )}
 
             {activeTab === "shipping" && (
               <div
-                dangerouslySetInnerHTML={{ __html: product.shipping_info }}
+                className="pdp-shipping-tab"
+                dangerouslySetInnerHTML={{
+                  __html: product.shipping_info || "<p>Shipping information not available.</p>",
+                }}
               />
             )}
           </div>

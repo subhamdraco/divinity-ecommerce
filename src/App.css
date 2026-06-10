@@ -40,8 +40,11 @@ html {
   scroll-behavior: smooth;
   color-scheme: light;
   background-color: var(--site-bg);
-  /* Avoid 100vw / scrollbar mismatch causing horizontal jump while scrolling */
-  scrollbar-gutter: stable;
+  width: 100%;
+  max-width: 100%;
+  /* stable + 100vw headers caused persistent side bands / clipped grids on some mobile WebViews */
+  scrollbar-gutter: auto;
+  overflow-x: hidden;
 }
 
 img,
@@ -78,6 +81,16 @@ body {
   overflow-x: hidden;
   background: var(--site-bg) !important;
   line-height: 1.5;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Contain app width */
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
 }
 
 /* Bootstrap / MUI surfaces on light */
@@ -133,22 +146,13 @@ body {
   padding-right: clamp(12px, 4vw, 45px);
 }
 
-/* Break out of site-main width — full viewport chrome (header, nav, compact bar) */
+/* Full-width chrome — never use 100vw here (scrollbar / dPR / WebViews → shifted or clipped grids) */
 .site-fullbleed {
-  width: 100vw;
-  max-width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-}
-
-/* 100vw is often wider than the layout on mobile (scrollbar, iOS) → horizontal scroll / “broken” page */
-@media (max-width: 576px) {
-  .site-fullbleed {
-    width: 100%;
-    max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-  }
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .site-fullbleed .container-fluid {
@@ -162,6 +166,7 @@ body {
   background: var(--site-bg);
   max-width: 100%;
   min-width: 0;
+  overflow-x: hidden;
 }
 
 .cursor {

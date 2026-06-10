@@ -245,3 +245,91 @@
         top: 0;
     }
 }
+
+/* =============================================================================
+   /products — premium filter panel (scoped)
+   ============================================================================= */
+
+.products-page .products-sidebar .card {
+    border-radius: 20px !important;
+    padding: clamp(1.25rem, 3vw, 1.65rem) !important;
+    border: 1px solid rgba(15, 23, 42, 0.08) !important;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.85) inset,
+        0 16px 40px rgba(15, 23, 42, 0.07) !important;
+    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%) !important;
+}
+
+.products-page .products-sidebar h3 {
+    font-family: "Oswald", system-ui, sans-serif !important;
+    font-size: 1.1rem !important;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding-bottom: 0.85rem !important;
+    margin-bottom: 1.15rem !important;
+}
+
+.products-page .products-sidebar .catitem {
+    border-radius: 14px;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    padding: 0.65rem 0.75rem;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.products-page .products-sidebar .catitem:hover {
+    background: rgba(232, 98, 34, 0.06);
+    border-color: rgba(232, 98, 34, 0.25);
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.products-page .products-sidebar .catitem:has(.Mui-checked) {
+    background: linear-gradient(135deg, rgba(5, 42, 74, 0.06), rgba(232, 98, 34, 0.08));
+    border-color: rgba(232, 98, 34, 0.35);
+    box-shadow: 0 0 0 1px rgba(232, 98, 34, 0.15);
+}
+
+.products-page .products-sidebar .catitem h4 {
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+}
+
+.products-page .products-sidebar .btn-g {
+    border-radius: 999px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em;
+    text-transform: uppercase !important;
+    font-size: 0.78rem !important;
+}
+
+@media (min-width: 992px) {
+    .products-page .sidebarwrapper {
+        max-width: 300px !important;
+        flex: 0 0 280px !important;
+    }
+
+    .products-page .rightcontent {
+        flex: 1 1 0 !important;
+        max-width: none !important;
+    }
+
+    .products-page .sidebarwrapper .sidebar {
+        position: sticky;
+        top: calc(var(--header-h, 4rem) + 1rem);
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1000px) {
+    .products-page .sidebarwrapper {
+        max-width: 280px !important;
+        flex: 0 0 260px !important;
+    }
+
+    .products-page .rightcontent {
+        max-width: none !important;
+        flex: 1 1 0 !important;
+    }
+}

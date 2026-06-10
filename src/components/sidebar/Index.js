@@ -6,7 +6,6 @@ import Slider from "@mui/material/Slider";
 import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
-import banner from "../../assets/images/banner/daily-banner.png";
 
 const Sidebar = ({
   brands,
@@ -78,7 +77,7 @@ const Sidebar = ({
   };
 
   return (
-    <div className="sidebar">
+    <div className="sidebar products-sidebar">
 
       {/* CATEGORY / BRAND */}
       <div className="card border-0 shadow width-auto">
@@ -105,8 +104,8 @@ const Sidebar = ({
               <Checkbox
                 checked={selectedBrands.includes(brand)}
                 sx={{
-                  color: "#d4af37",
-                  "&.Mui-checked": { color: "#d4af37" }
+                  color: "var(--site-border-strong)",
+                  "&.Mui-checked": { color: "var(--primary-icon-color)" },
                 }}
               />
             </div>
@@ -137,8 +136,8 @@ const Sidebar = ({
               <Checkbox
                 checked={selectedCategories.includes(cat)}
                 sx={{
-                  color: "#d4af37",
-                  "&.Mui-checked": { color: "#d4af37" }
+                  color: "var(--site-border-strong)",
+                  "&.Mui-checked": { color: "var(--primary-icon-color)" },
                 }}
               />
             </div>
@@ -157,7 +156,16 @@ const Sidebar = ({
           min={0}
           max={500}
           step={10}
-          sx={{ color: "#E2CA78" }}
+          sx={{
+            color: "var(--primary-icon-color)",
+            "& .MuiSlider-thumb": {
+              border: "2px solid #fff",
+              boxShadow: "0 2px 8px rgba(15,23,42,0.15)",
+            },
+            "& .MuiSlider-track": {
+              background: "linear-gradient(90deg, #052a4a, #e86222)",
+            },
+          }}
         />
 
         <div className="d-flex pt-2 pb-2 pricerange">
