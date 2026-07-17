@@ -1,17 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Globe2, Award, Factory } from "lucide-react";
 import { Counter } from "@/components/motion/Counter";
 import { ParallaxOrbs } from "@/components/motion/ParallaxOrbs";
-import { RotatingRings } from "@/components/motion/RotatingRings";
 import { PulseDot, ShimmerBorder } from "@/components/motion/Shimmer";
 import { LineReveal } from "@/components/motion/TextReveal";
+import { SegmentIcon } from "@/components/ui/SegmentIcon";
 import { hubStats } from "@/lib/content";
 import { segments } from "@/lib/segments";
-import { SegmentIcon } from "@/components/ui/SegmentIcon";
-import { cardHover, floatY, springBouncy, staggerContainer, staggerFast } from "@/lib/motion";
+import { floatY, springBouncy, staggerContainer, staggerFast } from "@/lib/motion";
 
 const headline = ["Crafting", "the", "Future", "of", "Global", "FMCG"];
 
@@ -19,21 +19,20 @@ export function Hero() {
   const reduced = useReducedMotion();
 
   return (
-    <section className="mesh-dark grain-overlay relative min-h-[92vh] overflow-hidden">
+    <section className="mesh-dark grain-overlay relative overflow-hidden bg-white lg:min-h-[calc(100svh-5.75rem)]">
       <ParallaxOrbs variant="light" />
-      <RotatingRings />
-
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+      <div className="relative z-10 mx-auto flex max-w-7xl flex-col px-4 pt-4 pb-6 sm:px-6 sm:pt-5 sm:pb-8 lg:min-h-[calc(100svh-5.75rem)] lg:justify-center lg:px-8 lg:pt-4 lg:pb-6">
+        <div className="grid items-stretch gap-8 lg:grid-cols-12 lg:gap-8">
+          {/* Left — compact copy */}
           <motion.div
-            className="lg:col-span-6"
+            className="flex h-full flex-col justify-center lg:col-span-5"
             variants={reduced ? undefined : staggerContainer}
             initial={reduced ? false : "hidden"}
             animate="visible"
           >
             <motion.div
               variants={reduced ? undefined : { hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5 } } }}
-              className="mb-6 inline-flex items-center gap-2 rounded-full border border-hub-gold/30 bg-hub-gold/10 px-4 py-1.5"
+              className="mb-4 inline-flex items-center gap-2 rounded-full border border-hub-gold/25 bg-hub-gold/8 px-4 py-1.5"
             >
               <PulseDot />
               <span className="font-accent text-[11px] font-bold uppercase tracking-[0.2em] text-hub-gold">
@@ -41,7 +40,7 @@ export function Hero() {
               </span>
             </motion.div>
 
-            <h1 className="font-display text-[2.75rem] font-semibold leading-[1.08] text-hub-navy sm:text-5xl lg:text-6xl xl:text-7xl">
+            <h1 className="font-display text-3xl font-bold leading-[1.05] tracking-[0.02em] text-hub-charcoal sm:text-4xl lg:text-[2.95rem]">
               {reduced ? (
                 <>Crafting the <span className="text-gold-gradient">Future</span> of Global FMCG</>
               ) : (
@@ -51,12 +50,12 @@ export function Hero() {
                     className="inline-block"
                     style={{ marginRight: "0.22em" }}
                     variants={{
-                      hidden: { opacity: 0, y: 40, rotateX: 30 },
+                      hidden: { opacity: 0, y: 30, rotateX: 20 },
                       visible: {
                         opacity: 1,
                         y: 0,
                         rotateX: 0,
-                        transition: { duration: 0.55, delay: 0.15 + i * 0.08, ease: [0.16, 1, 0.3, 1] },
+                        transition: { duration: 0.5, delay: 0.1 + i * 0.07, ease: [0.16, 1, 0.3, 1] },
                       },
                     }}
                   >
@@ -67,20 +66,19 @@ export function Hero() {
               )}
             </h1>
 
-            <LineReveal className="mt-6 max-w-lg text-base leading-relaxed text-hub-slate sm:text-lg" delay={0.55}>
-              Divinity Impex — a world-class manufacturing partner delivering
-              personal care, healthcare, and performance products across four
-              continents and thirty countries.
+            <LineReveal className="mt-5 max-w-md text-sm leading-relaxed text-hub-slate sm:text-base lg:text-[1.05rem]" delay={0.45}>
+              A world-class manufacturing partner delivering personal care, healthcare, and
+              performance products across four continents and thirty countries.
             </LineReveal>
 
             <motion.div
-              className="mt-8 flex flex-wrap gap-3"
-              variants={reduced ? undefined : { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { delay: 0.7 } } }}
+              className="mt-5 flex flex-wrap gap-3"
+              variants={reduced ? undefined : { hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0, transition: { delay: 0.6 } } }}
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }} transition={springBouncy}>
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }} transition={springBouncy}>
                 <Link
-                  href="#segments"
-                  className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-gradient-to-r from-hub-gold to-[#dbb42e] px-8 py-3 text-sm font-bold text-hub-navy shadow-lg shadow-hub-gold/25"
+                  href="#brands"
+                  className="group inline-flex min-h-11 items-center gap-2 rounded-full bg-gradient-to-r from-hub-gold to-[#dbb42e] px-7 py-2.5 text-sm font-bold text-white shadow-md shadow-hub-gold/20"
                 >
                   Explore Our Brands
                   <motion.span animate={reduced ? undefined : { x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
@@ -88,112 +86,165 @@ export function Hero() {
                   </motion.span>
                 </Link>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
-                <Link href="#manufacturing" className="glass-dark inline-flex min-h-12 items-center rounded-full px-8 py-3 text-sm font-semibold text-hub-navy hover:bg-hub-warm">
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+                <Link
+                  href="#manufacturing"
+                  className="glass-dark inline-flex min-h-11 items-center rounded-full px-7 py-2.5 text-sm font-semibold text-hub-charcoal hover:border-hub-gold/30"
+                >
                   Manufacturing Process
                 </Link>
               </motion.div>
             </motion.div>
 
             <motion.div
-              className="mt-10 flex flex-wrap gap-2"
+              className="mt-6 hidden grid-cols-2 gap-2 sm:grid"
               variants={reduced ? undefined : staggerFast}
               initial={reduced ? false : "hidden"}
               animate="visible"
             >
-              {segments.map((s, i) => (
-                <motion.div
-                  key={s.id}
-                  variants={reduced ? undefined : { hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1, transition: springBouncy } }}
-                >
-                  <Link
-                    href={s.href}
-                    className="glass-dark inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium text-hub-slate hover:bg-hub-warm hover:text-hub-navy"
-                  >
-                    <motion.span whileHover={{ rotate: 12, scale: 1.2 }} transition={springBouncy}>
-                      <SegmentIcon segment={s} className="h-3.5 w-3.5" />
-                    </motion.span>
-                    {s.name.split(" ")[0]}
-                  </Link>
-                </motion.div>
+              {hubStats.map((stat, i) => (
+                <Counter key={stat.label} value={stat.value} label={stat.label} delay={0.5 + i * 0.08} variant="nested" />
               ))}
             </motion.div>
           </motion.div>
 
+          {/* Right — four brand logos, all above the fold */}
           <motion.div
-            className="relative lg:col-span-6"
-            initial={reduced ? false : { opacity: 0, x: 60, rotateY: -8 }}
-            animate={{ opacity: 1, x: 0, rotateY: 0 }}
-            transition={{ duration: 0.75, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="relative flex h-full flex-col lg:col-span-7"
+            initial={reduced ? false : { opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
             <motion.div
-              className="glass-card-dark relative rounded-3xl p-6 sm:p-8"
-              animate={reduced ? undefined : floatY(8, 6)}
+              className="glass-card-dark relative flex h-full flex-col justify-center rounded-[1.75rem] p-4 sm:p-5 lg:p-6"
+              animate={reduced ? undefined : floatY(6, 5)}
             >
-              <ShimmerBorder className="mb-6" />
-              <p className="font-accent text-xs font-bold uppercase tracking-widest text-hub-gold">
-                Global Impact at a Glance
+              <ShimmerBorder className="mb-3" />
+              <p className="font-accent text-[11px] font-bold uppercase tracking-widest text-hub-gold">
+                Our Four Brands
               </p>
-              <div className="mt-5 grid grid-cols-2 gap-3">
-                {hubStats.map((stat, i) => (
-                  <Counter key={stat.label} value={stat.value} label={stat.label} delay={0.4 + i * 0.12} variant="nested" />
-                ))}
-              </div>
-              <motion.div
-                className="mt-5 grid grid-cols-2 gap-2"
-                variants={staggerFast}
-                initial="hidden"
-                animate="visible"
-              >
-                {segments.map((s) => (
-                  <motion.div key={s.id} variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0 } }}>
-                    <motion.div whileHover={{ scale: 1.04, y: -2 }} whileTap={{ scale: 0.98 }}>
-                      <Link
-                        href={s.href}
-                        className="block overflow-hidden rounded-xl p-3"
-                        style={{ background: `linear-gradient(135deg, ${s.accent}44, ${s.accent}18)` }}
+              <div className="mt-3 grid grid-cols-2 place-items-center gap-x-2 gap-y-2 sm:gap-x-3 sm:gap-y-3 lg:gap-x-4 lg:gap-y-3">
+                {segments.map((segment, i) => {
+                  const isPortraitLogo = segment.id === "rizwan-adatia";
+                  const floatDelay = `${i * 0.45}s`;
+                  const spinDuration = `${10 + i * 1.5}s`;
+                  return (
+                    <motion.div
+                      key={segment.id}
+                      className="w-full max-w-[240px]"
+                      initial={reduced ? false : { opacity: 0, y: 24, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ delay: 0.2 + i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <motion.div
+                        whileHover={{ y: -6, scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                        transition={springBouncy}
                       >
-                        <div className="flex items-center gap-2">
-                          <motion.div
-                            className="flex h-8 w-8 items-center justify-center rounded-lg"
-                            style={{ backgroundColor: `${s.accent}55` }}
-                            whileHover={{ rotate: [0, -10, 10, 0] }}
-                            transition={{ duration: 0.4 }}
+                        <Link href={segment.href} className="group flex flex-col items-center text-center">
+                          <div
+                            className={`relative flex aspect-square w-[min(100%,clamp(8.75rem,22vh,12.5rem))] items-center justify-center ${reduced ? "" : "brand-float"}`}
+                            style={reduced ? undefined : { animationDelay: floatDelay }}
                           >
-                            <SegmentIcon segment={s} className="h-4 w-4 text-white" />
-                          </motion.div>
-                          <div>
-                            <p className="text-[10px] font-bold uppercase tracking-wider text-white/50">{s.number}</p>
-                            <p className="text-xs font-semibold text-white">{s.name.split(" ")[0]}</p>
+                            {/* Soft glow */}
+                            <span
+                              aria-hidden
+                              className="pointer-events-none absolute inset-[-6%] rounded-[32%] opacity-60 blur-xl transition-opacity duration-300 group-hover:opacity-100"
+                              style={{
+                                background: `radial-gradient(circle, ${segment.accent}28 0%, transparent 70%)`,
+                              }}
+                            />
+
+                            {/* Gradient frame */}
+                            <div
+                              className={`absolute inset-0 rounded-[30%] p-[3px] shadow-[0_14px_36px_-14px_rgba(28,25,23,0.35)] transition-shadow duration-300 group-hover:shadow-[0_20px_44px_-12px_rgba(184,148,47,0.35)] ${reduced ? "" : "brand-ring-spin"}`}
+                              style={{
+                                background: `conic-gradient(from 140deg, ${segment.accent}, #e8d5a0, ${segment.accent}aa, #fff6d6, ${segment.accent})`,
+                                animationDuration: spinDuration,
+                              }}
+                            >
+                              <div
+                                className={`h-full w-full rounded-[28%] bg-white p-[5px] ${reduced ? "" : "brand-ring-spin"}`}
+                                style={
+                                  reduced
+                                    ? undefined
+                                    : { animationDuration: spinDuration, animationDirection: "reverse" }
+                                }
+                              >
+                                <div
+                                  className="brand-shine relative flex h-full w-full items-center justify-center overflow-hidden rounded-[24%]"
+                                  style={{
+                                    backgroundColor: "#ffffff",
+                                    backgroundImage: isPortraitLogo
+                                      ? undefined
+                                      : `radial-gradient(circle at 30% 24%, #ffffff 0%, ${segment.accentLight} 58%, #ffffff 100%)`,
+                                    boxShadow: `inset 0 0 0 1px ${segment.accent}28`,
+                                  }}
+                                >
+                                  {!isPortraitLogo && (
+                                    <span
+                                      aria-hidden
+                                      className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,rgba(255,255,255,0.95)_0%,transparent_45%)]"
+                                    />
+                                  )}
+                                  {segment.logo ? (
+                                    <Image
+                                      src={isPortraitLogo ? "/photos/rizwan-adatia.jpg" : segment.logo}
+                                      alt={`${segment.name} logo`}
+                                      width={280}
+                                      height={280}
+                                      className={
+                                        isPortraitLogo
+                                          ? "h-full w-full object-cover object-[center_16%] transition-transform duration-500 group-hover:scale-105"
+                                          : "relative z-[1] h-[68%] w-[68%] object-contain drop-shadow-[0_6px_12px_rgba(28,25,23,0.1)] transition-transform duration-500 group-hover:scale-105"
+                                      }
+                                    />
+                                  ) : (
+                                    <div
+                                      className="relative z-[1] flex h-[68%] w-[68%] items-center justify-center rounded-[20%]"
+                                      style={{ backgroundColor: `${segment.accent}14`, color: segment.accent }}
+                                    >
+                                      <SegmentIcon segment={segment} className="h-10 w-10 sm:h-12 sm:w-12" />
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </Link>
+                          <p className="mt-2.5 font-display text-base font-semibold tracking-[0.04em] text-hub-charcoal sm:text-lg">
+                            {segment.name}
+                          </p>
+                          <p className="mt-0.5 line-clamp-1 max-w-[12rem] font-accent text-[10px] font-bold uppercase tracking-[0.14em] text-hub-slate">
+                            {segment.tagline}
+                          </p>
+                        </Link>
+                      </motion.div>
                     </motion.div>
-                  </motion.div>
-                ))}
-              </motion.div>
+                  );
+                })}
+              </div>
             </motion.div>
 
             <motion.div
-              className="absolute -bottom-4 -left-4 hidden rounded-2xl glass-card-dark px-4 py-3 sm:block"
-              animate={reduced ? undefined : floatY(10, 5, 0)}
+              className="absolute -bottom-2 -left-2 hidden rounded-2xl glass-card-dark px-3 py-2 xl:block"
+              animate={reduced ? undefined : floatY(8, 4, 0)}
             >
               <div className="flex items-center gap-2">
-                <Globe2 className="h-5 w-5 text-hub-gold" />
+                <Globe2 className="h-4 w-4 text-hub-gold" />
                 <div>
-                  <p className="text-xs font-bold text-hub-navy">30+ Countries</p>
+                  <p className="text-xs font-bold text-hub-charcoal">30+ Countries</p>
                   <p className="text-[10px] text-hub-slate">Global Distribution</p>
                 </div>
               </div>
             </motion.div>
             <motion.div
-              className="absolute -right-4 -top-4 hidden rounded-2xl glass-card-dark px-4 py-3 sm:block"
-              animate={reduced ? undefined : floatY(12, 4.5, 1.2)}
+              className="absolute -right-2 -top-2 hidden rounded-2xl glass-card-dark px-3 py-2 xl:block"
+              animate={reduced ? undefined : floatY(10, 3.5, 1)}
             >
               <div className="flex items-center gap-2">
-                <Award className="h-5 w-5 text-hub-gold" />
+                <Award className="h-4 w-4 text-hub-gold" />
                 <div>
-                  <p className="text-xs font-bold text-hub-navy">Quality First</p>
+                  <p className="text-xs font-bold text-hub-charcoal">Quality First</p>
                   <p className="text-[10px] text-hub-slate">ISO Certified</p>
                 </div>
               </div>
@@ -202,8 +253,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Animated trust marquee */}
-      <div className="relative z-10 overflow-hidden border-t border-hub-border bg-hub-cream/90 py-4 backdrop-blur-sm">
+      <div className="relative z-10 overflow-hidden border-t border-hub-border bg-white py-3">
         <motion.div
           className="flex gap-16 whitespace-nowrap"
           animate={reduced ? undefined : { x: [0, -1200] }}

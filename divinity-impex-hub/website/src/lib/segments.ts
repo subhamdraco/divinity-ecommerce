@@ -11,6 +11,7 @@ export interface Segment {
   gradient: string;
   icon: "dumbbell" | "sparkles" | "compass" | "crown";
   number: string;
+  logo?: string;
 }
 
 export const segments: Segment[] = [
@@ -21,11 +22,12 @@ export const segments: Segment[] = [
     description:
       "Cutting-edge nutrition and performance products engineered for athletes and modern health enthusiasts worldwide.",
     href: "/titan-core",
-    accent: "#006BB3",
-    accentLight: "#E6F3FA",
-    gradient: "from-[#006BB3] via-[#0088CC] to-[#004A7C]",
+    accent: "#96781f",
+    accentLight: "#FBF6E8",
+    gradient: "from-[#96781f] via-[#b8942f] to-[#7a6218]",
     icon: "dumbbell",
     number: "01",
+    logo: "/logos/titan-core.png",
   },
   {
     id: "reshu",
@@ -39,6 +41,7 @@ export const segments: Segment[] = [
     gradient: "from-[#C45B7A] via-[#D47894] to-[#9E3D5C]",
     icon: "sparkles",
     number: "02",
+    logo: "/logos/reshu-logo.png",
   },
   {
     id: "nova",
@@ -52,6 +55,7 @@ export const segments: Segment[] = [
     gradient: "from-[#0E7C7B] via-[#12A09E] to-[#065E5D]",
     icon: "compass",
     number: "03",
+    logo: "/logos/nova.png",
   },
   {
     id: "rizwan-adatia",
@@ -65,6 +69,7 @@ export const segments: Segment[] = [
     gradient: "from-[#B8860B] via-[#D4A017] to-[#8B6508]",
     icon: "crown",
     number: "04",
+    logo: "/logos/rizwan-adatia.png",
   },
 ];
 

@@ -8,7 +8,7 @@ import { segments } from "@/lib/segments";
 
 export function SegmentGrid() {
   return (
-    <section id="segments" className="mesh-light relative overflow-hidden py-20 sm:py-28">
+    <section id="segments" className="mesh-light relative overflow-hidden py-12 sm:py-16">
       <ParallaxOrbs variant="light" count={2} />
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <Reveal variant="blur">
@@ -20,7 +20,7 @@ export function SegmentGrid() {
             showLines
           />
         </Reveal>
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {segments.map((segment, i) => (
             <SegmentCard key={segment.id} segment={segment} index={i} />
           ))}

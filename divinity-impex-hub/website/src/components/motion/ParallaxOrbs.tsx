@@ -16,9 +16,9 @@ const orbConfig = {
     { color: "rgba(196,91,122,0.2)", size: 280, top: "15%", left: "55%", d: 22, delay: 2 },
   ],
   light: [
-    { color: "rgba(184,148,47,0.28)", size: 400, top: "10%", left: "80%", d: 22, delay: 0 },
-    { color: "rgba(21,42,71,0.14)", size: 350, top: "60%", left: "-5%", d: 26, delay: 4 },
-    { color: "rgba(14,124,123,0.16)", size: 300, top: "80%", left: "60%", d: 20, delay: 2 },
+    { color: "rgba(184,148,47,0.12)", size: 400, top: "10%", left: "80%", d: 22, delay: 0 },
+    { color: "rgba(28,25,23,0.04)", size: 350, top: "60%", left: "-5%", d: 26, delay: 4 },
+    { color: "rgba(184,148,47,0.08)", size: 300, top: "80%", left: "60%", d: 20, delay: 2 },
   ],
 };
 

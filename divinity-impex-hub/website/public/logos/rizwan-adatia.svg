@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 180" fill="none" role="img" aria-label="Rizwan Adatia">
+  <defs>
+    <linearGradient id="raGold" x1="90" y1="18" x2="190" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F2DC9A"/>
+      <stop offset="50%" stop-color="#D4AD3F"/>
+      <stop offset="100%" stop-color="#8F7018"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer seal -->
+  <circle cx="140" cy="58" r="44" stroke="url(#raGold)" stroke-width="2.75" fill="#FFFDF8"/>
+  <circle cx="140" cy="58" r="37" stroke="url(#raGold)" stroke-width="1" stroke-opacity="0.4"/>
+
+  <!-- RA monogram -->
+  <g fill="url(#raGold)">
+    <!-- R -->
+    <path d="M118 82V34h16.5c11.2 0 18.5 6.8 18.5 16.2 0 7.4-4.2 12.8-11.2 15.1L155 82h-11.2L131.5 66.8H128V82h-10zm10-37.2v15.6h4.2c5.6 0 9.2-3.1 9.2-7.8s-3.6-7.8-9.2-7.8H128z"/>
+    <!-- A -->
+    <path d="M168 82l-14-48h11.4l8.1 30.2L181.4 34H192l-14 48H168zm-1.8-18.5h16.4l-1.2-4.6h-14z"/>
+  </g>
+
+  <!-- Compassion arc -->
+  <path d="M122 96c8 7 28 7 36 0" stroke="url(#raGold)" stroke-width="2.25" stroke-linecap="round"/>
+
+  <!-- Wordmark -->
+  <text x="140" y="128" text-anchor="middle" fill="#1c1917" font-family="Montserrat, Helvetica, Arial, sans-serif" font-size="18" font-weight="700" letter-spacing="0.2em">RIZWAN ADATIA</text>
+  <text x="140" y="148" text-anchor="middle" fill="#B8860B" font-family="Montserrat, Helvetica, Arial, sans-serif" font-size="8.5" font-weight="700" letter-spacing="0.32em">HUMAN FOR HUMANS</text>
+</svg>

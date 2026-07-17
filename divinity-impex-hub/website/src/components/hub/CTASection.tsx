@@ -12,7 +12,7 @@ export function CTASection() {
   const reduced = useReducedMotion();
 
   return (
-    <section className="mesh-dark grain-overlay relative overflow-hidden py-20 sm:py-28">
+    <section className="mesh-dark grain-overlay relative overflow-hidden py-12 sm:py-16">
       <ParallaxOrbs variant="light" count={2} />
       <motion.div
         className="pointer-events-none absolute inset-0 flex items-center justify-center"

@@ -1,5 +1,4 @@
 import { Hero } from "@/components/hub/Hero";
-import { SegmentGrid } from "@/components/hub/SegmentGrid";
 import { BrandsSection } from "@/components/hub/BrandsSection";
 import { GlobalPresence } from "@/components/hub/GlobalPresence";
 import { ManufacturingSection } from "@/components/hub/ManufacturingSection";
@@ -10,7 +9,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <SegmentGrid />
       <BrandsSection />
       <GlobalPresence />
       <ManufacturingSection />

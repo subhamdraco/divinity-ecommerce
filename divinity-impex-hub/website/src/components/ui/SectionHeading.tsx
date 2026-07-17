@@ -45,7 +45,7 @@ export function SectionHeading({
         </motion.div>
       )}
       <h2
-        className={`font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-[2.75rem] text-hub-navy`}
+        className="font-display text-3xl font-bold leading-[1.05] tracking-[0.02em] text-hub-navy sm:text-4xl lg:text-[2.85rem]"
       >
         {reduced
           ? title
